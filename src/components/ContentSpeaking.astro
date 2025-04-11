@@ -281,9 +281,11 @@ const uncategorizedTags = allTags.filter(tag =>
                 </div>
                 
                 {engagement.tags && engagement.tags.length > 0 && (
-                    <div class="flex flex-wrap gap-2 mt-3">
+                    <div class="flex flex-wrap gap-1 mt-2 mb-4">
                         {engagement.tags.map(tag => (
-                            <span class="px-2 py-1 text-xs bg-gray-800 text-gray-300 rounded-full">{tag}</span>
+                            <span class="inline-block px-2 py-1 text-xs rounded-lg bg-black text-gray-100 cursor-pointer transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5">
+                                #{tag}
+                            </span>
                         ))}
                     </div>
                 )}
@@ -334,9 +336,11 @@ const uncategorizedTags = allTags.filter(tag =>
                 </div>
                 
                 {engagement.tags && engagement.tags.length > 0 && (
-                    <div class="flex flex-wrap gap-2 mt-3">
+                    <div class="flex flex-wrap gap-1 mt-2 mb-4">
                         {engagement.tags.map(tag => (
-                            <span class="px-2 py-1 text-xs bg-gray-800 text-gray-300 rounded-full">{tag}</span>
+                            <span class="inline-block px-2 py-1 text-xs rounded-lg bg-black text-gray-100 cursor-pointer transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5">
+                                #{tag}
+                            </span>
                         ))}
                     </div>
                 )}
@@ -363,104 +367,83 @@ const uncategorizedTags = allTags.filter(tag =>
     
     <!-- Tag Filter Section (Moved to bottom) -->
     <div class="mt-12 pt-8 border-t border-gray-800">
-        <h3 class="text-xl font-semibold mb-4 text-white">Filter Speaking Engagements by Topic</h3>
+        <h3 class="text-xl font-semibold mb-4 text-white">Filter by Tags</h3>
         
         <div class="flex flex-wrap gap-2 mb-4" id="tag-filters">
+            <button 
+                class="tag-filter active flex items-center justify-center px-3 py-1 text-sm rounded-lg bg-black text-gray-100 transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5"
+                data-tag="all">
+                All Sessions
+            </button>
             {allTags.map(tag => (
                 <button 
-                    class="px-3 py-1 text-sm border border-gray-600 rounded-full hover:border-primary hover:text-primary transition-colors tag-filter" 
+                    class="tag-filter flex items-center justify-center px-3 py-1 text-sm rounded-lg bg-black text-gray-100 transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5"
                     data-tag={tag}>
                     #{tag}
                 </button>
             ))}
         </div>
         
-        <button 
-            id="clear-filters"
-            class="px-4 py-2 text-sm bg-gray-800 text-white rounded-md hover:bg-gray-700 transition-colors hidden">
-            Clear Filters
-        </button>
+        <div id="no-results" class="hidden py-4 text-center text-gray-400">
+            No speaking engagements found for the selected tag.
+        </div>
     </div>
-</div>
 
-<script>
-    // Client-side filtering for tags
-    document.addEventListener('DOMContentLoaded', () => {
-        const tagButtons = document.querySelectorAll('.tag-filter');
-        const clearFiltersButton = document.getElementById('clear-filters');
-        const speakingCards = document.querySelectorAll('.speaking-card');
-        const noUpcomingResults = document.getElementById('no-upcoming-results');
-        const noPastResults = document.getElementById('no-past-results');
-        
-        // Active tag tracking
-        let activeTag = null;
-
-        // Filter function
-        const filterByTag = (tag) => {
-            // Set or clear active tag
-            activeTag = activeTag === tag ? null : tag;
+    <script>
+        // Client-side filtering for tags
+        document.addEventListener('DOMContentLoaded', () => {
+            const tagButtons = document.querySelectorAll('.tag-filter');
+            const speakingCards = document.querySelectorAll('.speaking-card');
+            const noResults = document.getElementById('no-results');
             
-            // Show/hide clear filters button
-            clearFiltersButton.classList.toggle('hidden', !activeTag);
-            
-            // Track visible cards for each section
-            let visibleUpcoming = 0;
-            let visiblePast = 0;
-            
-            // Filter cards
-            speakingCards.forEach(card => {
-                const cardTags = card.dataset.tags ? card.dataset.tags.split(',') : [];
-                const shouldShow = !activeTag || cardTags.includes(activeTag);
+            // Filter function
+            const filterByTag = (selectedTag) => {
+                // Update active state for buttons
+                tagButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.classList.remove('bg-primary');
+                    btn.classList.add('bg-black');
+                });
                 
-                card.classList.toggle('hidden', !shouldShow);
-                
-                // Count visible cards by section
-                if (shouldShow) {
-                    if (card.closest('#upcoming-engagements')) {
-                        visibleUpcoming++;
-                    } else if (card.closest('#past-engagements')) {
-                        visiblePast++;
-                    }
+                const clickedButton = document.querySelector(`.tag-filter[data-tag="${selectedTag}"]`);
+                if (clickedButton) {
+                    clickedButton.classList.add('active');
+                    clickedButton.classList.remove('bg-black');
+                    clickedButton.classList.add('bg-primary');
                 }
+                
+                let visibleCount = 0;
+                
+                // Filter cards
+                speakingCards.forEach(card => {
+                    const cardTags = card.dataset.tags ? card.dataset.tags.split(',') : [];
+                    const shouldShow = selectedTag === 'all' || cardTags.includes(selectedTag);
+                    
+                    card.style.display = shouldShow ? 'flex' : 'none';
+                    if (shouldShow) visibleCount++;
+                });
+                
+                // Show/hide "no results" message
+                noResults.classList.toggle('hidden', visibleCount > 0);
+                
+                // Hide section-specific "no results" messages
+                document.getElementById('no-upcoming-results').classList.add('hidden');
+                document.getElementById('no-past-results').classList.add('hidden');
+            };
+            
+            // Set up event listeners
+            tagButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterByTag(button.dataset.tag);
+                });
             });
             
-            // Highlight active tag button
-            tagButtons.forEach(btn => {
-                btn.classList.toggle('border-primary', btn.dataset.tag === activeTag);
-                btn.classList.toggle('text-primary', btn.dataset.tag === activeTag);
-                btn.classList.toggle('bg-gray-800', btn.dataset.tag === activeTag);
-            });
-            
-            // Show/hide "no results" messages
-            noUpcomingResults.classList.toggle('hidden', visibleUpcoming > 0 || !activeTag);
-            noPastResults.classList.toggle('hidden', visiblePast > 0 || !activeTag);
-        };
-        
-        // Set up event listeners
-        tagButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterByTag(button.dataset.tag);
-            });
+            // Initialize with "All Sessions" active
+            const allSessionsButton = document.querySelector('.tag-filter[data-tag="all"]');
+            if (allSessionsButton) {
+                allSessionsButton.classList.remove('bg-black');
+                allSessionsButton.classList.add('bg-primary');
+            }
         });
-        
-        // Clear filters button
-        clearFiltersButton.addEventListener('click', () => {
-            activeTag = null;
-            clearFiltersButton.classList.add('hidden');
-            
-            // Reset tag buttons
-            tagButtons.forEach(btn => {
-                btn.classList.remove('border-primary', 'text-primary', 'bg-gray-800');
-            });
-            
-            // Show all cards
-            speakingCards.forEach(card => {
-                card.classList.remove('hidden');
-            });
-            
-            // Hide "no results" messages
-            noUpcomingResults.classList.add('hidden');
-            noPastResults.classList.add('hidden');
-        });
-    });
-</script>
+    </script>
+</div>
