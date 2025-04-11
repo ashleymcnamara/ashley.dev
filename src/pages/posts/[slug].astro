@@ -1,12 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 
 // Generate static paths for all posts
 export async function getStaticPaths() {
   const blogEntries = await getCollection('posts');
   
-  return blogEntries.map(entry => ({
+  return blogEntries.map((entry: CollectionEntry<'posts'>) => ({
     params: { slug: entry.data.slug || entry.slug },
     props: { entry },
   }));
@@ -118,3 +119,39 @@ const { Content } = await entry.render();
     padding: 0.125rem 0.25rem;
   }
 </style>
+
+<script>
+  // Support linking back to any tab from blog posts
+  document.addEventListener('DOMContentLoaded', () => {
+    const tagLinks = document.querySelectorAll('.tag-link');
+    
+    tagLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        // Extract tag name from the data attribute
+        const tagName = link.getAttribute('data-tag');
+        
+        // Navigate back to homepage with tag as query parameter
+        window.location.href = `/?tab=blogs&tag=${tagName}`;
+      });
+    });
+    
+    // Add functionality for the back button to remember which tab it came from
+    const backButton = document.querySelector('a[href="/?tab=blogs"]') as HTMLAnchorElement;
+    if (backButton) {
+      const referrer = document.referrer;
+      if (referrer && referrer.includes('?tab=')) {
+        const tab = new URL(referrer).searchParams.get('tab');
+        if (tab) {
+          backButton.href = `/?tab=${tab}`;
+          
+          // Update the text based on which tab it's going back to
+          if (tab === 'speaking') {
+            backButton.textContent = '← Back to Speaking';
+          } else if (tab === 'projects') {
+            backButton.textContent = '← Back to Projects';
+          }
+        }
+      }
+    }
+  });
+</script>

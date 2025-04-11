@@ -7,7 +7,7 @@ import Contact from '../components/Contact.astro';
 import ContentLink from '../components/ContentLink.astro';
 import ContentCode from '../components/ContentAbout.astro';
 import ContentProjects from '../components/ContentProjects.astro';
-import Content from '../components/ContentProjects.astro';
+import ContentSpeaking from '../components/ContentSpeaking.astro';
 import ContentBlogs from '../components/ContentBlogs.astro';
 ---
 
@@ -49,9 +49,17 @@ import ContentBlogs from '../components/ContentBlogs.astro';
                         name="tabs"
                         class="tab-radio"
                     />
+                    
                     <input
                         type="radio"
                         id="tab3"
+                        name="tabs"
+                        class="tab-radio"
+                    />
+                    
+                    <input
+                        type="radio"
+                        id="tab4"
                         name="tabs"
                         class="tab-radio"
                     />
@@ -68,11 +76,16 @@ import ContentBlogs from '../components/ContentBlogs.astro';
                             contentId="tab2"
                             contentName="projects.md"
                         />
+                        
+                        <ContentLink
+                            contentId="tab3"
+                            contentName="speaking.md"
+                        />
 
                         <ContentLink
-                        contentId="tab3"
-                        contentName="blogs.md"
-                    />
+                            contentId="tab4"
+                            contentName="blogs.md"
+                        />
 
                     </div>
                     <!-- End: Tab bar -->
@@ -91,9 +104,15 @@ import ContentBlogs from '../components/ContentBlogs.astro';
                             <ContentProjects />
                         </div>
                         <!-- End: Projects content -->
+                        
+                        <!-- Start: Speaking content -->
+                        <div id="content3" class="tab-content">
+                            <ContentSpeaking />
+                        </div>
+                        <!-- End: Speaking content -->
                        
                         <!-- Start: Blog content -->
-                        <div id="content3" class="tab-content">
+                        <div id="content4" class="tab-content">
                             <ContentBlogs />
                         </div>
                         <!-- End: Blog content -->
@@ -128,7 +147,8 @@ import ContentBlogs from '../components/ContentBlogs.astro';
         
         // If tab parameter exists, activate that tab
         if (tabParam === 'blogs') {
-            document.getElementById('tab3').checked = true;
+            const tab4 = document.getElementById('tab4') as HTMLInputElement;
+            if (tab4) tab4.checked = true;
             
             // If tag parameter exists, find and click the corresponding tag filter
             if (tagParam) {
@@ -136,14 +156,19 @@ import ContentBlogs from '../components/ContentBlogs.astro';
                 setTimeout(() => {
                     const tagButton = document.querySelector(`.tag-filter[data-tag="${tagParam}"]`);
                     if (tagButton) {
-                        tagButton.click();
+                        (tagButton as HTMLElement).click();
                     }
                 }, 100);
             }
         } else if (tabParam === 'projects') {
-            document.getElementById('tab2').checked = true;
+            const tab2 = document.getElementById('tab2') as HTMLInputElement;
+            if (tab2) tab2.checked = true;
+        } else if (tabParam === 'speaking') {
+            const tab3 = document.getElementById('tab3') as HTMLInputElement;
+            if (tab3) tab3.checked = true;
         } else if (tabParam === 'about') {
-            document.getElementById('tab1').checked = true;
+            const tab1 = document.getElementById('tab1') as HTMLInputElement;
+            if (tab1) tab1.checked = true;
         }
     });
 </script>
@@ -184,11 +209,22 @@ import ContentBlogs from '../components/ContentBlogs.astro';
     #tab2:checked ~ .flex .tab-link:nth-child(2) {
         @apply border-b-2 border-b-primary;
     }
+    
     /* When tab3 is checked, show content3 and highlight its tab */
     #tab3:checked ~ * #content3 {
         @apply block opacity-100;
     }
+    
     #tab3:checked ~ .flex .tab-link:nth-child(3) {
+        @apply border-b-2 border-b-primary;
+    }
+    
+    /* When tab4 is checked, show content4 and highlight its tab */
+    #tab4:checked ~ * #content4 {
+        @apply block opacity-100;
+    }
+    
+    #tab4:checked ~ .flex .tab-link:nth-child(4) {
         @apply border-b-2 border-b-primary;
     }
     

@@ -44,17 +44,19 @@ const projects: Project[] = [{
 ---
 
 <div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 gap-6 mb-10">
         {projects.map(project => (
-            <div class="flex flex-col justify-center items-start border border-gray-700 rounded-lg p-4 bg-black">
-                <h3 class="text-xl font-semibold text-white mb-2">{project.name}</h3>
-                <p class="text-gray-400">{project.description}</p>
+            <div class="flex flex-col justify-center items-start border border-gray-700 rounded-lg p-6 bg-black">
+                <div class="w-full">
+                    <h3 class="text-xl font-semibold text-white mb-2">{project.name}</h3>
+                </div>
+                <p class="text-gray-400 my-4">{project.description}</p>
                 {project.link?.url && (
                     <a
                         href={project.link.url}
                         title={project.link.title || project.name}
                         target={project.link.target || '_blank'}
-                        class="w-full px-4 py-2.5 mt-4 text-center border border-gray-600 rounded-lg hover:text-primary hover:border-primary"
+                        class="px-4 py-2.5 mt-2 text-center border border-gray-600 rounded-lg hover:text-primary hover:border-primary"
                     >
                         {project.link.buttonLabel || 'Open Project Website'}
                     </a>
