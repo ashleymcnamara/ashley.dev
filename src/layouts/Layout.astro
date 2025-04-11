@@ -3,24 +3,24 @@ import '../styles/global.scss';
 
 // Base domain URL without trailing slash
 const domainBaseURL = 'https://ashley.dev';
-const ogImageUrl    = 'https://img/meta.png';
+const ogImageUrl    = `${domainBaseURL}/img/meta.png`;
 
 // Website publisher & region
 const authorPublisher   = 'Ashley Willis';
 const geoRegion         = 'seattle-us';
 
 // SEO title, description and keywords
-const seoTitle          = 'ashley.dev | Ashley Willis | Sr. Dir. of Developer Advocacy';
-const seoDescription    = 'PI’ve spent my career in Open Source, focused on people, not just projects. At GitHub, I lead Developer Relations with empathy—helping developers grow, and keeping communities connected. The work is technical, but the mission is human.';
-const seoKeywords       = 'Developer Avocacy, Ashley Willis, Ashley McNamara, Seattle, GitHub, Golang, Kubernetes, Open Source, DevRel, Developer Relations, DevOps, Software Engineer, Software Development, Software Engineering, Tech Lead, Engineering Manager, Sr. Director of Developer Advocacy';
+const seoTitle          = 'Ashley Willis | Developer Advocacy Leader';
+const seoDescription    = 'I\'ve spent my career in Open Source, focused on people, not just projects. At GitHub, I lead Developer Relations with empathy—helping developers grow, and keeping communities connected.';
+const seoKeywords       = 'Developer Advocacy, Ashley Willis, Ashley McNamara, Seattle, GitHub, Golang, Kubernetes, Open Source, DevRel, Developer Relations, DevOps';
 
 // Twitter card data
 const twitter = {
     title:          seoTitle,
     description:    seoDescription,
     image:          ogImageUrl,
-    site:           '@ashley.dev',
-    creator:        '@ashley.dev'
+    site:           '@ashleymcnamara',
+    creator:        '@ashleymcnamara'
 };
 
 // Open graph data
@@ -36,7 +36,7 @@ const openGraph = {
 
 // Dublin core
 const dublinCore = {
-    title:          'ashley.dev | ' + seoTitle,
+    title:          seoTitle,
     creator:        authorPublisher,
     publisher:      authorPublisher,
     rights:         authorPublisher,
@@ -119,6 +119,23 @@ const dublinCore = {
         <meta name="DC.Type"                    content={dublinCore.type}>
         <meta name="DC.Format"                  content={dublinCore.format}>
         <!-- End: Dublin Core (DC) -->
+
+        <!-- Start: Structured data for better SEO -->
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Ashley Willis",
+              "jobTitle": "Sr. Director of Developer Advocacy",
+              "url": "https://ashley.dev",
+              "sameAs": [
+                "https://github.com/ashleymcnamara",
+                "https://twitter.com/ashleymcnamara",
+                "https://www.linkedin.com/in/ashleymcnamara/"
+              ]
+            }
+        </script>
+        <!-- End: Structured data -->
 
         <!-- Title & Description -->
         <title>{seoTitle}</title>
