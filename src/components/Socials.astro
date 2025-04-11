@@ -5,6 +5,8 @@ interface Social {
     icon: 'github' | 'linkedIn' | 'twitter' | 'email' | 'bluesky';
     link: string;
     title?: string;
+    id?: string;
+    isEmail?: boolean; // Flag to identify email links
 }
 
 const socials: Social[] = [{
@@ -22,13 +24,16 @@ const socials: Social[] = [{
 }, {
     icon: 'bluesky',
     link: 'https://bsky.app/profile/ashley.dev',
-    title: 'View  Profile'
+    title: 'View Profile'
 }, {
     icon: 'email',
-    link: 'mailto:hello@ashley.dev',
-    title: 'Send Email'
+    link: '#', // Changed from mailto: to # to prevent default browser behavior
+    title: 'Copy Email Address',
+    id: 'email-link',
+    isEmail: true
 }];
 
+const emailAddress = 'hello@ashley.dev';
 ---
 
 <!-- Start: Social Links -->
@@ -40,10 +45,64 @@ const socials: Social[] = [{
             target="_blank"
             title={social.title}
             rel="noopener noreferrer"
-            class="flex items-center justify-center w-10 h-10 rounded-lg bg-black text-gray-100 transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5">
+            id={social.id}
+            data-email={social.isEmail ? emailAddress : undefined}
+            class={`flex items-center justify-center w-10 h-10 rounded-lg bg-black text-gray-100 transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5 ${social.isEmail ? 'email-link' : ''}`}>
             <SocialIcon icon={social.icon} />
         </a>
     )}
 
 </div>
 <!-- End: Social Links -->
+
+<script>
+    // Add event handler for email link
+    document.addEventListener('DOMContentLoaded', function() {
+        const emailLink = document.getElementById('email-link');
+        
+        if (emailLink) {
+            emailLink.addEventListener('click', function(e) {
+                // Prevent default action (opening a new tab)
+                e.preventDefault();
+                
+                const emailAddress = emailLink.getAttribute('data-email');
+                if (!emailAddress) return;
+                
+                // Copy to clipboard
+                try {
+                    navigator.clipboard.writeText(emailAddress).then(() => {
+                        // Create and show a tooltip that fades out
+                        const tooltip = document.createElement('div');
+                        tooltip.textContent = 'Email copied to clipboard!';
+                        tooltip.style.position = 'fixed';
+                        tooltip.style.bottom = '20px';
+                        tooltip.style.left = '50%';
+                        tooltip.style.transform = 'translateX(-50%)';
+                        tooltip.style.backgroundColor = 'var(--color-primary, #F43F5E)';
+                        tooltip.style.color = 'white';
+                        tooltip.style.padding = '10px 15px';
+                        tooltip.style.borderRadius = '4px';
+                        tooltip.style.zIndex = '9999';
+                        tooltip.style.transition = 'opacity 0.5s ease-in-out';
+                        
+                        document.body.appendChild(tooltip);
+                        
+                        // Fade out after 2 seconds
+                        setTimeout(() => {
+                            tooltip.style.opacity = '0';
+                            setTimeout(() => {
+                                document.body.removeChild(tooltip);
+                            }, 500);
+                        }, 2000);
+                    });
+                } catch (err) {
+                    console.error('Failed to copy email: ', err);
+                    
+                    // Fallback for browsers that don't support clipboard API
+                    // Try to open mailto as a last resort
+                    window.location.href = `mailto:${emailAddress}`;
+                }
+            });
+        }
+    });
+</script>
