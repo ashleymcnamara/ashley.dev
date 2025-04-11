@@ -9,7 +9,7 @@ import remarkEmoji from 'remark-emoji';
 export default defineConfig({
     output: 'static',
     trailingSlash: 'never',
-    site: 'https://devidev.io',
+    site: 'https://ashley.dev',
 
     // Single page, no prefetch needed
     prefetch: false,
