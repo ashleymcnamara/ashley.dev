@@ -6,9 +6,32 @@ import { getCollection } from 'astro:content';
 const allPosts = await getCollection('posts');
 
 // Sort posts by date (newest first)
-const sortedPosts = allPosts.sort((a, b) => {
-  return new Date(b.data.date) - new Date(a.data.date);
+const sortedPosts = allPosts.sort((a: any, b: any) => {
+  return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
 });
+
+// Function to extract a preview from the markdown content
+function extractPreview(content: string, maxLength: number = 150): string {
+  // Remove frontmatter if present (shouldn't be needed but just to be safe)
+  const contentWithoutFrontmatter = content.replace(/^---(.|\n)*?---/, '').trim();
+  
+  // Remove Markdown headings, links, images, and other formatting
+  const plainText = contentWithoutFrontmatter
+    .replace(/#+\s(.*)/g, '$1') // Remove headings
+    .replace(/!\[(.*?)\]\((.*?)\)/g, '') // Remove images
+    .replace(/\[(.*?)\]\((.*?)\)/g, '$1') // Convert links to just their text
+    .replace(/(\*\*|__)(.*?)(\*\*|__)/g, '$2') // Remove bold
+    .replace(/(\*|_)(.*?)(\*|_)/g, '$2') // Remove italic
+    .replace(/\n/g, ' ') // Replace newlines with spaces
+    .trim();
+  
+  // Truncate to maxLength and add ellipsis if needed
+  if (plainText.length > maxLength) {
+    return plainText.substring(0, maxLength) + '...';
+  }
+  
+  return plainText;
+}
 ---
 
 <div>
@@ -18,7 +41,9 @@ const sortedPosts = allPosts.sort((a, b) => {
                 <p class="text-gray-400">No blog posts found. Make sure your content collection is properly set up.</p>
             </div>
         ) : (
-            sortedPosts.map((post, index) => (
+            sortedPosts.map((post, index) => {
+                const preview = extractPreview(post.body);
+                return (
                 <div class="flex flex-col justify-center items-start border border-gray-700 rounded-lg p-6 bg-black blog-post" data-tags={post.data.tags?.join(',')}>
                     <div class="w-full">
                         <a 
@@ -39,14 +64,20 @@ const sortedPosts = allPosts.sort((a, b) => {
                         ))}
                     </div>
                     
+                    {/* Post preview */}
+                    <div class="text-gray-300 mb-4 mt-2">
+                        <p>{preview}</p>
+                    </div>
+                    
                     <a 
                         href={`/posts/${post.data.slug || post.slug}`}
                         class="px-4 py-2.5 mt-2 text-center border border-gray-600 rounded-lg hover:text-primary hover:border-primary"
                     >
-                        Read Post
+                        Read More
                     </a>
                 </div>
-            ))
+                )
+            })
         )}
     </div>
     
