@@ -54,6 +54,7 @@ import ContentBlogs from '../components/ContentBlogs.astro';
                         id="tab3"
                         name="tabs"
                         class="tab-radio"
+                    />
 
                     <!-- Start: Tab bar -->
                     <div class="flex bg-black border-b border-gray-600 sticky top-0 z-10">
@@ -117,6 +118,35 @@ import ContentBlogs from '../components/ContentBlogs.astro';
     </div>
 
 </Layout>
+
+<script>
+    // Handle URL parameters for tab and tag selection
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabParam = urlParams.get('tab');
+        const tagParam = urlParams.get('tag');
+        
+        // If tab parameter exists, activate that tab
+        if (tabParam === 'blogs') {
+            document.getElementById('tab3').checked = true;
+            
+            // If tag parameter exists, find and click the corresponding tag filter
+            if (tagParam) {
+                // Wait for a moment to ensure all elements are fully loaded
+                setTimeout(() => {
+                    const tagButton = document.querySelector(`.tag-filter[data-tag="${tagParam}"]`);
+                    if (tagButton) {
+                        tagButton.click();
+                    }
+                }, 100);
+            }
+        } else if (tabParam === 'projects') {
+            document.getElementById('tab2').checked = true;
+        } else if (tabParam === 'about') {
+            document.getElementById('tab1').checked = true;
+        }
+    });
+</script>
 
 <style is:global>
 
