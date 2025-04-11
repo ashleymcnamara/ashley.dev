@@ -12,4 +12,4 @@ Emoji Test :smile: :heart: :rocket:
 - Item 1
 - Item 2
 - Item 3
-# Testing Emojis 😊
+Link to the sample section: [Link Text](#sample-section).
