@@ -29,8 +29,8 @@ const { Content } = await entry.render();
         <!-- Start: Header bar (similar to the tab bar in home) -->
         <div class="flex bg-black border-b border-gray-600 sticky top-0 z-10 p-4">
           <div class="flex-grow">
-            <a href="/" class="px-3 py-1 border border-gray-600 rounded-lg hover:bg-gray-800 transition inline-block mb-4">
-              &larr; Back to home
+            <a href="/?tab=blogs" class="px-4 py-2.5 border border-gray-600 rounded-lg hover:text-primary hover:border-primary transition inline-block mb-4">
+              &larr; Back to Blog
             </a>
             <h1 class="text-2xl font-bold">{entry.data.title}</h1>
           </div>
@@ -99,7 +99,7 @@ const { Content } = await entry.render();
   }
   
   .prose a {
-    color: var(--color-primary, #38bdf8);
+    color: var(--color-primary, #F43F5E);
     text-decoration: none;
   }
   
