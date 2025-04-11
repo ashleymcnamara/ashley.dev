@@ -1,0 +1,122 @@
+---
+import { Code } from 'astro:components';
+
+const code = `interface Developer {
+    name: string;
+    skills: string[];
+    interests: string[];
+};
+
+interface TechStack {
+    devOps: string[];
+    backend: string[];
+   frontend: string[];
+   design: string[];
+};
+
+type ContactType = 'github' | 'twitter' | 'linkedIn' | 'bluesky' | 'email';
+
+const techStack: TechStack = {
+    devOps: [
+        'GitHub',
+        'Docker',
+        'Cloudflare'
+    ],
+    backend: [
+        'Golang',
+        'Python',
+        'Node.js',
+        'Flask'
+    ],
+    frontend: [
+        'JavaScript',
+        'Angular',
+        'Vue.js',
+        'Jinja2',
+        'HTML5',
+        'CSS3',
+        'TailwindCSS',
+        'Astro',
+        'SCSS',
+        'Markdown',
+        'WordPress'
+    ],
+    design: [
+        'Adobe Illustrator'
+    ]
+};
+
+// Developer profile
+const me: Developer = {
+    name: 'Ashley Willis',
+    skills: [
+       ...techStack.devOps,
+        ...techStack.backend,
+        ...techStack.frontend,
+        ...techStack.design
+    ],
+    interests: [
+        'Open Source',
+        'Developer Experience',
+        'Performance',
+        'AI',
+        'Accessibility',
+        'Networking',
+        'Photography',
+        'Maker Projects',
+        'Public Speaking',
+        'Diversity, Equity, and Inclusion (DEI)'
+    ]
+};
+
+// Contact function
+const contact = (type: ContactType): string => {
+    switch (type) {
+        case 'github':
+            return 'https://github.com/ashleymcnamara';
+        case 'twitter':
+            return 'https://x.com/ashleymcnamara';
+        case 'linkedIn':
+            return 'https://www.linkedin.com/in/ashleymcnamara1';
+        case 'bluesky':
+            return 'https://bsky.app/profile/ashley.dev';
+        case 'email':
+            return 'hello@ashley.dev';
+        default:
+            return 'Send fax.';
+    }
+};
+
+`;
+---
+
+<Code
+    code={code}
+    lang="js"
+    wrap={true}
+/>
+
+<style is:global>
+
+    /* Custom styling for code block line numbers */
+    pre.astro-code {
+        @apply bg-transparent !important;
+    }
+
+    pre.astro-code code {
+        @apply block;
+        counter-reset: step;
+        counter-increment: step 0;
+    }
+
+    pre.astro-code code .line {
+        @apply relative;
+    }
+
+    pre.astro-code code .line::before {
+        content: counter(step);
+        counter-increment: step;
+        @apply text-gray-600 pr-2;
+    }
+
+</style>
