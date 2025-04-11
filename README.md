@@ -23,8 +23,9 @@ The website consists of several key sections:
 - Responsive design that works on desktop and mobile devices
 - Content collections for structured data management
 - Dark mode design for comfortable viewing
-- Tag filtering system for blog posts
+- Tag filtering system for blog posts and speaking engagements
 - Social media integration
+- Section-specific "no results" messaging for filtered content
 
 ## 🧞 Development Commands
 
@@ -45,6 +46,8 @@ Blog posts are written in Markdown and stored in `src/content/posts/`. Each post
 - `date` - Publication date
 - `tags` - Categories/topics for filtering
 
+Speaking engagements and projects are managed through TypeScript data files in the `src/data/` directory.
+
 ## 🏗️ Project Structure
 
 ```
@@ -57,9 +60,16 @@ Blog posts are written in Markdown and stored in `src/content/posts/`. Each post
 │   ├── content/
 │   │   ├── config.ts
 │   │   └── posts/
+│   ├── data/
+│   │   ├── projects.ts
+│   │   └── speaking.ts
 │   ├── layouts/
 │   ├── pages/
-│   └── styles/
+│   ├── styles/
+│   ├── types/
+│   │   └── content.ts
+│   └── utils/
+│       └── filtering.ts
 ├── astro.config.mjs
 ├── tailwind.config.js
 └── tsconfig.json

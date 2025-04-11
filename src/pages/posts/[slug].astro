@@ -47,7 +47,7 @@ const { Content } = await entry.render();
               <!-- Tags display -->
               <div class="flex flex-wrap gap-1">
                 {entry.data.tags?.map(tag => (
-                  <span class="inline-block px-2 py-1 text-xs rounded-lg bg-black text-gray-100 cursor-pointer transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5 tag-link" data-tag={tag}>
+                  <span class="inline-flex items-center justify-center px-2 py-1 text-xs rounded-lg bg-black text-gray-100 cursor-pointer transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5 tag-link" data-tag={tag}>
                     #{tag}
                   </span>
                 ))}
