@@ -21,12 +21,12 @@ const sortedPosts = allPosts.sort((a, b) => {
         ) : (
             sortedPosts.map((post, index) => (
                 <li class="border border-gray-700 rounded-lg p-4 bg-black blog-post" data-tags={post.data.tags?.join(',')}>
-                    <button 
-                        class="text-primary hover:underline w-full text-left"
-                        data-index={index}
+                    <a 
+                        href={`/posts/${post.data.slug || post.slug}`}
+                        class="text-primary hover:underline w-full text-left block"
                     >
                         <h2 class="text-xl font-bold">{post.data.title}</h2>
-                    </button>
+                    </a>
                     <p class="text-sm text-gray-400">{post.data.date.toString()}</p>
                     
                     <!-- Tags display -->
@@ -38,11 +38,10 @@ const sortedPosts = allPosts.sort((a, b) => {
                         ))}
                     </div>
                     
-                    <div id={`content-${index}`} class="hidden mt-2 text-gray-300 prose prose-invert">
-                        {async () => {
-                            const { Content } = await post.render();
-                            return <Content />;
-                        }}
+                    <div class="mt-2 text-gray-300">
+                        <a href={`/posts/${post.data.slug || post.slug}`} class="text-primary hover:underline">
+                            Read more →
+                        </a>
                     </div>
                 </li>
             ))
@@ -72,19 +71,6 @@ const sortedPosts = allPosts.sort((a, b) => {
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Content toggle functionality
-        const contentButtons = document.querySelectorAll('.blog-post button[data-index]');
-        contentButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const index = button.getAttribute('data-index');
-                const content = document.getElementById(`content-${index}`);
-                
-                if (content) {
-                    content.classList.toggle('hidden');
-                }
-            });
-        });
-        
         // Tag filtering functionality
         const tagButtons = document.querySelectorAll('.tag-filter');
         const blogPosts = document.querySelectorAll('.blog-post');
