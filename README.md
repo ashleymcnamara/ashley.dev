@@ -4,9 +4,7 @@ This repository contains the source code for [Ashley.dev](https://ashley.dev), m
 
 ## 📸 Site Preview
 
-| About Page | Projects Page |
-|:---:|:---:|
-| ![About Page Preview](assets/preview-about.png) | ![Projects Page Preview](assets/preview-projects.png) |
+![About Page Preview](assets/preview-about.png)
 
 ## 🚀 Site Structure
 
