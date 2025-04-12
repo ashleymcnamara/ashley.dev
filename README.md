@@ -29,6 +29,7 @@ The website consists of several key sections:
 - Dark mode design for comfortable viewing
 - Tag filtering system for blog posts and speaking engagements
 - Social media integration with Bluesky, Twitter, LinkedIn, GitHub and Email
+- Bluesky post interactions (likes and comments) displayed on blog posts
 - Section-specific "no results" messaging for filtered content
 - Clean URLs that don't persist query parameters on page refresh
 - Robust tab system with browser history integration
@@ -51,6 +52,7 @@ Blog posts are written in Markdown and stored in `src/content/posts/`. Each post
 - `title` - The title of the post
 - `date` - Publication date
 - `tags` - Categories/topics for filtering
+- `blueskyPostURI` - Optional AT URI to a Bluesky post for displaying likes and comments
 
 Speaking engagements and projects are managed through TypeScript data files in the `src/data/` directory.
 
@@ -65,6 +67,8 @@ Speaking engagements and projects are managed through TypeScript data files in t
 ├── src/
 │   ├── assets/             # Images used in components
 │   ├── components/         # Reusable UI components
+│   │   ├── BlueskyLikes.astro  # Bluesky likes and comments component
+│   │   └── ...             # Other components
 │   ├── content/
 │   │   ├── config.ts       # Content collection configuration
 │   │   └── posts/          # Blog posts in Markdown
