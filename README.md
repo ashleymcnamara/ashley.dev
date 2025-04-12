@@ -2,6 +2,12 @@
 
 This repository contains the source code for [Ashley.dev](https://ashley.dev), my personal website built with Astro and Tailwind CSS.
 
+## 📸 Site Preview
+
+| About Page | Projects Page |
+|:---:|:---:|
+| ![About Page Preview](assets/preview-about.png) | ![Projects Page Preview](assets/preview-projects.png) |
+
 ## 🚀 Site Structure
 
 The website consists of several key sections:
@@ -24,8 +30,10 @@ The website consists of several key sections:
 - Content collections for structured data management
 - Dark mode design for comfortable viewing
 - Tag filtering system for blog posts and speaking engagements
-- Social media integration
+- Social media integration with Bluesky, Twitter, LinkedIn, GitHub and Email
 - Section-specific "no results" messaging for filtered content
+- Clean URLs that don't persist query parameters on page refresh
+- Robust tab system with browser history integration
 
 ## 🧞 Development Commands
 
@@ -52,27 +60,34 @@ Speaking engagements and projects are managed through TypeScript data files in t
 
 ```
 /
+├── assets/                 # Preview images for README
 ├── public/
-│   └── images, robots.txt, etc.
+│   ├── img/                # Images used in the site
+│   └── robots.txt
 ├── src/
-│   ├── assets/
-│   ├── components/
+│   ├── assets/             # Images used in components
+│   ├── components/         # Reusable UI components
 │   ├── content/
-│   │   ├── config.ts
-│   │   └── posts/
+│   │   ├── config.ts       # Content collection configuration
+│   │   └── posts/          # Blog posts in Markdown
 │   ├── data/
-│   │   ├── projects.ts
-│   │   └── speaking.ts
+│   │   ├── projects.ts     # Project data
+│   │   └── speaking.ts     # Speaking engagements data
 │   ├── layouts/
+│   │   └── Layout.astro    # Main layout template
 │   ├── pages/
+│   │   ├── index.astro     # Homepage with tabs
+│   │   └── posts/
+│   │       └── [slug].astro # Dynamic blog post pages
 │   ├── styles/
+│   │   └── global.scss     # Global styles
 │   ├── types/
-│   │   └── content.ts
+│   │   └── content.ts      # TypeScript interfaces
 │   └── utils/
-│       └── filtering.ts
-├── astro.config.mjs
-├── tailwind.config.js
-└── tsconfig.json
+│       └── filtering.ts    # Tag filtering utility
+├── astro.config.mjs        # Astro configuration
+├── tailwind.config.js      # Tailwind CSS configuration
+└── tsconfig.json           # TypeScript configuration
 ```
 
 ## 🔄 Deployment
