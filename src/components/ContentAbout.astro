@@ -111,6 +111,7 @@ const contact = (type: ContactType): string => {
         counter-reset: step;
         counter-increment: step 0;
         font-size: 0.85rem;
+        line-height: 1; /* Single line spacing */
     }
 
     @media (max-width: 640px) {
@@ -121,17 +122,34 @@ const contact = (type: ContactType): string => {
 
     pre.astro-code code .line {
         @apply relative;
-        padding-left: 1.5rem;
-        text-indent: -1.5rem;
+        padding-left: 2.5rem;
+        text-indent: 0;
+        position: relative;
+        display: block;
+        margin-bottom: 0; /* Remove default bottom margin */
     }
 
     pre.astro-code code .line::before {
         content: counter(step);
         counter-increment: step;
-        @apply text-gray-600 pr-2;
-        width: 1.5rem;
+        @apply text-gray-600 pr-1;
+        width: 2rem;
+        position: absolute;
+        left: 0;
         display: inline-block;
         text-align: right;
+    }
+    
+    /* Additional mobile optimizations */
+    @media (max-width: 480px) {
+        pre.astro-code code .line {
+            padding-left: 2.2rem;
+        }
+        
+        pre.astro-code code .line::before {
+            width: 1.7rem;
+            font-size: 0.7rem;
+        }
     }
 
 </style>
