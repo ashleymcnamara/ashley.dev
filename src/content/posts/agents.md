@@ -2,7 +2,7 @@
 title: "What Are AI Agents and What Does Agentic Mean?"
 date: "2025-04-11"
 tags: ["ai", "agents","copilot"]
-blueskyPostURI: "at://did:plc:abc123xyz456/app.bsky.feed.post/3lm6pgtxo6s2h"
+blueskyPostURI: "at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.post/3kl42poillg2s"
 ---
 
 ### What Are AI Agents and What Does "Agentic" Mean?
