@@ -111,7 +111,7 @@ const contact = (type: ContactType): string => {
         counter-reset: step;
         counter-increment: step 0;
         font-size: 0.85rem;
-        line-height: 1; /* Single line spacing */
+        line-height: 0.9; /* Reduced from 1 to 0.9 for even tighter spacing */
     }
 
     @media (max-width: 640px) {
@@ -126,7 +126,7 @@ const contact = (type: ContactType): string => {
         text-indent: 0;
         position: relative;
         display: block;
-        margin-bottom: 0; /* Remove default bottom margin */
+        margin-bottom: 0; /* Removed margin-bottom for tighter line spacing */
     }
 
     pre.astro-code code .line::before {
@@ -136,6 +136,7 @@ const contact = (type: ContactType): string => {
         width: 2rem;
         position: absolute;
         left: 0;
+        top: 0; /* Ensure alignment at the top of line */
         display: inline-block;
         text-align: right;
     }
