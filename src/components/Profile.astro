@@ -21,12 +21,12 @@ const profile = {
             height={96}
             alt={'Profile picture ' + profile.name}
             title={profile.name}
-            class="w-24 h-24 rounded-xl object-cover border-2 border-primary mx-auto sm:mx-0"
+            class="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover border-2 border-primary mx-auto sm:mx-0"
         />
 
         <div>
 
-            <h1 class="text-2xl font-extrabold mb-1 inline-block relative text-text-primary">
+            <h1 class="text-xl md:text-2xl font-extrabold mb-1 inline-block relative text-text-primary">
                 {profile.name}
             </h1>
 
@@ -43,7 +43,7 @@ const profile = {
 
     </div>
 
-    <p class="text-sm leading-relaxed mt-4 text-gray-400">
+    <p class="text-sm leading-relaxed mt-2 text-gray-400 max-w-prose">
         {profile.description}
     </p>
 

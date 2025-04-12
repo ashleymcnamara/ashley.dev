@@ -101,22 +101,37 @@ const contact = (type: ContactType): string => {
     /* Custom styling for code block line numbers */
     pre.astro-code {
         @apply bg-transparent !important;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
     }
 
     pre.astro-code code {
         @apply block;
         counter-reset: step;
         counter-increment: step 0;
+        font-size: 0.85rem;
+    }
+
+    @media (max-width: 640px) {
+        pre.astro-code code {
+            font-size: 0.75rem;
+        }
     }
 
     pre.astro-code code .line {
         @apply relative;
+        padding-left: 1.5rem;
+        text-indent: -1.5rem;
     }
 
     pre.astro-code code .line::before {
         content: counter(step);
         counter-increment: step;
         @apply text-gray-600 pr-2;
+        width: 1.5rem;
+        display: inline-block;
+        text-align: right;
     }
 
 </style>
