@@ -145,31 +145,63 @@ import ContentBlogs from '../components/ContentBlogs.astro';
         const tabParam = urlParams.get('tab');
         const tagParam = urlParams.get('tag');
         
-        // If tab parameter exists, activate that tab
-        if (tabParam === 'blogs') {
-            const tab4 = document.getElementById('tab4') as HTMLInputElement;
-            if (tab4) tab4.checked = true;
-            
-            // If tag parameter exists, find and click the corresponding tag filter
-            if (tagParam) {
-                // Wait for a moment to ensure all elements are fully loaded
-                setTimeout(() => {
-                    const tagButton = document.querySelector(`.tag-filter[data-tag="${tagParam}"]`);
-                    if (tagButton) {
-                        (tagButton as HTMLElement).click();
-                    }
-                }, 100);
+        // Process URL parameters only on direct page load
+        if (tabParam || tagParam) {
+            // If tab parameter exists, activate that tab
+            if (tabParam === 'blogs') {
+                const tab4 = document.getElementById('tab4') as HTMLInputElement;
+                if (tab4) tab4.checked = true;
+                
+                // If tag parameter exists, find and click the corresponding tag filter
+                if (tagParam) {
+                    // Wait for a moment to ensure all elements are fully loaded
+                    setTimeout(() => {
+                        const tagButton = document.querySelector(`.tag-filter[data-tag="${tagParam}"]`);
+                        if (tagButton) {
+                            (tagButton as HTMLElement).click();
+                        }
+                    }, 100);
+                }
+            } else if (tabParam === 'projects') {
+                const tab2 = document.getElementById('tab2') as HTMLInputElement;
+                if (tab2) tab2.checked = true;
+            } else if (tabParam === 'speaking') {
+                const tab3 = document.getElementById('tab3') as HTMLInputElement;
+                if (tab3) tab3.checked = true;
+            } else if (tabParam === 'about') {
+                const tab1 = document.getElementById('tab1') as HTMLInputElement;
+                if (tab1) tab1.checked = true;
             }
-        } else if (tabParam === 'projects') {
-            const tab2 = document.getElementById('tab2') as HTMLInputElement;
-            if (tab2) tab2.checked = true;
-        } else if (tabParam === 'speaking') {
-            const tab3 = document.getElementById('tab3') as HTMLInputElement;
-            if (tab3) tab3.checked = true;
-        } else if (tabParam === 'about') {
-            const tab1 = document.getElementById('tab1') as HTMLInputElement;
-            if (tab1) tab1.checked = true;
+            
+            // Clean up URL after processing parameters
+            // Use history.replaceState to update URL without reloading the page
+            // This way on refresh the URL will be clean
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
         }
+        
+        // Set up click handlers for tab links to manage browser history without page reload
+        const tabLinks = document.querySelectorAll('.tab-link');
+        tabLinks.forEach((link, index) => {
+            link.addEventListener('click', () => {
+                // Get the tab name based on index
+                let tabName;
+                switch (index) {
+                    case 0: tabName = 'about'; break;
+                    case 1: tabName = 'projects'; break;
+                    case 2: tabName = 'speaking'; break;
+                    case 3: tabName = 'blogs'; break;
+                    default: tabName = 'about';
+                }
+                
+                // Update URL for navigation without reloading (but don't clean it)
+                // This way links to tabs still work, but refreshes go to clean URL
+                if (window.history && window.history.pushState) {
+                    window.history.pushState({}, document.title, `?tab=${tabName}`);
+                }
+            });
+        });
     });
 </script>
 
