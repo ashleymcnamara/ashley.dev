@@ -2,13 +2,14 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import BlueskyLikes from '../../components/BlueskyLikes.astro';
 
 // Generate static paths for all posts
 export async function getStaticPaths() {
   const blogEntries = await getCollection('posts');
   
   return blogEntries.map((entry: CollectionEntry<'posts'>) => ({
-    params: { slug: entry.data.slug || entry.slug },
+    params: { slug: entry.slug },
     props: { entry },
   }));
 }
@@ -60,6 +61,9 @@ const { Content } = await entry.render();
             <div class="prose prose-invert max-w-none post-content">
               <Content />
             </div>
+            
+            <!-- Bluesky Likes Component -->
+            <BlueskyLikes blueskyPostURI={entry.data.blueskyPostURI} />
           </article>
         </div>
         <!-- End: Post content -->

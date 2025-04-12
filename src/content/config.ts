@@ -5,6 +5,7 @@ const postsCollection = defineCollection({
         title: z.string(),
         date: z.string(),
         tags: z.array(z.string()).optional(),
+        blueskyPostURI: z.string().optional(),
     }),
 });
 

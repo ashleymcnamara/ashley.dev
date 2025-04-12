@@ -1,0 +1,383 @@
+---
+interface Props {
+  blueskyPostURI?: string;
+}
+
+const { blueskyPostURI } = Astro.props;
+---
+
+{blueskyPostURI && (
+  <div class="mt-8 pt-6 border-t border-gray-600">
+    <h3 class="text-xl font-medium mb-4">Bluesky Interactions</h3>
+    
+    <!-- Likes Section -->
+    <div id="bluesky-likes" data-post-uri={blueskyPostURI} class="flex flex-col items-start gap-3 mb-6">
+      <div class="flex items-center text-gray-400">
+        <div class="loading-spinner mr-2"></div>
+        <span>Loading likes...</span>
+      </div>
+    </div>
+    
+    <!-- Comments Section -->
+    <div id="bluesky-comments" data-post-uri={blueskyPostURI} class="flex flex-col items-start gap-3 mt-6">
+      <h4 class="text-lg font-medium mb-2">Comments</h4>
+      <div class="comments-container w-full">
+        <div class="flex items-center text-gray-400">
+          <div class="loading-spinner mr-2"></div>
+          <span>Loading comments...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+<script>
+  interface BlueskyActor {
+    did: string;
+    handle: string;
+    displayName?: string;
+    avatar?: string;
+  }
+
+  interface BlueskyLike {
+    actor: BlueskyActor;
+  }
+  
+  interface BlueskyComment {
+    uri: string;
+    createdAt: string;
+    text: string;
+    actor: BlueskyActor;
+  }
+
+  class BlueskyInteractionsManager {
+    private likesContainer: HTMLElement | null = null;
+    private commentsContainer: HTMLElement | null = null;
+    private postURI: string | null = null;
+    private likesCache: Map<string, BlueskyLike[]> = new Map();
+    private commentsCache: Map<string, BlueskyComment[]> = new Map();
+    
+    constructor() {
+      this.init();
+    }
+
+    private init() {
+      document.addEventListener('DOMContentLoaded', () => {
+        this.likesContainer = document.getElementById('bluesky-likes');
+        this.commentsContainer = document.getElementById('bluesky-comments');
+        if (!this.likesContainer || !this.commentsContainer) return;
+        
+        // Both containers should have the same post URI
+        this.postURI = this.likesContainer.dataset.postUri || null;
+        if (!this.postURI) return;
+        
+        this.fetchLikes();
+        this.fetchComments();
+      });
+    }
+
+    private async fetchLikes() {
+      if (!this.postURI || !this.likesContainer) return;
+
+      // Check cache first
+      if (this.likesCache.has(this.postURI)) {
+        this.renderLikes(this.likesCache.get(this.postURI)!);
+        return;
+      }
+
+      try {
+        // Parse the AT URI
+        const [atProto, handleOrDid, postType, postId] = this.postURI.split('/');
+        if (!postId || !handleOrDid) throw new Error('Invalid Bluesky post URI format');
+
+        // Determine if we have a handle or DID
+        let did = handleOrDid;
+        if (!handleOrDid.startsWith('did:')) {
+          // We have a handle, need to resolve to DID
+          const handleResponse = await fetch(`https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=${handleOrDid}`);
+          if (!handleResponse.ok) throw new Error('Failed to resolve handle');
+          
+          const handleData = await handleResponse.json();
+          did = handleData.did;
+        }
+        
+        // Now we fetch the likes with the resolved DID
+        const likesResponse = await fetch(`https://bsky.social/xrpc/app.bsky.feed.getLikes?uri=at://${did}/${postType}/${postId}`);
+        if (!likesResponse.ok) throw new Error('Failed to fetch likes');
+        
+        const likesData = await likesResponse.json();
+        const likes = likesData.likes || [];
+        
+        // Cache the likes
+        this.likesCache.set(this.postURI, likes);
+        
+        // Render the likes
+        this.renderLikes(likes);
+      } catch (error) {
+        console.error('Error fetching Bluesky likes:', error);
+        this.renderLikesError();
+      }
+    }
+
+    private async fetchComments() {
+      if (!this.postURI || !this.commentsContainer) return;
+
+      // Check cache first
+      if (this.commentsCache.has(this.postURI)) {
+        this.renderComments(this.commentsCache.get(this.postURI)!);
+        return;
+      }
+
+      try {
+        // Parse the AT URI
+        const [atProto, handleOrDid, postType, postId] = this.postURI.split('/');
+        if (!postId || !handleOrDid) throw new Error('Invalid Bluesky post URI format');
+
+        // Determine if we have a handle or DID
+        let did = handleOrDid;
+        if (!handleOrDid.startsWith('did:')) {
+          // We have a handle, need to resolve to DID
+          const handleResponse = await fetch(`https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=${handleOrDid}`);
+          if (!handleResponse.ok) throw new Error('Failed to resolve handle');
+          
+          const handleData = await handleResponse.json();
+          did = handleData.did;
+        }
+        
+        // Build the post URI with the resolved DID
+        const fullUri = `at://${did}/${postType}/${postId}`;
+        
+        // Fetch the thread to get replies
+        const threadResponse = await fetch(`https://bsky.social/xrpc/app.bsky.feed.getPostThread?uri=${fullUri}`);
+        if (!threadResponse.ok) throw new Error('Failed to fetch thread');
+        
+        const threadData = await threadResponse.json();
+        
+        // Get the replies from the thread
+        const replies = threadData.thread?.replies || [];
+        
+        // Extract the comments
+        const comments = replies.map((reply: any) => {
+          const post = reply.post;
+          return {
+            uri: post.uri,
+            createdAt: post.record.createdAt,
+            text: post.record.text,
+            actor: post.author
+          };
+        });
+        
+        // Cache the comments
+        this.commentsCache.set(this.postURI, comments);
+        
+        // Render the comments
+        this.renderComments(comments);
+      } catch (error) {
+        console.error('Error fetching Bluesky comments:', error);
+        this.renderCommentsError();
+      }
+    }
+
+    private renderLikes(likes: BlueskyLike[]) {
+      if (!this.likesContainer) return;
+      
+      if (likes.length === 0) {
+        this.likesContainer.innerHTML = '<p class="text-gray-400">No likes yet</p>';
+        return;
+      }
+
+      // Create elements for the likes count and avatars
+      const likesCount = document.createElement('h4');
+      likesCount.className = 'text-lg font-medium mb-2';
+      likesCount.textContent = `${likes.length} ${likes.length === 1 ? 'Like' : 'Likes'}`;
+
+      const avatarsContainer = document.createElement('div');
+      avatarsContainer.className = 'flex flex-wrap gap-2 items-center';
+      avatarsContainer.style.minHeight = '32px'; // Prevent layout shift
+
+      // Add avatars (limited to first 10 users)
+      likes.slice(0, 10).forEach(like => {
+        const avatar = document.createElement('div');
+        avatar.className = 'avatar-container';
+        
+        const img = document.createElement('img');
+        img.className = 'w-8 h-8 rounded-full border border-gray-700 hover:border-primary transition-all';
+        img.width = 32;
+        img.height = 32;
+        img.src = like.actor.avatar || 'https://bsky.social/static/default-avatar.webp'; // Default avatar if none available
+        img.alt = `${like.actor.displayName || like.actor.handle}'s avatar`;
+        img.title = like.actor.displayName || like.actor.handle;
+        
+        // Add click handler to navigate to the user's profile
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+          window.open(`https://bsky.app/profile/${like.actor.handle}`, '_blank');
+        });
+
+        avatar.appendChild(img);
+        avatarsContainer.appendChild(avatar);
+      });
+
+      // Clear existing content and append new elements
+      this.likesContainer.innerHTML = '';
+      this.likesContainer.appendChild(likesCount);
+      this.likesContainer.appendChild(avatarsContainer);
+
+      // If there are more than 10 likes, add an indicator
+      if (likes.length > 10) {
+        const moreIndicator = document.createElement('span');
+        moreIndicator.className = 'text-xs text-gray-400 ml-2';
+        moreIndicator.textContent = `+${likes.length - 10} more`;
+        avatarsContainer.appendChild(moreIndicator);
+      }
+    }
+    
+    private renderComments(comments: BlueskyComment[]) {
+      if (!this.commentsContainer) return;
+      
+      const commentsWrapper = this.commentsContainer.querySelector('.comments-container');
+      if (!commentsWrapper) return;
+      
+      if (comments.length === 0) {
+        commentsWrapper.innerHTML = '<p class="text-gray-400">No comments yet</p>';
+        return;
+      }
+
+      // Clear existing content
+      commentsWrapper.innerHTML = '';
+      
+      // Sort comments by creation date
+      const sortedComments = [...comments].sort((a, b) => 
+        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      );
+
+      // Create comment elements
+      sortedComments.forEach(comment => {
+        const commentEl = document.createElement('div');
+        commentEl.className = 'comment bg-gray-800 bg-opacity-50 rounded-lg p-4 mb-3 w-full';
+        
+        // Comment header with author info
+        const commentHeader = document.createElement('div');
+        commentHeader.className = 'flex items-center mb-2';
+        
+        // Author avatar
+        const authorAvatar = document.createElement('img');
+        authorAvatar.className = 'w-6 h-6 rounded-full border border-gray-700 mr-2';
+        authorAvatar.width = 24;
+        authorAvatar.height = 24;
+        authorAvatar.src = comment.actor.avatar || 'https://bsky.social/static/default-avatar.webp';
+        authorAvatar.alt = `${comment.actor.displayName || comment.actor.handle}'s avatar`;
+        
+        // Author name
+        const authorName = document.createElement('span');
+        authorName.className = 'font-medium text-gray-200 mr-1';
+        authorName.textContent = comment.actor.displayName || '';
+        
+        // Author handle
+        const authorHandle = document.createElement('span');
+        authorHandle.className = 'text-gray-400 text-sm';
+        authorHandle.textContent = `@${comment.actor.handle}`;
+        
+        // Timestamp
+        const timestamp = document.createElement('span');
+        timestamp.className = 'text-gray-500 text-xs ml-auto';
+        
+        // Format timestamp
+        const date = new Date(comment.createdAt);
+        const formattedDate = new Intl.DateTimeFormat('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric'
+        }).format(date);
+        timestamp.textContent = formattedDate;
+        
+        // Comment text
+        const commentText = document.createElement('div');
+        commentText.className = 'text-gray-300 text-sm';
+        commentText.textContent = comment.text;
+        
+        // Create "View on Bluesky" link
+        const viewLink = document.createElement('a');
+        viewLink.className = 'text-xs text-primary hover:underline mt-2 inline-block';
+        viewLink.href = `https://bsky.app/profile/${comment.actor.handle}/post/${comment.uri.split('/').pop()}`;
+        viewLink.target = '_blank';
+        viewLink.textContent = 'View on Bluesky';
+        
+        // Assemble comment element
+        commentHeader.appendChild(authorAvatar);
+        commentHeader.appendChild(authorName);
+        commentHeader.appendChild(authorHandle);
+        commentHeader.appendChild(timestamp);
+        
+        commentEl.appendChild(commentHeader);
+        commentEl.appendChild(commentText);
+        commentEl.appendChild(viewLink);
+        
+        commentsWrapper.appendChild(commentEl);
+      });
+    }
+
+    private renderLikesError() {
+      if (!this.likesContainer) return;
+      
+      // Hide the error completely as per requirements
+      this.likesContainer.innerHTML = '';
+      this.likesContainer.style.display = 'none';
+    }
+    
+    private renderCommentsError() {
+      if (!this.commentsContainer) return;
+      
+      // Hide the error completely as per requirements
+      this.commentsContainer.innerHTML = '';
+      this.commentsContainer.style.display = 'none';
+    }
+  }
+
+  // Initialize the interactions manager
+  new BlueskyInteractionsManager();
+</script>
+
+<style>
+  .loading-spinner {
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-top-color: var(--color-primary, #F43F5E);
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .avatar-container {
+    transition: transform 0.2s ease;
+  }
+  
+  .avatar-container:hover {
+    transform: scale(1.1) translateY(-2px);
+    z-index: 2;
+  }
+  
+  .comments-container {
+    max-height: 500px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(200, 200, 200, 0.2) transparent;
+  }
+  
+  .comments-container::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .comments-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .comments-container::-webkit-scrollbar-thumb {
+    background-color: rgba(200, 200, 200, 0.2);
+    border-radius: 6px;
+  }
+</style>
