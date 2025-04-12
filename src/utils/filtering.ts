@@ -45,7 +45,9 @@ export function setupTagFiltering(options: TagFilterOptions): () => void {
       items.forEach(item => {
         const itemTags = item.getAttribute(dataAttribute)?.split(',') || [];
         
-        if (selectedTag === allTagValue || itemTags.includes(selectedTag)) {
+        // Case-insensitive matching
+        if (selectedTag === allTagValue || 
+            itemTags.some(tag => tag.toLowerCase() === selectedTag.toLowerCase())) {
           (item as HTMLElement).style.display = '';
           visibleCount++;
         } else {

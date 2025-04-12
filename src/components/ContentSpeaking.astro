@@ -163,7 +163,7 @@ const allTags = getAllSpeakingTags();
         const allButton = document.querySelector('.tag-filter[data-tag="all"]');
         
         // Function to update section-specific visibility
-        function updateSectionVisibility(selectedTag) {
+        function updateSectionVisibility(selectedTag: string) {
             // Check visibility of upcoming section cards
             let visibleUpcoming = 0;
             upcomingCards.forEach(card => {
@@ -211,9 +211,53 @@ const allTags = getAllSpeakingTags();
             });
         });
         
-        // Initialize the visibility based on default "All" selection
-        if (allButton) {
+        // Function to ensure all sessions are shown by default
+        function showAllSessions() {
+            // 1. Make sure all cards are visible
+            document.querySelectorAll('.speaking-card').forEach(card => {
+                (card as HTMLElement).style.display = 'flex';
+            });
+            
+            // 2. Update section visibility with 'all' tag
             updateSectionVisibility('all');
+            
+            // 3. Set the "All Sessions" button to active state
+            if (allButton) {
+                // Remove active class from all buttons
+                tagButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.classList.remove('bg-primary');
+                    btn.classList.add('bg-black');
+                });
+                
+                // Add active class to the all button
+                allButton.classList.add('active');
+                allButton.classList.remove('bg-black');
+                allButton.classList.add('bg-primary');
+            }
+        }
+        
+        // Initialize the visibility based on default "All" selection immediately
+        showAllSessions();
+        
+        // Call it again after a small delay to ensure it applies after all DOM operations
+        setTimeout(showAllSessions, 100);
+        
+        // Add a listener for when the speaking tab becomes visible
+        const speakingTab = document.getElementById('content3');
+        if (speakingTab) {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.attributeName === 'class' && 
+                        !speakingTab.classList.contains('hidden') && 
+                        speakingTab.classList.contains('opacity-100')) {
+                        // Tab became visible, make sure all items are shown
+                        showAllSessions();
+                    }
+                });
+            });
+            
+            observer.observe(speakingTab, { attributes: true });
         }
     });
 </script>
