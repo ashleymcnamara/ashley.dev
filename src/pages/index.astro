@@ -30,10 +30,10 @@ import ContentBlogs from '../components/ContentBlogs.astro';
         <div class="w-full md:w-4/5 p-0">
 
             <!-- Start: Inner wrapper -->
-            <div class="min-h-full h-[90vh] flex flex-col overflow-y-scroll">
+            <div class="min-h-full h-[90vh] md:h-[90vh] flex flex-col overflow-y-auto md:overflow-y-scroll">
 
                 <!-- Use hidden radio buttons to control the tabs -->
-                <div class="tab-controls">
+                <div class="tab-controls h-full flex flex-col">
 
                     <input
                         type="radio"
@@ -91,7 +91,7 @@ import ContentBlogs from '../components/ContentBlogs.astro';
                     <!-- End: Tab bar -->
 
                     <!-- Start: Tab content -->
-                    <div class="p-6 flex-grow overflow-y-auto bg-black">
+                    <div class="p-6 flex-grow overflow-y-auto bg-black h-full">
 
                         <!-- Start: About content -->
                         <div id="content1" class="tab-content">

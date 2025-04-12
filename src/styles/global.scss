@@ -7,3 +7,18 @@
 :root {
     --color-primary: #F43F5E;
 }
+
+/* Improve mobile scrolling behavior */
+.tab-content {
+    height: 100%;
+    width: 100%;
+    -webkit-overflow-scrolling: touch; /* For better scrolling on iOS */
+}
+
+/* Fix for mobile overflow issues */
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+        position: relative;
+    }
+}
