@@ -1,6 +1,6 @@
 ---
 title: "Testing Bluesky Integration"
-date: "2025-04-5"
+date: "2025-04-05"
 tags: ["test", "bluesky","integrations"]
 blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lm34df764s2w"
 ---
