@@ -32,87 +32,100 @@ const { blueskyPostURI } = Astro.props;
 )}
 
 <script>
-  interface BlueskyActor {
-    did: string;
-    handle: string;
-    displayName?: string;
-    avatar?: string;
-  }
-
-  interface BlueskyLike {
-    actor: BlueskyActor;
-  }
-  
-  interface BlueskyComment {
-    uri: string;
-    createdAt: string;
-    text: string;
-    actor: BlueskyActor;
-  }
+  // Set maximum number of avatars to display
+  const LIMIT = 55; // Increased limit to show more likes
+  // Use the public Bluesky API endpoint
+  const BSKY_PUBLIC_API = "https://public.api.bsky.app/xrpc/";
+  const IDENTIFIER = import.meta.env?.BLUESKY_IDENTIFIER || "ashley.dev";
+  // Using my actual Bluesky DID that we resolved
+  const MY_DID = "did:plc:5tgxxpsiv36w3e37im6kd2se";
 
   class BlueskyInteractionsManager {
     private likesContainer: HTMLElement | null = null;
     private commentsContainer: HTMLElement | null = null;
     private postURI: string | null = null;
-    private likesCache: Map<string, BlueskyLike[]> = new Map();
-    private commentsCache: Map<string, BlueskyComment[]> = new Map();
     
     constructor() {
+      // Initialize immediately instead of waiting for DOMContentLoaded
+      // This fixes timing issues in Astro's hydration
       this.init();
     }
 
-    private init() {
-      document.addEventListener('DOMContentLoaded', () => {
+    private async init() {
+      // Small delay to ensure DOM is fully loaded in Astro's hydration
+      setTimeout(async () => {
         this.likesContainer = document.getElementById('bluesky-likes');
         this.commentsContainer = document.getElementById('bluesky-comments');
-        if (!this.likesContainer || !this.commentsContainer) return;
+        
+        if (!this.likesContainer || !this.commentsContainer) {
+          console.warn("Bluesky containers not found in DOM");
+          return;
+        }
         
         // Both containers should have the same post URI
         this.postURI = this.likesContainer.dataset.postUri || null;
-        if (!this.postURI) return;
         
-        this.fetchLikes();
-        this.fetchComments();
-      });
+        if (!this.postURI) {
+          console.warn("No Bluesky post URI found");
+          return;
+        }
+
+        // Ensure the post URI is properly formatted
+        if (!this.postURI.startsWith("at://")) {
+          // If we only have a post ID (like from the URL: 3lm34df764s2w)
+          if (!this.postURI.includes('/')) {
+            this.postURI = `at://${MY_DID}/app.bsky.feed.post/${this.postURI}`;
+            console.log("Formatted post URI:", this.postURI);
+          }
+        }
+
+        console.log("Initialized with post URI:", this.postURI);
+        
+        // Fetch interactions
+        await Promise.all([
+          this.fetchLikes(),
+          this.fetchComments()
+        ]);
+      }, 100);
     }
 
     private async fetchLikes() {
       if (!this.postURI || !this.likesContainer) return;
 
-      // Check cache first
-      if (this.likesCache.has(this.postURI)) {
-        this.renderLikes(this.likesCache.get(this.postURI)!);
-        return;
-      }
-
       try {
-        // Parse the AT URI
-        const [atProto, handleOrDid, postType, postId] = this.postURI.split('/');
-        if (!postId || !handleOrDid) throw new Error('Invalid Bluesky post URI format');
-
-        // Determine if we have a handle or DID
-        let did = handleOrDid;
-        if (!handleOrDid.startsWith('did:')) {
-          // We have a handle, need to resolve to DID
-          const handleResponse = await fetch(`https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=${handleOrDid}`);
-          if (!handleResponse.ok) throw new Error('Failed to resolve handle');
-          
-          const handleData = await handleResponse.json();
-          did = handleData.did;
+        console.log("Fetching likes for:", this.postURI);
+        const getLikesURL = `${BSKY_PUBLIC_API}app.bsky.feed.getLikes?limit=${LIMIT}&uri=${encodeURIComponent(this.postURI)}`;
+        const getPostURL = `${BSKY_PUBLIC_API}app.bsky.feed.getPosts?uris=${encodeURIComponent(this.postURI)}`;
+        
+        // Fetch both post data (for total like count) and likes data
+        const [postResponse, likesResponse] = await Promise.all([
+          fetch(getPostURL),
+          fetch(getLikesURL)
+        ]);
+        
+        if (!postResponse.ok) {
+          throw new Error(`Failed to fetch post data: ${postResponse.status}`);
         }
         
-        // Now we fetch the likes with the resolved DID
-        const likesResponse = await fetch(`https://bsky.social/xrpc/app.bsky.feed.getLikes?uri=at://${did}/${postType}/${postId}`);
-        if (!likesResponse.ok) throw new Error('Failed to fetch likes');
+        if (!likesResponse.ok) {
+          throw new Error(`Failed to fetch likes data: ${likesResponse.status}`);
+        }
         
+        const postData = await postResponse.json();
         const likesData = await likesResponse.json();
-        const likes = likesData.likes || [];
         
-        // Cache the likes
-        this.likesCache.set(this.postURI, likes);
+        console.log("Post data:", postData);
+        console.log("Likes data:", likesData);
         
-        // Render the likes
-        this.renderLikes(likes);
+        // Get total like count from post data
+        const totalLikesCount = postData.posts?.[0]?.likeCount || 0;
+        
+        // Render likes if available
+        if (likesData.likes?.length > 0) {
+          this.renderLikes(likesData.likes, totalLikesCount);
+        } else {
+          this.renderEmptyLikes();
+        }
       } catch (error) {
         console.error('Error fetching Bluesky likes:', error);
         this.renderLikesError();
@@ -122,36 +135,18 @@ const { blueskyPostURI } = Astro.props;
     private async fetchComments() {
       if (!this.postURI || !this.commentsContainer) return;
 
-      // Check cache first
-      if (this.commentsCache.has(this.postURI)) {
-        this.renderComments(this.commentsCache.get(this.postURI)!);
-        return;
-      }
-
       try {
-        // Parse the AT URI
-        const [atProto, handleOrDid, postType, postId] = this.postURI.split('/');
-        if (!postId || !handleOrDid) throw new Error('Invalid Bluesky post URI format');
-
-        // Determine if we have a handle or DID
-        let did = handleOrDid;
-        if (!handleOrDid.startsWith('did:')) {
-          // We have a handle, need to resolve to DID
-          const handleResponse = await fetch(`https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=${handleOrDid}`);
-          if (!handleResponse.ok) throw new Error('Failed to resolve handle');
-          
-          const handleData = await handleResponse.json();
-          did = handleData.did;
+        console.log("Fetching comments for:", this.postURI);
+        // Fetch thread data to get replies
+        const threadURL = `${BSKY_PUBLIC_API}app.bsky.feed.getPostThread?uri=${encodeURIComponent(this.postURI)}`;
+        const threadResponse = await fetch(threadURL);
+        
+        if (!threadResponse.ok) {
+          throw new Error(`Failed to fetch thread: ${threadResponse.status}`);
         }
         
-        // Build the post URI with the resolved DID
-        const fullUri = `at://${did}/${postType}/${postId}`;
-        
-        // Fetch the thread to get replies
-        const threadResponse = await fetch(`https://bsky.social/xrpc/app.bsky.feed.getPostThread?uri=${fullUri}`);
-        if (!threadResponse.ok) throw new Error('Failed to fetch thread');
-        
         const threadData = await threadResponse.json();
+        console.log("Thread data:", threadData);
         
         // Get the replies from the thread
         const replies = threadData.thread?.replies || [];
@@ -161,88 +156,114 @@ const { blueskyPostURI } = Astro.props;
           const post = reply.post;
           return {
             uri: post.uri,
-            createdAt: post.record.createdAt,
+            createdAt: post.indexedAt || post.createdAt,
             text: post.record.text,
             actor: post.author
           };
         });
         
-        // Cache the comments
-        this.commentsCache.set(this.postURI, comments);
+        console.log(`Found ${comments.length} comments`);
         
         // Render the comments
-        this.renderComments(comments);
+        if (comments.length > 0) {
+          this.renderComments(comments);
+        } else {
+          this.renderEmptyComments();
+        }
       } catch (error) {
         console.error('Error fetching Bluesky comments:', error);
         this.renderCommentsError();
       }
     }
 
-    private renderLikes(likes: BlueskyLike[]) {
+    private renderLikes(likes: any[], totalCount: number) {
       if (!this.likesContainer) return;
       
-      if (likes.length === 0) {
-        this.likesContainer.innerHTML = '<p class="text-gray-400">No likes yet</p>';
-        return;
-      }
-
       // Create elements for the likes count and avatars
       const likesCount = document.createElement('h4');
       likesCount.className = 'text-lg font-medium mb-2';
-      likesCount.textContent = `${likes.length} ${likes.length === 1 ? 'Like' : 'Likes'}`;
+      likesCount.textContent = `${totalCount} ${totalCount === 1 ? 'Like' : 'Likes'}`;
 
-      const avatarsContainer = document.createElement('div');
+      const avatarsContainer = document.createElement('ul');
       avatarsContainer.className = 'flex flex-wrap gap-2 items-center';
-      avatarsContainer.style.minHeight = '32px'; // Prevent layout shift
+      avatarsContainer.style.minHeight = '50px'; // Prevent layout shift
+      avatarsContainer.style.listStyle = 'none';
+      avatarsContainer.style.padding = '0';
 
-      // Add avatars (limited to first 10 users)
-      likes.slice(0, 10).forEach(like => {
-        const avatar = document.createElement('div');
-        avatar.className = 'avatar-container';
+      // Add avatars
+      likes.forEach(like => {
+        const avatarItem = document.createElement('li');
+        avatarItem.className = 'w-10 h-10 rounded-full overflow-hidden';
+        avatarItem.style.marginRight = '-0.5rem'; // Overlap avatars like in whitep4nth3r's design
+        avatarItem.style.filter = 'drop-shadow(0px 0.125rem 0.125rem rgba(0, 0, 0, 0.25))';
         
-        const img = document.createElement('img');
-        img.className = 'w-8 h-8 rounded-full border border-gray-700 hover:border-primary transition-all';
-        img.width = 32;
-        img.height = 32;
-        img.src = like.actor.avatar || 'https://bsky.social/static/default-avatar.webp'; // Default avatar if none available
-        img.alt = `${like.actor.displayName || like.actor.handle}'s avatar`;
-        img.title = like.actor.displayName || like.actor.handle;
+        if (like.actor.avatar) {
+          const img = document.createElement('img');
+          img.className = 'w-full h-full rounded-full';
+          // Use thumbnail version of avatar for better performance
+          img.src = like.actor.avatar.replace("avatar", "avatar_thumbnail");
+          img.alt = like.actor.displayName || like.actor.handle;
+          img.title = like.actor.displayName || like.actor.handle;
+          
+          // Add click handler to navigate to the user's profile
+          img.style.cursor = 'pointer';
+          img.addEventListener('click', () => {
+            window.open(`https://bsky.app/profile/${like.actor.handle}`, '_blank');
+          });
+          
+          avatarItem.appendChild(img);
+        } else {
+          // Placeholder for users without avatars
+          avatarItem.className += ' flex justify-center items-center bg-blue-500 font-bold';
+          avatarItem.setAttribute('aria-label', like.actor.displayName || like.actor.handle);
+          avatarItem.textContent = '@';
+        }
         
-        // Add click handler to navigate to the user's profile
-        img.style.cursor = 'pointer';
-        img.addEventListener('click', () => {
-          window.open(`https://bsky.app/profile/${like.actor.handle}`, '_blank');
-        });
-
-        avatar.appendChild(img);
-        avatarsContainer.appendChild(avatar);
+        avatarsContainer.appendChild(avatarItem);
       });
+
+      // If there are more likes than what we display, show how many more
+      if (totalCount > likes.length) {
+        const moreItem = document.createElement('li');
+        moreItem.className = 'w-10 h-10 rounded-full flex justify-center items-center bg-blue-500 text-white font-bold';
+        moreItem.textContent = `+${totalCount - likes.length}`;
+        avatarsContainer.appendChild(moreItem);
+      }
+      
+      // Add a link to the Bluesky post
+      const viewOnBluesky = document.createElement('a');
+      viewOnBluesky.className = 'text-sm text-blue-400 hover:underline mt-2 block';
+      viewOnBluesky.href = `https://bsky.app/profile/${IDENTIFIER}/post/${this.postURI?.split('/').pop()}`;
+      viewOnBluesky.target = '_blank';
+      viewOnBluesky.textContent = 'Like this post on Bluesky to see your face here';
 
       // Clear existing content and append new elements
       this.likesContainer.innerHTML = '';
       this.likesContainer.appendChild(likesCount);
       this.likesContainer.appendChild(avatarsContainer);
-
-      // If there are more than 10 likes, add an indicator
-      if (likes.length > 10) {
-        const moreIndicator = document.createElement('span');
-        moreIndicator.className = 'text-xs text-gray-400 ml-2';
-        moreIndicator.textContent = `+${likes.length - 10} more`;
-        avatarsContainer.appendChild(moreIndicator);
-      }
+      this.likesContainer.appendChild(viewOnBluesky);
     }
     
-    private renderComments(comments: BlueskyComment[]) {
+    private renderEmptyLikes() {
+      if (!this.likesContainer) return;
+      
+      this.likesContainer.innerHTML = `
+        <h4 class="text-lg font-medium mb-2">0 Likes</h4>
+        <p class="text-gray-400">Be the first to like this post on Bluesky!</p>
+        <a class="text-sm text-blue-400 hover:underline mt-2 block" 
+           href="https://bsky.app/profile/${IDENTIFIER}/post/${this.postURI?.split('/').pop()}" 
+           target="_blank">
+          Like this post on Bluesky
+        </a>
+      `;
+    }
+    
+    private renderComments(comments: any[]) {
       if (!this.commentsContainer) return;
       
       const commentsWrapper = this.commentsContainer.querySelector('.comments-container');
       if (!commentsWrapper) return;
       
-      if (comments.length === 0) {
-        commentsWrapper.innerHTML = '<p class="text-gray-400">No comments yet</p>';
-        return;
-      }
-
       // Clear existing content
       commentsWrapper.innerHTML = '';
       
@@ -265,7 +286,7 @@ const { blueskyPostURI } = Astro.props;
         authorAvatar.className = 'w-6 h-6 rounded-full border border-gray-700 mr-2';
         authorAvatar.width = 24;
         authorAvatar.height = 24;
-        authorAvatar.src = comment.actor.avatar || 'https://bsky.social/static/default-avatar.webp';
+        authorAvatar.src = comment.actor.avatar?.replace("avatar", "avatar_thumbnail") || 'https://bsky.social/static/default-avatar.webp';
         authorAvatar.alt = `${comment.actor.displayName || comment.actor.handle}'s avatar`;
         
         // Author name
@@ -298,7 +319,7 @@ const { blueskyPostURI } = Astro.props;
         
         // Create "View on Bluesky" link
         const viewLink = document.createElement('a');
-        viewLink.className = 'text-xs text-primary hover:underline mt-2 inline-block';
+        viewLink.className = 'text-xs text-blue-400 hover:underline mt-2 inline-block';
         viewLink.href = `https://bsky.app/profile/${comment.actor.handle}/post/${comment.uri.split('/').pop()}`;
         viewLink.target = '_blank';
         viewLink.textContent = 'View on Bluesky';
@@ -316,26 +337,40 @@ const { blueskyPostURI } = Astro.props;
         commentsWrapper.appendChild(commentEl);
       });
     }
+    
+    private renderEmptyComments() {
+      if (!this.commentsContainer) return;
+      
+      const commentsWrapper = this.commentsContainer.querySelector('.comments-container');
+      if (!commentsWrapper) return;
+      
+      commentsWrapper.innerHTML = `
+        <p class="text-gray-400">No comments yet</p>
+        <a class="text-sm text-blue-400 hover:underline mt-2 block" 
+           href="https://bsky.app/profile/${IDENTIFIER}/post/${this.postURI?.split('/').pop()}" 
+           target="_blank">
+          Comment on this post on Bluesky
+        </a>
+      `;
+    }
 
     private renderLikesError() {
       if (!this.likesContainer) return;
-      
-      // Hide the error completely as per requirements
-      this.likesContainer.innerHTML = '';
-      this.likesContainer.style.display = 'none';
+      this.likesContainer.innerHTML = '<p class="text-gray-400">Unable to load likes</p>';
     }
     
     private renderCommentsError() {
       if (!this.commentsContainer) return;
       
-      // Hide the error completely as per requirements
-      this.commentsContainer.innerHTML = '';
-      this.commentsContainer.style.display = 'none';
+      const commentsWrapper = this.commentsContainer.querySelector('.comments-container');
+      if (!commentsWrapper) return;
+      
+      commentsWrapper.innerHTML = '<p class="text-gray-400">Unable to load comments</p>';
     }
   }
 
   // Initialize the interactions manager
-  new BlueskyInteractionsManager();
+  const manager = new BlueskyInteractionsManager();
 </script>
 
 <style>
@@ -350,15 +385,6 @@ const { blueskyPostURI } = Astro.props;
   
   @keyframes spin {
     to { transform: rotate(360deg); }
-  }
-  
-  .avatar-container {
-    transition: transform 0.2s ease;
-  }
-  
-  .avatar-container:hover {
-    transform: scale(1.1) translateY(-2px);
-    z-index: 2;
   }
   
   .comments-container {

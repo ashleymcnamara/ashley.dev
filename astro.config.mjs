@@ -13,6 +13,11 @@ export default defineConfig({
 
     // Single page, no prefetch needed
     prefetch: false,
+    
+    // Make environment variables available on the client side
+    vite: {
+        envPrefix: 'BLUESKY_',
+    },
 
     integrations: [
         tailwind(),
