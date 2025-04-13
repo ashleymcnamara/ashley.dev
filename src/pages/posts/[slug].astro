@@ -17,6 +17,20 @@ export async function getStaticPaths() {
 // The entry prop is passed from getStaticPaths
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+// Safely handle the date
+let formattedDate;
+try {
+  formattedDate = new Date(entry.data.date).toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+} catch (e) {
+  formattedDate = "Publication date unavailable";
+  console.error("Error formatting date:", e);
+}
+
+// Check if Bluesky URI is valid
+const hasBlueskyURI = entry.data.blueskyPostURI && typeof entry.data.blueskyPostURI === 'string' && entry.data.blueskyPostURI.trim() !== '';
 ---
 
 <Layout title={entry.data.title}>
@@ -46,7 +60,7 @@ const { Content } = await entry.render();
         <div class="p-6 flex-grow overflow-y-auto bg-black">
           <article>
             <div class="flex flex-wrap items-center gap-3 mb-8 meta-info">
-              <p class="text-gray-400">{new Date(entry.data.date).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}</p>
+              <p class="text-gray-400">{formattedDate}</p>
               
               <!-- Tags display -->
               <div class="flex flex-wrap gap-2">
@@ -63,7 +77,11 @@ const { Content } = await entry.render();
             </div>
             
             <!-- Bluesky Likes Component -->
-            <BlueskyLikes blueskyPostURI={entry.data.blueskyPostURI} />
+            {hasBlueskyURI && (
+              <div class="bluesky-component-wrapper">
+                <BlueskyLikes blueskyPostURI={entry.data.blueskyPostURI} />
+              </div>
+            )}
           </article>
         </div>
         <!-- End: Post content -->
