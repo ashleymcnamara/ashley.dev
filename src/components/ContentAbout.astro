@@ -94,64 +94,62 @@ const contact = (type: ContactType): string => {
 <Code
     code={code}
     lang="js"
-    wrap={true}
+    wrap={false}
 />
 
 <style is:global>
-
-    /* Custom styling for code block line numbers */
+    /* Custom styling for code blocks with line numbers */
     pre.astro-code {
-        @apply bg-transparent !important;
-        word-break: break-word;
-        overflow-wrap: break-word;
-        white-space: pre-wrap;
+        @apply bg-transparent overflow-x-auto !important;
+        position: relative;
+        margin: 0;
+        padding: 0;
     }
 
     pre.astro-code code {
         @apply block;
-        counter-reset: step;
-        counter-increment: step 0;
+        counter-reset: line;
         font-size: 0.85rem;
-        line-height: 0.9; /* Reduced from 1 to 0.9 for even tighter spacing */
+        line-height: 1.5;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
 
+    pre.astro-code code .line {
+        @apply relative;
+        padding-left: 3.5rem;
+        min-height: 1.5em;
+        position: relative;
+    }
+
+    pre.astro-code code .line::before {
+        counter-increment: line;
+        content: counter(line);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 3rem;
+        text-align: right;
+        padding-right: 0.5rem;
+        color: #6b7280;
+        font-family: "SF Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        font-variant-numeric: tabular-nums;
+        user-select: none;
+    }
+
+    /* Responsive adjustments */
     @media (max-width: 640px) {
         pre.astro-code code {
             font-size: 0.75rem;
         }
     }
-
-    pre.astro-code code .line {
-        @apply relative;
-        padding-left: 2.5rem;
-        text-indent: 0;
-        position: relative;
-        display: block;
-        margin-bottom: 0; /* Removed margin-bottom for tighter line spacing */
-    }
-
-    pre.astro-code code .line::before {
-        content: counter(step);
-        counter-increment: step;
-        @apply text-gray-600 pr-1;
-        width: 2rem;
-        position: absolute;
-        left: 0;
-        top: 0; /* Ensure alignment at the top of line */
-        display: inline-block;
-        text-align: right;
-    }
     
-    /* Additional mobile optimizations */
     @media (max-width: 480px) {
         pre.astro-code code .line {
-            padding-left: 2.2rem;
+            padding-left: 2.8rem;
         }
         
         pre.astro-code code .line::before {
-            width: 1.7rem;
-            font-size: 0.7rem;
+            width: 2.3rem;
         }
     }
-
 </style>
