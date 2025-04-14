@@ -13,7 +13,6 @@ The website consists of several key sections:
 - **Projects** - Showcase of my key projects and contributions
 - **Blog** - Articles and thoughts on various topics
 - **Speaking** - Information about my speaking engagements
-- **Contact** - Ways to get in touch with me
 
 ## 🛠️ Technology Stack
 
