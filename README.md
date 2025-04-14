@@ -1,6 +1,6 @@
 # Ashley.dev - Personal Website
 
-This repository contains the source code for [Ashley.dev](https://ashley.dev), my personal website built with Astro and Tailwind CSS.
+This repository contains the source code for [ashley.dev](https://ashley.dev), my personal website built with Astro and Tailwind CSS.
 
 ## 📸 Site Preview
 
