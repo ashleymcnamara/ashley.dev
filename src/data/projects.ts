@@ -2,7 +2,7 @@ import type { Project } from '../types/content';
 
 export const projects: Project[] = [{
     name: 'Faces of Open Source',
-    description: 'Being a part of the \'Faces of Open Source\' project was both an honor and a unique experience. As someone who has spent years contributing to open-source projects, often behind the scenes, having my portrait taken by Peter Adams was a moment that made me reflect on the work I\'ve done and the community I\'m a part of. Peter approached the photo session with an understanding of the open-source ethos and a genuine interest in my story.',
+    description: 'Being a part of the \'Faces of Open Source\' project was both an honor and a unique experience. As someone who has spent years contributing to open-source projects, often behind the scenes, having my portrait taken by Peter Adams was a moment that made me reflect on the work I\'ve done and the community I\'m a part of.',
     link: {
         url: 'https://www.facesofopensource.com/person/ashley-mcnamara/',
         buttonLabel: 'View My Portrait'
