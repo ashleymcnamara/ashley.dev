@@ -10,8 +10,8 @@ const code = `interface Developer {
 interface TechStack {
     devOps: string[];
     backend: string[];
-   frontend: string[];
-   design: string[];
+    frontend: string[];
+    design: string[];
 };
 
 type ContactType = 'github' | 'twitter' | 'linkedIn' | 'bluesky' | 'email';
@@ -51,7 +51,7 @@ const techStack: TechStack = {
 const me: Developer = {
     name: 'Ashley Willis',
     skills: [
-       ...techStack.devOps,
+        ...techStack.devOps,
         ...techStack.backend,
         ...techStack.frontend,
         ...techStack.design
