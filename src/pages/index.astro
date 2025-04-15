@@ -91,7 +91,7 @@ import ContentBlogs from '../components/ContentBlogs.astro';
                     <!-- End: Tab bar -->
 
                     <!-- Start: Tab content -->
-                    <div class="p-4 sm:p-6 flex-grow overflow-y-auto bg-black h-full">
+                    <div class="p-4 sm:p-6 flex-grow overflow-y-auto bg-black h-full" id="tab-content-container">
 
                         <!-- Start: About content -->
                         <div id="content1" class="tab-content">
@@ -197,6 +197,59 @@ import ContentBlogs from '../components/ContentBlogs.astro';
                 }
             });
         });
+
+        // Fix for scrolling issue on about.ts tab
+        const tabRadios = document.querySelectorAll('.tab-radio');
+        const tabContentContainer = document.getElementById('tab-content-container');
+        
+        // Initialize scroll position memory for each tab
+        const scrollPositions = [0, 0, 0, 0];
+        
+        tabRadios.forEach((radio, index) => {
+            radio.addEventListener('change', () => {
+                if (radio.checked) {
+                    // Store current scroll position before switching
+                    const currentActiveIndex = Array.from(tabRadios).findIndex(r => r.checked);
+                    if (currentActiveIndex !== -1 && tabContentContainer) {
+                        scrollPositions[currentActiveIndex] = tabContentContainer.scrollTop;
+                    }
+                    
+                    // Set the correct scroll position after tab content is shown
+                    setTimeout(() => {
+                        if (tabContentContainer) {
+                            // Reset scroll position for newly activated tab
+                            tabContentContainer.scrollTop = scrollPositions[index];
+                            
+                            // Ensure the about.ts tab content is properly scrollable
+                            if (index === 0) { // about.ts tab
+                                const codeContainer = document.querySelector('#content1 pre.astro-code');
+                                if (codeContainer) {
+                                    // Force a reflow to ensure scrolling works properly
+                                    void codeContainer.offsetHeight;
+                                    
+                                    // Ensure the container is properly initialized for scrolling
+                                    tabContentContainer.style.overflowY = 'auto';
+                                }
+                            }
+                        }
+                    }, 50);
+                }
+            });
+        });
+        
+        // Initial check for about.ts tab (tab1) if it's already active
+        if ((document.getElementById('tab1') as HTMLInputElement)?.checked) {
+            setTimeout(() => {
+                if (tabContentContainer) {
+                    // Force reflow and ensure scrolling for about.ts on initial load
+                    const codeContainer = document.querySelector('#content1 pre.astro-code');
+                    if (codeContainer) {
+                        void codeContainer.offsetHeight;
+                        tabContentContainer.style.overflowY = 'auto';
+                    }
+                }
+            }, 100);
+        }
     });
 </script>
 
