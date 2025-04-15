@@ -272,6 +272,11 @@ import ContentBlogs from '../components/ContentBlogs.astro';
         transition: background-color 0.2s ease-in-out;
     }
 
+    /* Remove the right border on the last tab to prevent an overlapping border with the container */
+    .tab-link:last-of-type {
+        border-inline-end: none;
+    }
+
     /* When tab1 is checked, show content1 and highlight its tab */
     #tab1:checked ~ * #content1 {
         @apply block opacity-100;
