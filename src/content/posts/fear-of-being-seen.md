@@ -49,4 +49,4 @@ And if you’re reading this and nodding along, just know: you’re not alone. Y
 
 I’m starting here. And if you’re trying to find your way back to something too, I hope you’ll start with me.
 
-And hey, if you made it this far, I’m really grateful. I’d honestly love to know what you think. Whether it resonated, or reminded you of something in your own life. Drop me a note, or don’t. But it would mean a lot.
+And hey, if you made it this far, I’m really grateful. Drop me a note, or don’t. But it would mean a lot. 🩷
