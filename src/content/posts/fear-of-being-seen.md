@@ -5,8 +5,6 @@ tags: ["tech leadership", "Motherhood","Personal"]
 blueskyPostURI: ""
 ---
 
-# Working Through the Fear of Being Seen
-
 I’ve been sitting with a lot of hesitation around writing lately, especially writing publicly. It’s not because I don’t have things to say. If anything, the longer I’ve been in tech, the more I’ve lived through: the shifts, the wins, the slow burns, the burnouts. The things that worked. The things that didn’t. I’ve led teams, shaped programs, helped people grow, and been grown by them in return. I could write volumes.
 
 But when it comes to hitting *publish* on a blog post, I freeze.
