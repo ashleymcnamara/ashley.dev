@@ -25,9 +25,9 @@ But even then, I don’t share most of it.
 
 Because the fear is still there. What if it’s not that good? What if someone sees it and thinks I’ve lost my edge? What if it’s not technical enough, not smart enough, not useful enough? What if someone screenshots it and laughs about it in a group chat? What if it ends up on Hacker News and ruins my day?
 
-It’s exhausting. 
+It’s *exhausting*. 
 
-I watch people I admire write every day, like my friend Cassidy, and I’m in awe. She just shows up. Says what’s on her mind. And the ripple effect is real. I’ve seen others start writing because of her. I love that. But when I try to do it myself, it’s like pulling teeth. Every word takes effort. I question everything. I spend hours on a single post and still wonder if I should even hit publish.
+I watch people I admire write every day, like my friend [Cassidy](https://cassidoo.co/blog/), and I’m in awe. She just shows up. Says what’s on her mind. And the ripple effect is real. I’ve seen others start writing because of her. I love that. But when I try to do it myself, it’s like pulling teeth. Every word takes effort. I question everything. I spend hours on a single post and still wonder if I should even hit publish.
 
 Sometimes I don’t.
 
@@ -39,6 +39,8 @@ Maybe I don’t need to be prolific. Maybe I don’t need to impress anyone. May
 
 Because I know I’m not the only one who feels like this. I know I’m not the only one trying to find their way back to something they used to love. I know I’m not the only one wondering where their confidence went.
 
-So this is me writing something. Not a grand comeback. Not a commitment to blog every day. Just a post. A start. A reminder to myself that taking up space, even imperfectly, still matters.
+So I’m writing this post—not as a declaration that I’m going to blog every day (I probably won’t), or that I have a new master plan (I don’t). I’m writing it as a gentle reentry. A reminder to myself that taking up space, even imperfectly, is still worth doing.
 
-And if you’ve been feeling the same way, I hope this gives you permission to start again too. 🩷
+And if you’re reading this and nodding along, just know: you’re not alone. You don’t have to write every day. You don’t have to have the hottest take. You don’t have to prove anything. You just have to be real. That’s enough.
+
+I’m starting here. And if you’re trying to find your way back to something too, I hope you’ll start with me. 🩷
