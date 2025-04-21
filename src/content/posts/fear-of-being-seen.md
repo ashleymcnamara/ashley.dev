@@ -1,6 +1,6 @@
 ---
 title: "Working Through the Fear of Being Seen"
-date: "2025-04-05"
+date: "2025-04-21"
 tags: ["tech leadership", "Motherhood","Personal"]
 blueskyPostURI: ""
 ---
