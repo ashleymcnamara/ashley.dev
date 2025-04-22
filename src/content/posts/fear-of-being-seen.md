@@ -2,7 +2,7 @@
 title: "Working Through the Fear of Being Seen"
 date: "2025-04-21"
 tags: ["TechLeadership", "Motherhood","Personal"]
-blueskyPostURI: "https://bsky.app/profile/ashley.dev/post/3lneixhjamk2i"
+blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lneixhjamk2i"
 ---
 
 I’ve been sitting on this for a while. I keep thinking I should write more, but the truth is, I’ve been hesitating. Not because I don’t have anything to say. I’ve been in tech long enough to have a lot of stories. I’ve seen things change. I’ve helped build a few things, lead a few teams, gotten things wrong, and learned along the way. I could write about all of it.
