@@ -20,7 +20,7 @@ export function GET(context) {
       description: post.data.description,
       // Compute RSS link from post `id`
       // This example assumes all posts are rendered as `/blog/[id]` routes
-      link: `/posts/${post.id}/`,
+      link: `/posts/${post.slug}/`,
     })),
     // (optional) inject custom xml
     customData: `<language>en-us</language>`,
