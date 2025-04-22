@@ -259,6 +259,26 @@ const allTags = getAllSpeakingTags();
             
             observer.observe(speakingTab, { attributes: true });
         }
+        
+        // Check for tag parameter in the URL and activate the appropriate filter
+        const urlParams = new URLSearchParams(window.location.search);
+        const tagParam = urlParams.get('tag');
+        
+        if (tagParam) {
+            // Find the tag button for this tag and click it
+            setTimeout(() => {
+                const tagButton = document.querySelector(`.tag-filter[data-tag="${tagParam}"]`);
+                if (tagButton) {
+                    (tagButton as HTMLElement).click();
+                    
+                    // Scroll to the tag filters section
+                    const filtersContainer = document.getElementById('tag-filters');
+                    if (filtersContainer) {
+                        filtersContainer.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            }, 100); // Small delay to ensure DOM is fully processed
+        }
     });
 </script>
 

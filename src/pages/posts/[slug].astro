@@ -48,7 +48,7 @@ const hasBlueskyURI = entry.data.blueskyPostURI && typeof entry.data.blueskyPost
         <!-- Start: Header bar (similar to the tab bar in home) -->
         <div class="flex flex-col bg-black border-b border-gray-600 sticky top-0 z-10 p-4 backdrop-blur-md bg-opacity-90">
           <div class="flex-grow">
-            <a href="/?tab=blogs" class="px-4 py-2.5 border border-gray-600 rounded-lg hover:text-primary hover:border-primary transition-all duration-300 inline-block mb-4 back-button">
+            <a href="/blog" class="px-4 py-2.5 border border-gray-600 rounded-lg hover:text-primary hover:border-primary transition-all duration-300 inline-block mb-4 back-button">
               &larr; Back to Blog
             </a>
             <h1 class="text-3xl md:text-4xl font-bold post-title">{entry.data.title}</h1>
@@ -98,7 +98,6 @@ const hasBlueskyURI = entry.data.blueskyPostURI && typeof entry.data.blueskyPost
 
 <script>
   // Make tag spans clickable to filter
-  // Support linking back to any tab from blog posts
   document.addEventListener('DOMContentLoaded', () => {
     // Reading progress bar functionality
     const progressBar = document.getElementById('progress-bar');
@@ -132,29 +131,52 @@ const hasBlueskyURI = entry.data.blueskyPostURI && typeof entry.data.blueskyPost
         // Extract tag name from the data attribute
         const tagName = link.getAttribute('data-tag');
         
-        // Navigate back to homepage with tag as query parameter
-        window.location.href = `/?tab=blogs&tag=${tagName}`;
+        // Navigate to blog page with tag as query parameter
+        window.location.href = `/blog?tag=${tagName}`;
       });
     });
     
-    // Add functionality for the back button to remember which tab it came from
-    const backButton = document.querySelector('a[href="/?tab=blogs"]') as HTMLAnchorElement;
+    // Add functionality for the back button to remember which referrer it came from
+    const backButton = document.querySelector('a[href="/blog"]') as HTMLAnchorElement;
     if (backButton) {
       const referrer = document.referrer;
-      if (referrer && referrer.includes('?tab=')) {
-        const tab = new URL(referrer).searchParams.get('tab');
-        if (tab) {
-          backButton.href = `/?tab=${tab}`;
-          
-          // Update the text based on which tab it's going back to
-          if (tab === 'speaking') {
+      
+      // Check if the referrer is from our own site and extract the path
+      if (referrer) {
+        try {
+          const referrerURL = new URL(referrer);
+          if (referrerURL.pathname === '/speaking') {
+            backButton.href = '/speaking';
             backButton.textContent = '← Back to Speaking';
-          } else if (tab === 'projects') {
+          } else if (referrerURL.pathname === '/projects') {
+            backButton.href = '/projects';
             backButton.textContent = '← Back to Projects';
           }
+        } catch (e) {
+          console.error("Error parsing referrer URL:", e);
         }
       }
     }
+    
+    // Force all links in blog content to be the primary color
+    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim() || '#F43F5E';
+    const postLinks = document.querySelectorAll('.post-content a, .prose a');
+    
+    postLinks.forEach(link => {
+      link.style.color = primaryColor;
+      link.style.textDecoration = 'none';
+      
+      // Add event listener to recreate the hover effect from CSS
+      link.addEventListener('mouseenter', (e) => {
+        const target = e.target as HTMLElement;
+        target.style.opacity = '0.9';
+      });
+      
+      link.addEventListener('mouseleave', (e) => {
+        const target = e.target as HTMLElement;
+        target.style.opacity = '1';
+      });
+    });
   });
 </script>
 
@@ -205,8 +227,13 @@ const hasBlueskyURI = entry.data.blueskyPostURI && typeof entry.data.blueskyPost
     margin-bottom: 1.5rem;
   }
   
-  .prose a {
-    color: var(--color-primary, #F43F5E);
+  /* Strengthened link selectors to override any potential conflicts */
+  .prose a,
+  .prose a:link,
+  .prose a:visited,
+  article .prose p a,
+  .post-content .prose a {
+    color: var(--color-primary, #F43F5E) !important;
     text-decoration: none;
     position: relative;
     transition: all 0.2s ease;

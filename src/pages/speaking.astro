@@ -2,23 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import Profile from '../components/Profile.astro';
 import Contact from '../components/Contact.astro';
-import ContentBlogs from '../components/ContentBlogs.astro';
+import ContentSpeaking from '../components/ContentSpeaking.astro';
 ---
 
-<!-- Add a debugging script that executes immediately -->
-<script is:inline>
-  // This script runs immediately when the page loads
-  console.log('DEBUGGING: Blog page is loading');
-  
-  // Store the tag parameter for later use
-  window.tagToFilter = new URLSearchParams(window.location.search).get('tag');
-  
-  if (window.tagToFilter) {
-    console.log('DEBUGGING: Found tag parameter:', window.tagToFilter);
-  }
-</script>
-
-<Layout title="Blog | Ashley" description="Articles, tutorials, and thoughts on tech by Ashley.">
+<Layout title="Speaking | Ashley" description="Speaking engagements, presentations and talks by Ashley.">
   <!-- Start: Main Wrapper -->
   <main class="flex flex-col md:flex-row w-full max-w-full md:max-w-7xl border border-gray-600 rounded-2xl overflow-hidden shadow-2xl relative bg-black mb-6 mx-auto">
 
@@ -43,11 +30,11 @@ import ContentBlogs from '../components/ContentBlogs.astro';
             <svg class="hidden sm:inline-block flex-shrink-0 w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
             <h2 class="whitespace-nowrap text-[0.65rem] sm:text-xs">projects.md</h2>
           </a>
-          <a href="/speaking" class="tab-link flex items-center gap-0.5 md:gap-1 py-1.5 px-0.5 md:px-2 text-xs cursor-pointer min-w-[auto] flex-1 justify-center bg-black text-gray-100 hover:text-primary !border-r !border-r-gray-600">
+          <a href="/speaking" class="tab-link flex items-center gap-0.5 md:gap-1 py-1.5 px-0.5 md:px-2 text-xs cursor-pointer min-w-[auto] flex-1 justify-center bg-black text-gray-100 hover:text-primary !border-r !border-r-gray-600 border-b-2 border-b-primary">
             <svg class="hidden sm:inline-block flex-shrink-0 w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
             <h2 class="whitespace-nowrap text-[0.65rem] sm:text-xs">speaking.md</h2>
           </a>
-          <a href="/blog" class="tab-link flex items-center gap-0.5 md:gap-1 py-1.5 px-0.5 md:px-2 text-xs cursor-pointer min-w-[auto] flex-1 justify-center bg-black text-gray-100 hover:text-primary !border-r !border-r-gray-600 border-b-2 border-b-primary">
+          <a href="/blog" class="tab-link flex items-center gap-0.5 md:gap-1 py-1.5 px-0.5 md:px-2 text-xs cursor-pointer min-w-[auto] flex-1 justify-center bg-black text-gray-100 hover:text-primary !border-r !border-r-gray-600">
             <svg class="hidden sm:inline-block flex-shrink-0 w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
             <h2 class="whitespace-nowrap text-[0.65rem] sm:text-xs">blogs.md</h2>
           </a>
@@ -55,7 +42,7 @@ import ContentBlogs from '../components/ContentBlogs.astro';
         
         <!-- Content -->
         <div class="p-4 sm:p-6 flex-grow overflow-y-auto bg-black h-full">
-          <ContentBlogs />
+          <ContentSpeaking />
         </div>
       </div>
       <!-- End: Inner wrapper -->
@@ -64,31 +51,6 @@ import ContentBlogs from '../components/ContentBlogs.astro';
   </main>
   <!-- End: Main Wrapper -->
 </Layout>
-
-<script>
-  // Process URL parameters for tag filtering
-  document.addEventListener('DOMContentLoaded', () => {
-    // Add TypeScript declaration for the global function
-    declare global {
-      interface Window {
-        applyBlogTagFilter: (tagName: string) => boolean;
-      }
-    }
-    
-    const urlParams = new URLSearchParams(window.location.search);
-    const tagParam = urlParams.get('tag');
-    
-    if (tagParam) {
-      // Wait for a bit to ensure the ContentBlogs component has initialized
-      setTimeout(() => {
-        // Use the global function from ContentBlogs if it exists
-        if (window.applyBlogTagFilter) {
-          window.applyBlogTagFilter(tagParam);
-        }
-      }, 300); // Longer delay to ensure everything is ready
-    }
-  });
-</script>
 
 <style>
   /* Similar styling as in index.astro to maintain consistency */

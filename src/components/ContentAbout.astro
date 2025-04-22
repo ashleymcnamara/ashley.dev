@@ -14,7 +14,12 @@ interface TechStack {
     design: string[];
 };
 
-type ContactType = 'github' | 'twitter' | 'linkedIn' | 'bluesky' | 'email';
+type ContactType = 
+    | 'github' 
+    | 'twitter' 
+    | 'linkedIn' 
+    | 'bluesky' 
+    | 'email';
 
 const techStack: TechStack = {
     devOps: [
@@ -100,10 +105,11 @@ const contact = (type: ContactType): string => {
 <style is:global>
     /* Custom styling for code blocks with line numbers */
     pre.astro-code {
-        @apply bg-transparent overflow-x-auto !important;
+        @apply bg-transparent !important;
         position: relative;
         margin: 0;
         padding: 0;
+        overflow: visible; /* Changed from overflow-x-auto to avoid scrollbar issues */
     }
 
     pre.astro-code code {
@@ -112,6 +118,8 @@ const contact = (type: ContactType): string => {
         font-size: 0.85rem;
         line-height: 1.5;
         font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        overflow-wrap: break-word;
+        white-space: pre-wrap; /* Allow code to wrap to prevent horizontal scrolling */
     }
 
     pre.astro-code code .line {

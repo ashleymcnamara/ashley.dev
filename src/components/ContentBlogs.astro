@@ -105,24 +105,100 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))].
     </div>
 </div>
 
-<script>
-    // Import our shared tag filtering utility
-    import { setupTagFiltering } from '../utils/filtering';
+<script is:inline>
+  // This script runs immediately when the page loads
+  console.log('DEBUGGING: ContentBlogs component loading');
+  
+  // Wait for DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('DEBUGGING: ContentBlogs DOM loaded');
     
-    // Set up tag filtering when the DOM is loaded
-    document.addEventListener('DOMContentLoaded', () => {
-        // Get the initialization function with our config
-        const initializeFiltering = setupTagFiltering({
-            tagButtonsSelector: '.tag-filter',
-            itemsSelector: '.blog-post',
-            noResultsSelector: '#no-results',
-            dataAttribute: 'data-tags',
-            allTagValue: 'all'
-        });
+    // Simple function to filter by tag
+    function filterByTag(selectedTag) {
+      console.log('DEBUGGING: Filtering by tag:', selectedTag);
+      
+      // Get all tag filter buttons
+      const tagButtons = document.querySelectorAll('.tag-filter');
+      
+      // Reset all buttons to inactive state
+      tagButtons.forEach(btn => {
+        btn.classList.remove('active');
+        btn.classList.remove('bg-primary');
+        btn.classList.add('bg-black');
+      });
+      
+      // Find and activate the selected tag button
+      const selectedButton = document.querySelector(`.tag-filter[data-tag="${selectedTag}"]`);
+      if (selectedButton) {
+        console.log('DEBUGGING: Found tag button for:', selectedTag);
+        selectedButton.classList.add('active');
+        selectedButton.classList.remove('bg-black');
+        selectedButton.classList.add('bg-primary');
+      } else {
+        console.log('DEBUGGING: Tag button not found for:', selectedTag);
+        return;
+      }
+      
+      // Get all blog posts
+      const posts = document.querySelectorAll('.blog-post');
+      let visibleCount = 0;
+      
+      // Filter posts
+      posts.forEach(post => {
+        const postTags = post.getAttribute('data-tags')?.split(',') || [];
         
-        // Call the initialization function when DOM is ready
-        initializeFiltering();
+        if (selectedTag === 'all' || postTags.some(tag => tag.toLowerCase() === selectedTag.toLowerCase())) {
+          post.style.display = '';
+          visibleCount++;
+        } else {
+          post.style.display = 'none';
+        }
+      });
+      
+      // Show/hide no results message
+      const noResultsMessage = document.getElementById('no-results');
+      if (noResultsMessage) {
+        noResultsMessage.classList.toggle('hidden', visibleCount > 0);
+      }
+    }
+    
+    // Add click event to tag filter buttons
+    document.querySelectorAll('.tag-filter').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const tag = button.getAttribute('data-tag');
+        if (tag) filterByTag(tag);
+      });
     });
+    
+    // Add click event to tag spans within blog posts
+    document.querySelectorAll('.tag-span').forEach(span => {
+      span.addEventListener('click', () => {
+        let tagText = span.textContent?.trim() || '';
+        if (tagText.startsWith('#')) {
+          tagText = tagText.substring(1);
+        }
+        
+        if (tagText) {
+          filterByTag(tagText);
+          
+          // Scroll to filters
+          const filtersContainer = document.getElementById('tag-filters');
+          if (filtersContainer) {
+            filtersContainer.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+    
+    // Check for the stored tag parameter from the blog.astro page
+    if (window.tagToFilter) {
+      console.log('DEBUGGING: Found stored tag parameter:', window.tagToFilter);
+      // Give the DOM a moment to fully render
+      setTimeout(() => {
+        filterByTag(window.tagToFilter);
+      }, 100);
+    }
+  });
 </script>
 
 <style>

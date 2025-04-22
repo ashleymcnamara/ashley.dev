@@ -1,259 +1,90 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
 import Profile from '../components/Profile.astro';
 import Contact from '../components/Contact.astro';
-
-import ContentLink from '../components/ContentLink.astro';
 import ContentCode from '../components/ContentAbout.astro';
-import ContentProjects from '../components/ContentProjects.astro';
-import ContentSpeaking from '../components/ContentSpeaking.astro';
-import ContentBlogs from '../components/ContentBlogs.astro';
 ---
 
-<Layout>
+<Layout title="Ashley Willis | ashley.dev">
+  <!-- Start: Main Wrapper -->
+  <main class="flex flex-col md:flex-row w-full max-w-full md:max-w-7xl border border-gray-600 rounded-2xl overflow-hidden shadow-2xl relative bg-black mb-6 mx-auto">
 
-    <!-- Start: Main Wrapper -->
-    <main class="flex flex-col md:flex-row w-full max-w-full md:max-w-7xl border border-gray-600 rounded-2xl overflow-hidden shadow-2xl relative bg-black mb-6">
+    <!-- Start: Left / upper card -->
+    <div class="p-6 md:p-6 flex flex-col justify-between w-full md:w-2/5 border-b md:border-b-0 md:border-r border-gray-600">
+      <Profile />
+      <Contact />
+    </div>
+    <!-- End: Left / upper card -->
 
-        <!-- Start: Left / upper card -->
-        <div class="p-6 md:p-6 flex flex-col justify-between w-full md:w-2/5 border-b md:border-b-0 md:border-r border-gray-600">
-
-            <Profile />
-
-            <Contact />
-
+    <!-- Start: Right / lower card -->
+    <div class="w-full md:w-4/5 p-0">
+      <!-- Start: Inner wrapper -->
+      <div class="min-h-full h-[80vh] sm:h-[85vh] md:h-[90vh] flex flex-col overflow-y-auto md:overflow-y-scroll">
+        <!-- Tab bar -->
+        <div class="flex justify-around bg-black border-b border-gray-600 sticky top-0 z-10 w-full overflow-x-auto">
+          <a href="/" class="tab-link flex items-center gap-0.5 md:gap-1 py-1.5 px-0.5 md:px-2 text-xs cursor-pointer min-w-[auto] flex-1 justify-center bg-black text-gray-100 hover:text-primary !border-r !border-r-gray-600 border-b-2 border-b-primary">
+            <svg class="hidden sm:inline-block flex-shrink-0 w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            <h2 class="whitespace-nowrap text-[0.65rem] sm:text-xs">about.ts</h2>
+          </a>
+          <a href="/projects" class="tab-link flex items-center gap-0.5 md:gap-1 py-1.5 px-0.5 md:px-2 text-xs cursor-pointer min-w-[auto] flex-1 justify-center bg-black text-gray-100 hover:text-primary !border-r !border-r-gray-600">
+            <svg class="hidden sm:inline-block flex-shrink-0 w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            <h2 class="whitespace-nowrap text-[0.65rem] sm:text-xs">projects.md</h2>
+          </a>
+          <a href="/speaking" class="tab-link flex items-center gap-0.5 md:gap-1 py-1.5 px-0.5 md:px-2 text-xs cursor-pointer min-w-[auto] flex-1 justify-center bg-black text-gray-100 hover:text-primary !border-r !border-r-gray-600">
+            <svg class="hidden sm:inline-block flex-shrink-0 w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            <h2 class="whitespace-nowrap text-[0.65rem] sm:text-xs">speaking.md</h2>
+          </a>
+          <a href="/blog" class="tab-link flex items-center gap-0.5 md:gap-1 py-1.5 px-0.5 md:px-2 text-xs cursor-pointer min-w-[auto] flex-1 justify-center bg-black text-gray-100 hover:text-primary !border-r !border-r-gray-600">
+            <svg class="hidden sm:inline-block flex-shrink-0 w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            <h2 class="whitespace-nowrap text-[0.65rem] sm:text-xs">blogs.md</h2>
+          </a>
         </div>
-        <!-- End: Left / upper card -->
-
-        <!-- Start: Right / lower card (yes 4/5 instead of 3/5) -->
-        <div class="w-full md:w-4/5 p-0">
-
-            <!-- Start: Inner wrapper -->
-            <div class="min-h-full h-[80vh] sm:h-[85vh] md:h-[90vh] flex flex-col overflow-y-auto md:overflow-y-scroll">
-
-                <!-- Use hidden radio buttons to control the tabs -->
-                <div class="tab-controls h-full flex flex-col">
-
-                    <input
-                        type="radio"
-                        id="tab1"
-                        name="tabs"
-                        class="tab-radio"
-                        checked
-                    />
-
-                    <input
-                        type="radio"
-                        id="tab2"
-                        name="tabs"
-                        class="tab-radio"
-                    />
-                    
-                    <input
-                        type="radio"
-                        id="tab3"
-                        name="tabs"
-                        class="tab-radio"
-                    />
-                    
-                    <input
-                        type="radio"
-                        id="tab4"
-                        name="tabs"
-                        class="tab-radio"
-                    />
-
-                    <!-- Start: Tab bar -->
-                    <div class="flex justify-around bg-black border-b border-gray-600 sticky top-0 z-10 w-full overflow-x-auto">
-
-                        <ContentLink
-                            contentId="tab1"
-                            contentName="about.ts"
-                        />
-
-                        <ContentLink
-                            contentId="tab2"
-                            contentName="projects.md"
-                        />
-                        
-                        <ContentLink
-                            contentId="tab3"
-                            contentName="speaking.md"
-                        />
-
-                        <ContentLink
-                            contentId="tab4"
-                            contentName="blogs.md"
-                        />
-
-                    </div>
-                    <!-- End: Tab bar -->
-
-                    <!-- Start: Tab content -->
-                    <div class="p-4 sm:p-6 flex-grow overflow-y-auto bg-black h-full">
-
-                        <!-- Start: About content -->
-                        <div id="content1" class="tab-content">
-                            <ContentCode />
-                        </div>
-                        <!-- End: About content -->
-
-                        <!-- Start: Projects content -->
-                        <div id="content2" class="tab-content">
-                            <ContentProjects />
-                        </div>
-                        <!-- End: Projects content -->
-                        
-                        <!-- Start: Speaking content -->
-                        <div id="content3" class="tab-content">
-                            <ContentSpeaking />
-                        </div>
-                        <!-- End: Speaking content -->
-                       
-                        <!-- Start: Blog content -->
-                        <div id="content4" class="tab-content">
-                            <ContentBlogs />
-                        </div>
-                        <!-- End: Blog content -->
-                    </div>
-
-                    <!-- End: Tab content -->
-
-                </div>
-
-            </div>
-            <!-- End: Inner wrapper -->
-
+        
+        <!-- Content -->
+        <div class="p-4 sm:p-6 flex-grow overflow-y-auto bg-black h-full">
+          <ContentCode />
         </div>
-        <!-- End: Right / lower card -->
-
-    </main>
-    <!-- End: Main Wrapper -->
-
+      </div>
+      <!-- End: Inner wrapper -->
+    </div>
+    <!-- End: Right / lower card -->
+  </main>
+  <!-- End: Main Wrapper -->
 </Layout>
 
 <script>
-    // Handle URL parameters for tab and tag selection
-    document.addEventListener('DOMContentLoaded', () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const tabParam = urlParams.get('tab');
-        const tagParam = urlParams.get('tag');
-        
-        // Process URL parameters only on direct page load
-        if (tabParam || tagParam) {
-            // If tab parameter exists, activate that tab
-            if (tabParam === 'blogs') {
-                const tab4 = document.getElementById('tab4') as HTMLInputElement;
-                if (tab4) tab4.checked = true;
-                
-                // If tag parameter exists, find and click the corresponding tag filter
-                if (tagParam) {
-                    // Wait for a moment to ensure all elements are fully loaded
-                    setTimeout(() => {
-                        const tagButton = document.querySelector(`.tag-filter[data-tag="${tagParam}"]`);
-                        if (tagButton) {
-                            (tagButton as HTMLElement).click();
-                        }
-                    }, 100);
-                }
-            } else if (tabParam === 'projects') {
-                const tab2 = document.getElementById('tab2') as HTMLInputElement;
-                if (tab2) tab2.checked = true;
-            } else if (tabParam === 'speaking') {
-                const tab3 = document.getElementById('tab3') as HTMLInputElement;
-                if (tab3) tab3.checked = true;
-            } else if (tabParam === 'about') {
-                const tab1 = document.getElementById('tab1') as HTMLInputElement;
-                if (tab1) tab1.checked = true;
-            }
-            
-            // Clean up URL after processing parameters
-            // Use history.replaceState to update URL without reloading the page
-            // This way on refresh the URL will be clean
-            if (window.history && window.history.replaceState) {
-                window.history.replaceState({}, document.title, window.location.pathname);
-            }
-        }
-        
-        // Set up click handlers for tab links to manage browser history without page reload
-        const tabLinks = document.querySelectorAll('.tab-link');
-        tabLinks.forEach((link, index) => {
-            link.addEventListener('click', () => {
-                // Get the tab name based on index
-                let tabName;
-                switch (index) {
-                    case 0: tabName = 'about'; break;
-                    case 1: tabName = 'projects'; break;
-                    case 2: tabName = 'speaking'; break;
-                    case 3: tabName = 'blogs'; break;
-                    default: tabName = 'about';
-                }
-                
-                // Update URL for navigation without reloading (but don't clean it)
-                // This way links to tabs still work, but refreshes go to clean URL
-                if (window.history && window.history.pushState) {
-                    window.history.pushState({}, document.title, `?tab=${tabName}`);
-                }
-            });
-        });
-    });
+  // Check if there are any query parameters for compatibility with old URLs
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get('tab');
+    const tagParam = urlParams.get('tag');
+    
+    // Redirect to the appropriate page if a tab parameter exists
+    if (tabParam) {
+      switch(tabParam) {
+        case 'projects':
+          window.location.href = '/projects' + (tagParam ? `?tag=${tagParam}` : '');
+          break;
+        case 'speaking':
+          window.location.href = '/speaking' + (tagParam ? `?tag=${tagParam}` : '');
+          break;
+        case 'blogs':
+          window.location.href = '/blog' + (tagParam ? `?tag=${tagParam}` : '');
+          break;
+        default:
+          // If tab=about or unknown tab, stay on this page but clean URL
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState({}, document.title, window.location.pathname);
+          }
+      }
+    }
+  });
 </script>
 
-<style is:global>
-
-    /* Hide the radio buttons */
-    .tab-radio {
-        @apply absolute opacity-0 pointer-events-none;
-    }
-
-    /* Default state - hide all tab content */
-    .tab-content {
-        @apply hidden opacity-0;
-        transition: opacity 0.3s ease-in-out;
-    }
-
-    /* Default state for tab links */
-    .tab-link {
-        @apply border-b-2 border-transparent bg-transparent;
-        transition: background-color 0.2s ease-in-out;
-    }
-
-    /* When tab1 is checked, show content1 and highlight its tab */
-    #tab1:checked ~ * #content1 {
-        @apply block opacity-100;
-    }
-
-    #tab1:checked ~ .flex .tab-link:nth-child(1) {
-        @apply border-b-2 border-b-primary;
-    }
-
-    /* When tab2 is checked, show content2 and highlight its tab */
-    #tab2:checked ~ * #content2 {
-        @apply block opacity-100;
-    }
-
-    #tab2:checked ~ .flex .tab-link:nth-child(2) {
-        @apply border-b-2 border-b-primary;
-    }
-    
-    /* When tab3 is checked, show content3 and highlight its tab */
-    #tab3:checked ~ * #content3 {
-        @apply block opacity-100;
-    }
-    
-    #tab3:checked ~ .flex .tab-link:nth-child(3) {
-        @apply border-b-2 border-b-primary;
-    }
-    
-    /* When tab4 is checked, show content4 and highlight its tab */
-    #tab4:checked ~ * #content4 {
-        @apply block opacity-100;
-    }
-    
-    #tab4:checked ~ .flex .tab-link:nth-child(4) {
-        @apply border-b-2 border-b-primary;
-    }
-    
-
+<style>
+  /* Similar styling as other pages for consistency */
+  .tab-link {
+    @apply border-b-2 border-transparent bg-transparent;
+    transition: background-color 0.2s ease-in-out;
+  }
 </style>
