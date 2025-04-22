@@ -16,7 +16,7 @@ export function GET(context) {
     // See "Generating items" section for examples using content collections and glob imports
     items: posts.map((post) => ({
       title: post.data.title,
-      pubDate: post.data.pubDate,
+      pubDate: post.data.date,
       description: post.data.description,
       // Compute RSS link from post `id`
       // This example assumes all posts are rendered as `/blog/[id]` routes
