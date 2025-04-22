@@ -96,4 +96,10 @@ import ContentBlogs from '../components/ContentBlogs.astro';
     @apply border-b-2 border-transparent bg-transparent;
     transition: background-color 0.2s ease-in-out;
   }
+  
+  /* Ensure the blog tab stays highlighted */
+  .tab-link.active,
+  a[href="/blog"] {
+    @apply text-primary;
+  }
 </style>

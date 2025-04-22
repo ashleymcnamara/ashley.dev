@@ -53,9 +53,14 @@ import ContentProjects from '../components/ContentProjects.astro';
 </Layout>
 
 <style>
-  /* Similar styling as in index.astro to maintain consistency */
+  /* Highlight active tab */
   .tab-link {
     @apply border-b-2 border-transparent bg-transparent;
     transition: background-color 0.2s ease-in-out;
+  }
+  
+  .tab-link.active,
+  a[href="/projects"] {
+    @apply text-primary;
   }
 </style>

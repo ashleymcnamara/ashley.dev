@@ -58,4 +58,10 @@ import ContentSpeaking from '../components/ContentSpeaking.astro';
     @apply border-b-2 border-transparent bg-transparent;
     transition: background-color 0.2s ease-in-out;
   }
+  
+  /* Ensure the speaking tab stays highlighted */
+  .tab-link.active,
+  a[href="/speaking"] {
+    @apply text-primary;
+  }
 </style>
