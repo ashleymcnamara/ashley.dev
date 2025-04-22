@@ -21,6 +21,7 @@ export function GET(context) {
       // Compute RSS link from post `id`
       // This example assumes all posts are rendered as `/blog/[id]` routes
       link: `/posts/${post.slug}/`,
+      content: post.body
     })),
     // (optional) inject custom xml
     customData: `<language>en-us</language>`,
