@@ -3,7 +3,7 @@ import rss from '@astrojs/rss';
 export function GET(context) {
   return rss({
     // `<title>` field in output xml
-    title: 'Ashley.dev',
+    title: 'ashley.dev',
     // `<description>` field in output xml
     description: 'Ashley Willis',
     // Pull in your project "site" from the endpoint context
