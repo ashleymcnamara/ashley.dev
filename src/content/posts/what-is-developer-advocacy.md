@@ -31,10 +31,6 @@ That double trust, inward and outward, is the backbone of Developer Advocacy. Lo
 
 And all of that is layered onto a job that touches nearly everything: product development, marketing strategy, developer education, support, community building. Today’s DevRel teams don’t just drop into one department, we stretch across them. Some DevRel orgs report into product, others into marketing, others directly to executives. This breadth is why the lone evangelist model, one person expected to do it all, is fading out and being replaced by more cross-functional, collaborative teams: content specialists, engineers, community managers, programs leads, all working together to build better developer experiences.
 
-So if you're looking for a neat, one-sentence definition of Developer Advocacy in 2025, here it is:
-
-> We build trust at the edges of the business so that developers can succeed, and so that the company can grow in ways that actually serve them.
-
 ## We’re Still Developers (Even if We’re Not Coding Full Time)
 
 One misconception that’s never really gone away is that Developer Advocates aren’t _“real”_ developers. That we’re just here to make videos or run social accounts or give talks. That we’re glorified marketers with GitHub profiles.
