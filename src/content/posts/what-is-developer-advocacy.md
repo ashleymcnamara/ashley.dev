@@ -2,7 +2,7 @@
 title: "What Is Developer Advocacy? (2025 Edition)"
 date: "2025-04-25"
 tags: ["DevRel", "DeveloperAdvocacy","Advocacy"]
-blueskyPostURI: ""
+blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lno24nnmdc2n""
 ---
 
 Back in 2018, I [wrote a post](https://ashley-willis.medium.com/what-is-developer-advocacy-3a92442b627c) that tried to explain what Developer Advocacy is and _why_ it matters. At the time, I was working at Microsoft, flying around the world to speak at conferences, and helping teams figure out how to connect better with the developers they were trying to serve.
