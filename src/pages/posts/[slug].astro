@@ -29,6 +29,22 @@ try {
   console.error("Error formatting date:", e);
 }
 
+// Calculate reading time
+function calculateReadingTime(content) {
+  // Get the content as plain text - rough approximation
+  const text = content.toString();
+  
+  // Count words (split by space)
+  const words = text.split(/\s+/).filter(Boolean).length;
+  
+  // Average reading speed is ~200-250 words per minute
+  const wordsPerMinute = 225;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  
+  return minutes;
+}
+const readingTime = calculateReadingTime(entry.body);
+
 // Check if Bluesky URI is valid
 const hasBlueskyURI = entry.data.blueskyPostURI && typeof entry.data.blueskyPostURI === 'string' && entry.data.blueskyPostURI.trim() !== '';
 ---
@@ -61,6 +77,16 @@ const hasBlueskyURI = entry.data.blueskyPostURI && typeof entry.data.blueskyPost
           <article>
             <div class="flex flex-wrap items-center gap-3 mb-8 meta-info">
               <p class="text-gray-400">{formattedDate}</p>
+              
+              <!-- Reading Time -->
+              <p class="text-gray-400 flex items-center">
+                <span class="inline-block mr-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </span>
+                {readingTime} min read
+              </p>
               
               <!-- Tags display -->
               <div class="flex flex-wrap gap-2">
@@ -122,6 +148,84 @@ const hasBlueskyURI = entry.data.blueskyPostURI && typeof entry.data.blueskyPost
       
       const progress = Math.min((window.scrollY / totalHeight) * 100, 100);
       if (progressBar) progressBar.style.width = `${progress}%`;
+    });
+    
+    // Add click listeners to the Table of Contents links for smooth scrolling
+    const tocLinks = document.querySelectorAll('.toc-link');
+    tocLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            // Smooth scroll to the target element
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+            
+            // Update the URL hash without jumping
+            history.pushState(null, null, targetId);
+          }
+        }
+      });
+    });
+    
+    // Handle anchor links in headings
+    const anchorLinks = document.querySelectorAll('.anchor-link');
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        // Prevent the default jump
+        e.preventDefault();
+        
+        // Get the href attribute
+        const targetId = link.getAttribute('href');
+        
+        if (targetId) {
+          // Update the URL with the hash without jumping
+          history.pushState(null, null, targetId);
+          
+          // Copy the link to clipboard
+          navigator.clipboard.writeText(window.location.href)
+            .then(() => {
+              // Show a small toast notification
+              const toast = document.createElement('div');
+              toast.textContent = 'Link copied to clipboard!';
+              toast.style.position = 'fixed';
+              toast.style.bottom = '20px';
+              toast.style.right = '20px';
+              toast.style.background = 'rgba(0, 0, 0, 0.8)';
+              toast.style.color = 'white';
+              toast.style.padding = '10px 15px';
+              toast.style.borderRadius = '4px';
+              toast.style.zIndex = '9999';
+              toast.style.animation = 'fadeIn 0.3s, fadeOut 0.3s 2s forwards';
+              
+              document.body.appendChild(toast);
+              
+              // Remove the toast after 2.5 seconds
+              setTimeout(() => {
+                document.body.removeChild(toast);
+              }, 2500);
+            })
+            .catch(err => {
+              console.error('Could not copy link: ', err);
+            });
+        }
+      });
+      
+      // Make anchor link visible on hover of parent heading
+      const parentHeading = link.closest('h1, h2, h3, h4, h5, h6');
+      if (parentHeading) {
+        parentHeading.addEventListener('mouseenter', () => {
+          link.classList.add('visible');
+        });
+        
+        parentHeading.addEventListener('mouseleave', () => {
+          link.classList.remove('visible');
+        });
+      }
     });
     
     const tagLinks = document.querySelectorAll('.tag-link');
@@ -370,5 +474,181 @@ const hasBlueskyURI = entry.data.blueskyPostURI && typeof entry.data.blueskyPost
   
   .post-content {
     animation: fadeIn 0.6s ease-out;
+  }
+
+  /* Table of Contents Styles */
+  .toc-container {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .toc-title {
+    font-size: 1.3rem !important;
+    margin-top: 0 !important;
+    margin-bottom: 1rem !important;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+  
+  .toc-title::before {
+    content: '';
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 0.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23F43F5E'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 12h16M4 18h7'%3E%3C/path%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  
+  .toc-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  
+  .toc-item {
+    margin: 0.5rem 0;
+    transition: transform 0.2s ease;
+  }
+  
+  .toc-item-h3 {
+    padding-left: 1.5rem;
+    font-size: 0.95em;
+    opacity: 0.9;
+  }
+  
+  .toc-link {
+    color: #d1d5db !important;
+    text-decoration: none !important;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+  }
+  
+  .toc-link:hover {
+    color: var(--color-primary, #F43F5E) !important;
+    transform: translateX(3px);
+  }
+  
+  .toc-link:hover::after {
+    display: none; /* Disable the underline animation for TOC links */
+  }
+  
+  .toc-link::before {
+    content: '';
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: var(--color-primary, #F43F5E);
+    margin-right: 0.5rem;
+    transform: scale(0);
+    transition: transform 0.2s ease;
+  }
+  
+  .toc-link:hover::before {
+    transform: scale(1);
+  }
+  
+  /* Anchor link styles */
+  .anchor-link {
+    margin-left: 0.5rem;
+    opacity: 0;
+    font-size: 0.8em;
+    transition: opacity 0.2s ease;
+    text-decoration: none !important;
+    color: var(--color-primary, #F43F5E) !important;
+  }
+  
+  .heading-custom:hover .anchor-link,
+  .anchor-link.visible {
+    opacity: 0.7;
+  }
+  
+  .anchor-link:hover {
+    opacity: 1 !important;
+  }
+  
+  .anchor-icon {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  /* Callout box styles for important content */
+  .callout {
+    border-left: 4px solid var(--color-primary, #F43F5E);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .callout-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary, #F43F5E);
+    display: flex;
+    align-items: center;
+  }
+  
+  .callout-icon {
+    margin-right: 0.5rem;
+  }
+  
+  /* Image caption styles */
+  figure {
+    margin: 2rem 0;
+  }
+  
+  figcaption {
+    text-align: center;
+    font-style: italic;
+    color: #d1d5db;
+    font-size: 0.9em;
+    margin-top: 0.75rem;
+    opacity: 0.8;
+  }
+  
+  /* Footnote styles */
+  .footnotes {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .footnote-backref {
+    text-decoration: none !important;
+    margin-left: 0.5rem;
+  }
+  
+  /* Code block line numbers */
+  pre {
+    counter-reset: line;
+  }
+  
+  pre span.line {
+    display: inline-block;
+    width: 100%;
+  }
+  
+  pre span.line::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 1.5rem;
+    margin-right: 1rem;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.4);
+    user-select: none;
   }
 </style>

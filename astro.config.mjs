@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import remarkEmoji from 'remark-emoji';
 import { rehypeHeadingColors } from './src/utils/rehypeHeadingColors.js';
+import { rehypeTableOfContents } from './src/utils/rehypeTableOfContents.js';
 
 export default defineConfig({
     output: 'static',
@@ -49,7 +50,7 @@ export default defineConfig({
             }
         }),
         mdx({
-            rehypePlugins: [rehypeHeadingColors],
+            rehypePlugins: [rehypeHeadingColors, rehypeTableOfContents],
             remarkPlugins: [remarkEmoji],
         }),
     ]
