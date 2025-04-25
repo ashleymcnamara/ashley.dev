@@ -177,6 +177,27 @@ const hasBlueskyURI = entry.data.blueskyPostURI && typeof entry.data.blueskyPost
         target.style.opacity = '1';
       });
     });
+    
+    // DIRECT STYLING FOR HEADINGS: Force all headings to be pink
+    const allHeadings = document.querySelectorAll('.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6');
+    allHeadings.forEach(heading => {
+      (heading as HTMLElement).style.color = primaryColor;
+    });
+    
+    // Set up a mutation observer to handle dynamically loaded content
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList') {
+          const newHeadings = document.querySelectorAll('.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6');
+          newHeadings.forEach(heading => {
+            (heading as HTMLElement).style.color = primaryColor;
+          });
+        }
+      });
+    });
+    
+    // Start observing the document with the configured parameters
+    observer.observe(document.body, { childList: true, subtree: true });
   });
 </script>
 
@@ -301,24 +322,39 @@ const hasBlueskyURI = entry.data.blueskyPostURI && typeof entry.data.blueskyPost
     border-radius: 0.25rem;
   }
   
-  .prose h1, .prose h2, .prose h3, .prose h4 {
+  /* Strengthened selectors for headings to override Tailwind prose defaults */
+  .prose h1, 
+  .prose h2, 
+  .prose h3, 
+  .prose h4,
+  .post-content h1,
+  .post-content h2,
+  .post-content h3,
+  .post-content h4,
+  article .prose h1,
+  article .prose h2,
+  article .prose h3,
+  article .prose h4 {
     margin-top: 2rem;
     margin-bottom: 1rem;
     line-height: 1.3;
     font-weight: 700;
-    color: var(--color-primary, #F43F5E); /* Set all headings to the primary pink color */
+    color: var(--color-primary, #F43F5E) !important; /* Added !important to ensure override */
   }
   
-  .prose h1 {
+  .prose h1,
+  .post-content h1 {
     font-size: 2em;
     margin-top: 0;
   }
   
-  .prose h2 {
+  .prose h2,
+  .post-content h2 {
     font-size: 1.7em;
   }
   
-  .prose h3 {
+  .prose h3,
+  .post-content h3 {
     font-size: 1.4em;
   }
   

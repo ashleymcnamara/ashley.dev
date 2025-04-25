@@ -5,6 +5,7 @@ import compress from 'astro-compress';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import remarkEmoji from 'remark-emoji';
+import { rehypeHeadingColors } from './src/utils/rehypeHeadingColors.js';
 
 export default defineConfig({
     output: 'static',
@@ -48,6 +49,7 @@ export default defineConfig({
             }
         }),
         mdx({
+            rehypePlugins: [rehypeHeadingColors],
             remarkPlugins: [remarkEmoji],
         }),
     ]
