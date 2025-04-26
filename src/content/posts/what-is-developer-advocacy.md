@@ -53,7 +53,7 @@ The difference is the speed. The pace of change in our industry used to feel fas
 
 In 2025, being a Developer Advocate doesn’t just mean staying up-to-date on frameworks or cloud tooling. It means learning how to prompt effectively. It means understanding when to trust an AI-generated response and when to stop and say, “Wait, this isn’t right.” It means knowing how to teach new mental models to teams who’ve built their careers around _very_ different workflows. And it means navigating new questions around authorship, ownership, and ethics.
 
-But it’s not just *what* we learn, it’s *how* we learn.
+But it’s not just _what_ we learn, it’s _how_ we learn.
 
 One of the most valuable shifts in Developer Advocacy over the last few years is the growing comfort with learning in the open.
 
@@ -115,7 +115,7 @@ That’s changed.
 
 Over the years, I’ve watched more and more DevRel teams shift from intuition to intention. We’ve started defining our goals more clearly, choosing metrics that match the stage our programs are in, and building habits around sharing our results, not just internally, but cross-functionally.
 
-These days, it’s rare to find a DevRel team that isn’t tracking *something*. Maybe it’s product adoption. Maybe it’s retention or activation. Maybe it’s content performance or community health. A few are even connecting the dots all the way to sales influence or revenue outcomes.
+These days, it’s rare to find a DevRel team that isn’t tracking _something_. Maybe it’s product adoption. Maybe it’s retention or activation. Maybe it’s content performance or community health. A few are even connecting the dots all the way to sales influence or revenue outcomes.
 
 And honestly? That’s a good thing.
 
@@ -125,10 +125,9 @@ Especially in the aftermath of layoffs, especially when headcount is under scrut
 
 To be clear: not everything that matters is measurable. You can’t put a number on belonging. You can’t quantify the moment someone watches a talk, tries a thing, and finally gets it.
 
-But we can build proxies. We can notice patterns. We can tell better stories, stories that show impact *and* insight.
+But we can build proxies. We can notice patterns. We can tell better stories, stories that show impact _and_ insight.
 
 And we can use those stories to not only keep our seat at the table, but to shape the table itself.
-
 
 ## The Emotional Labor Is Real
 
@@ -162,4 +161,4 @@ It’s part educator, part engineer, part community builder, part translator. It
 
 I could talk about this all day and maybe someday I will write the follow-up post on reporting structures, team models, and DevRel leadership. (Spoiler: they’re changing. More teams are cross-functional. More roles are emerging. The “DevRel of one” model is fading fast.)
 
-But for now, I hope this gives you a clearer picture of what Developer Advocacy looks like in 2025 and why it still matters. <3 
+But for now, I hope this gives you a clearer picture of what Developer Advocacy looks like in 2025 and why it still matters. <3

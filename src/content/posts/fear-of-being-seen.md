@@ -1,7 +1,7 @@
 ---
 title: "Working Through the Fear of Being Seen"
 date: "2025-04-21"
-tags: ["TechLeadership", "Motherhood","Personal"]
+tags: ["TechLeadership", "Motherhood", "Personal"]
 blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lneixhjamk2i"
 ---
 
@@ -23,11 +23,11 @@ That’s why I’ve been tinkering again. Rebuilding old sites. Playing around w
 
 But even then, I don’t share most of it.
 
-Because the fear is still there. What if it’s not that good? What if someone sees it and thinks I’ve lost my edge? What if it’s not technical enough, not smart enough, not useful enough? What if someone screenshots it and laughs about it in a group chat? What if it ends up on Hacker News and ruins my day?
+Because the fear is still there. What if it's not that good? What if someone sees it and thinks I've lost my edge? What if it's not technical enough, not smart enough, not useful enough? What if someone screenshots it and laughs about it in a group chat? What if it ends up on Hacker News and ruins my day?
 
-It’s *exhausting*. 
+It's _exhausting_.
 
-I watch people I admire write every day, like my friend [Cassidy](https://cassidoo.co/blog/), and I’m in awe. She just shows up. Says what’s on her mind. And the ripple effect is real. I’ve seen others start writing because of her. I love that. But when I try to do it myself, it’s like pulling teeth. Every word takes effort. I question everything. I spend hours on a single post and still wonder if I should even hit publish.
+I watch people I admire write every day, like my friend [Cassidy](https://cassidoo.co/blog/), and I'm in awe. She just shows up. Says what’s on her mind. And the ripple effect is real. I’ve seen others start writing because of her. I love that. But when I try to do it myself, it’s like pulling teeth. Every word takes effort. I question everything. I spend hours on a single post and still wonder if I should even hit publish.
 
 Sometimes I don’t.
 

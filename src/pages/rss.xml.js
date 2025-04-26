@@ -13,14 +13,12 @@ export function GET(context) {
     // https://docs.astro.build/en/reference/api-reference/#site
     site: context.site,
     // Array of `<item>`s in output xml
-    // See "Generating items" section for examples using content collections and glob imports
     items: posts.map((post) => ({
       title: post.data.title,
-      pubDate: post.data.pubDate,
-      description: post.data.description,
-      // Compute RSS link from post `id`
-      // This example assumes all posts are rendered as `/blog/[id]` routes
-      link: `/posts/${post.id}/`,
+      pubDate: new Date(post.data.date), // Using the correct date field
+      description: post.data.description || post.data.title, // Fallback to title if description isn't available
+      // Using the correct URL structure as seen in [slug].astro
+      link: `/posts/${post.slug}/`,
     })),
     // (optional) inject custom xml
     customData: `<language>en-us</language>`,
