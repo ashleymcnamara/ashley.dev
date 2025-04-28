@@ -279,7 +279,11 @@ const { blueskyPostURI } = Astro.props;
         
         // Comment header with author info
         const commentHeader = document.createElement('div');
-        commentHeader.className = 'flex items-center mb-2';
+        commentHeader.className = 'flex flex-wrap items-center mb-2';
+        
+        // Author info wrapper (for better mobile layout)
+        const authorInfoWrapper = document.createElement('div');
+        authorInfoWrapper.className = 'flex items-center mr-auto';
         
         // Author avatar
         const authorAvatar = document.createElement('img');
@@ -301,7 +305,7 @@ const { blueskyPostURI } = Astro.props;
         
         // Timestamp
         const timestamp = document.createElement('span');
-        timestamp.className = 'text-gray-500 text-xs ml-auto';
+        timestamp.className = 'text-gray-500 text-xs mt-1 w-full md:w-auto md:mt-0 md:ml-auto';
         
         // Format timestamp
         const date = new Date(comment.createdAt);
@@ -325,9 +329,11 @@ const { blueskyPostURI } = Astro.props;
         viewLink.textContent = 'View on Bluesky';
         
         // Assemble comment element
-        commentHeader.appendChild(authorAvatar);
-        commentHeader.appendChild(authorName);
-        commentHeader.appendChild(authorHandle);
+        authorInfoWrapper.appendChild(authorAvatar);
+        authorInfoWrapper.appendChild(authorName);
+        authorInfoWrapper.appendChild(authorHandle);
+        
+        commentHeader.appendChild(authorInfoWrapper);
         commentHeader.appendChild(timestamp);
         
         commentEl.appendChild(commentHeader);
@@ -392,6 +398,7 @@ const { blueskyPostURI } = Astro.props;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(200, 200, 200, 0.2) transparent;
+    width: 100%;
   }
   
   .comments-container::-webkit-scrollbar {
@@ -405,5 +412,22 @@ const { blueskyPostURI } = Astro.props;
   .comments-container::-webkit-scrollbar-thumb {
     background-color: rgba(200, 200, 200, 0.2);
     border-radius: 6px;
+  }
+  
+  /* Fix for horizontal overflow in comments */
+  .comment {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    max-width: 100%;
+  }
+  
+  .comment .text-gray-300 {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    max-width: 100%;
   }
 </style>
