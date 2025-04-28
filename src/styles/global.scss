@@ -8,6 +8,7 @@
 
 :root {
     --color-primary: #F43F5E;
+    --code-background: #141414; /* Darker background for code blocks */
 }
 
 /* Hide webkit (Chrome, Safari) scrollbars */
@@ -28,4 +29,55 @@
         overflow-x: hidden;
         position: relative;
     }
+}
+
+/* Code block styling to match VS Code dark theme */
+pre {
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    position: relative;
+    background-color: var(--code-background) !important; /* Darker background */
+}
+
+/* Add filename display capability */
+pre[data-filename]::before {
+    content: attr(data-filename);
+    display: block;
+    background: #1c1c1c; /* Darker header background */
+    color: #d4d4d4;
+    font-family: Monaco, Menlo, 'Courier New', monospace;
+    font-size: 0.85rem;
+    padding: 0.25rem 1rem;
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+    border-bottom: 1px solid #2d2d2d;
+    margin: -1rem -1rem 1rem -1rem;
+}
+
+/* Inline code styling */
+:not(pre) > code {
+    background-color: var(--code-background); /* Using the same darker background */
+    color: #d4d4d4;
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+    font-family: Monaco, Menlo, 'Courier New', monospace;
+    font-size: 0.85em;
+    white-space: nowrap;
+}
+
+/* Enhanced line highlighting */
+.highlighted-line {
+    background-color: rgba(255, 255, 255, 0.07);
+    display: block;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+    border-left: 3px solid var(--color-primary);
+}
+
+/* If you have a dark mode toggle, ensure code blocks look good in both modes */
+.dark pre, .dark code {
+    background-color: var(--code-background);
+    color: #d4d4d4;
 }

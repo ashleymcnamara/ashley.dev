@@ -17,9 +17,10 @@
         "astro": "^5.4.2",
         "astro-icon": "^1.1.5",
         "marked": "^15.0.8",
+        "rehype-shiki": "^0.0.9",
         "remark-emoji": "^5.0.1",
         "sharp": "^0.34.1",
-        "shiki": "^3.1.0",
+        "shiki": "^3.3.0",
         "swetrix": "^3.5.4",
         "tailwindcss": "^3.4.17"
     },

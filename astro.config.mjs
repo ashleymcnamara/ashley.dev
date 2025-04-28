@@ -7,6 +7,8 @@ import mdx from '@astrojs/mdx';
 import remarkEmoji from 'remark-emoji';
 import { rehypeHeadingColors } from './src/utils/rehypeHeadingColors.js';
 import { rehypeTableOfContents } from './src/utils/rehypeTableOfContents.js';
+import rehypeShiki from 'rehype-shiki';
+import * as shikiThemes from 'shiki/themes';
 
 export default defineConfig({
     output: 'static',
@@ -50,7 +52,15 @@ export default defineConfig({
             }
         }),
         mdx({
-            rehypePlugins: [rehypeHeadingColors, rehypeTableOfContents],
+            rehypePlugins: [
+                rehypeHeadingColors, 
+                rehypeTableOfContents,
+                [rehypeShiki, { 
+                    theme: shikiThemes.vitesseDark,
+                    useBackground: true,
+                    layoutMode: 'normal'
+                }]
+            ],
             remarkPlugins: [remarkEmoji],
         }),
     ]
