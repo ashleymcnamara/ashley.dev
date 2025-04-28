@@ -78,7 +78,7 @@ In a way, building my npm card was a perfect reflection of what I try to carry i
 
 And if someone smiles when they run `npx ashleywillis`, even just a little? That's a win.
 
-Most of all, it's a reminder that the best parts of building things often come from building them _together_ , from asking for help, listening to feedback, and finding delight in the smallest details.
+Most of all, it's a reminder that the best parts of building things often come from building them _together_, from asking for help, listening to feedback, and finding delight in the smallest details.
 
 ## Try It Yourself
 
