@@ -393,36 +393,50 @@ const { blueskyPostURI } = Astro.props;
     to { transform: rotate(360deg); }
   }
   
+  /* Fixed position container to prevent side-to-side movement */
+  #bluesky-comments {
+    overflow-x: hidden; /* Prevent horizontal scrolling at the component level */
+    position: relative;
+    width: 100%;
+  }
+  
   /* Comment container with improved scrolling stability */
   .comments-container {
     max-height: 500px;
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(200, 200, 200, 0.2) transparent;
+    scrollbar-width: none; /* Hide Firefox scrollbar */
     width: 100%;
-    padding-right: 6px; /* Add padding equal to scrollbar width to prevent layout shift */
-    scrollbar-gutter: stable; /* Modern browsers: reserve space for the scrollbar */
-    box-sizing: content-box; /* Ensure padding doesn't affect the width calculation */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     overscroll-behavior: contain; /* Prevent scroll chaining */
+    position: relative;
+    margin-right: -20px; /* Create space for the custom scrollbar */
+    padding-right: 20px; /* Add padding to offset the negative margin */
   }
   
-  /* Always showing scrollbar to prevent layout shifts */
-  #bluesky-comments {
-    overflow-x: hidden; /* Prevent horizontal scrolling at the component level */
-  }
-  
+  /* Hide webkit scrollbars */
   .comments-container::-webkit-scrollbar {
-    width: 6px;
+    width: 0;
+    background: transparent; /* Hide the scrollbar but allow scrolling */
+    display: none;
   }
   
-  .comments-container::-webkit-scrollbar-track {
-    background: transparent;
+  /* Custom scrollbar that doesn't take up layout space */
+  .comments-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 6px;
+    width: 3px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
   }
   
-  .comments-container::-webkit-scrollbar-thumb {
-    background-color: rgba(200, 200, 200, 0.2);
-    border-radius: 6px;
+  .comments-container:hover::after {
+    opacity: 1;
   }
   
   /* Fix for horizontal overflow in comments */
@@ -441,5 +455,31 @@ const { blueskyPostURI } = Astro.props;
     word-break: break-word;
     hyphens: auto;
     max-width: 100%;
+  }
+
+  /* Ensure avatar images don't cause layout shifts */
+  .comment img.w-6 {
+    min-width: 24px;
+    min-height: 24px;
+  }
+  
+  /* Ensure comments take full width of container */
+  @media (max-width: 768px) {
+    #bluesky-comments {
+      max-width: 100vw;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    
+    .comments-container {
+      margin-right: 0;
+      padding-right: 12px;
+      width: 100%;
+      overflow-x: hidden;
+    }
+    
+    .comment {
+      width: calc(100% - 6px);
+    }
   }
 </style>
