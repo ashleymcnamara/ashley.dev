@@ -2,7 +2,7 @@
 title: "Turning Feedback Into Features: Building My npx Business Card"
 date: "2025-04-28"
 tags: ["DeveloperExperience", "CLI", "NodeJS"]
-blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lm72uv4z5q2a"
+blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lnvt3vztlk2k"
 ---
 While I was building [ashley.dev](https://ashley.dev), I wanted it to feel genuine, more like a reflection of me, and less like a standard portfolio. One of the sections I added to the About page said `npx connect` above a set of social icons. In my mind, it was just a playful callout, a nod to the idea of connecting through different platforms.
 
