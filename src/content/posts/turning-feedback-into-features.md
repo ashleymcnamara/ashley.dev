@@ -2,7 +2,7 @@
 title: "Turning Feedback Into Features: Building My npx Business Card"
 date: "2025-04-28"
 tags: ["DeveloperExperience", "CLI", "NodeJS"]
-blueskyPostURI: ""
+blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lm72uv4z5q2a"
 ---
 While I was building [ashley.dev](https://ashley.dev), I wanted it to feel genuine, more like a reflection of me, and less like a standard portfolio. One of the sections I added to the About page said `npx connect` above a set of social icons. In my mind, it was just a playful callout, a nod to the idea of connecting through different platforms.
 
@@ -62,11 +62,7 @@ npm publish
 
 The first time I typed `npx ashleywillis` into my terminal and saw the finished card pop up, it genuinely made me smile.
 
-It wasn't a massive app or a complicated build.
-
-It was a small thing, made with care, and somehow that made it even better.
-
-After that, I went back to my Astro site, updated the About section with something that actually *worked*: `npx ashleywillis` 
+It wasn't a massive app or a complicated build. It was a small thing, made with care, and somehow that made it even better. After that, I went back to my Astro site, updated the About section with something that actually *worked*: `npx ashleywillis` 
 
 It felt good to close the loop and even better to know that if another developer ever got curious, they’d find a little easter egg waiting for them.
 
