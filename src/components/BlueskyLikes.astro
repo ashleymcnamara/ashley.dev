@@ -393,12 +393,23 @@ const { blueskyPostURI } = Astro.props;
     to { transform: rotate(360deg); }
   }
   
+  /* Comment container with improved scrolling stability */
   .comments-container {
     max-height: 500px;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(200, 200, 200, 0.2) transparent;
     width: 100%;
+    padding-right: 6px; /* Add padding equal to scrollbar width to prevent layout shift */
+    scrollbar-gutter: stable; /* Modern browsers: reserve space for the scrollbar */
+    box-sizing: content-box; /* Ensure padding doesn't affect the width calculation */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    overscroll-behavior: contain; /* Prevent scroll chaining */
+  }
+  
+  /* Always showing scrollbar to prevent layout shifts */
+  #bluesky-comments {
+    overflow-x: hidden; /* Prevent horizontal scrolling at the component level */
   }
   
   .comments-container::-webkit-scrollbar {
@@ -421,6 +432,7 @@ const { blueskyPostURI } = Astro.props;
     word-break: break-word;
     hyphens: auto;
     max-width: 100%;
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
   }
   
   .comment .text-gray-300 {
