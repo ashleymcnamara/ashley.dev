@@ -32,7 +32,7 @@ try {
 }
 
 // Calculate reading time
-function calculateReadingTime(content) {
+function calculateReadingTime(content: string): number {
 	// Get the content as plain text - rough approximation
 	const text = content.toString();
 
@@ -47,6 +47,38 @@ function calculateReadingTime(content) {
 }
 const readingTime = calculateReadingTime(entry.body);
 
+// Generate a clean preview for social media sharing
+function generateSocialPreview(content: string, maxLength = 160): string {
+	// Remove frontmatter if present
+	const contentWithoutFrontmatter = content.replace(/^---(.|\n)*?---/, '').trim();
+	
+	// Remove Markdown formatting
+	const plainText = contentWithoutFrontmatter
+		.replace(/#+\s(.*)/g, '$1') // Remove headings
+		.replace(/!\[(.*?)\]\((.*?)\)/g, '') // Remove images
+		.replace(/\[(.*?)\]\((.*?)\)/g, '$1') // Convert links to just their text
+		.replace(/(\*\*|__)(.*?)(\*\*|__)/g, '$2') // Remove bold
+		.replace(/(\*|_)(.*?)(\*|_)/g, '$2') // Remove italic
+		.replace(/`{1,3}(.*?)`{1,3}/g, '$1') // Remove inline code
+		.replace(/```[\s\S]*?```/g, '') // Remove code blocks
+		.replace(/\n/g, ' ') // Replace newlines with spaces
+		.replace(/\s+/g, ' ') // Replace multiple spaces with single space
+		.trim();
+	
+	// Truncate to maxLength and add ellipsis if needed
+	if (plainText.length > maxLength) {
+		return plainText.substring(0, maxLength) + '...';
+	}
+	
+	return plainText;
+}
+
+// Create social media preview text
+const socialPreview = generateSocialPreview(entry.body);
+
+// Convert tags array to comma-separated string for keywords meta tag
+const keywordsString = entry.data.tags ? entry.data.tags.join(', ') : '';
+
 // Check if Bluesky URI is valid
 const hasBlueskyURI =
 	entry.data.blueskyPostURI &&
@@ -58,6 +90,7 @@ const hasBlueskyURI =
 	<Fragment slot="head">
 		<!-- Start: Facebook open graph -->
 		<meta property="og:title" content={entry.data.title} />
+		<meta property="og:description" content={socialPreview} />
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:type" content="article" />
 		<!-- <meta property="og:image" content={openGraph.image} /> -->
@@ -68,6 +101,7 @@ const hasBlueskyURI =
 		<!-- Start: Twitter card -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={entry.data.title} />
+		<meta name="twitter:description" content={socialPreview} />
 		<!-- <meta name="twitter:image" content={twitter.image} /> -->
 		<meta name="twitter:site" content="@ashleymacnamara" />
 		<meta name="twitter:creator" content="@ashleymacnamara" />
@@ -75,12 +109,12 @@ const hasBlueskyURI =
 
 		<!-- Start: Dublin Core (DC) -->
 		<meta name="DC.Title" content={entry.data.title} />
+		<meta name="DC.Description" content={socialPreview} />
 
 		<!-- TODO: update for blog posts
 			<meta name="DC.Creator" content={dublinCore.creator} />
 			<meta name="DC.Rights" content={dublinCore.rights} />
 			<meta name="DC.Publisher" content={dublinCore.publisher} />
-			<meta name="DC.Description" content={dublinCore.description} />
 			<meta name="DC.Language" content={dublinCore.language} />
 			<meta name="DC.Type" content={dublinCore.type} />
 			<meta name="DC.Format" content={dublinCore.format} /> -->
@@ -94,6 +128,7 @@ const hasBlueskyURI =
 					"@context": "https://schema.org",
 					"@type": "NewsArticle",
 					"headline": "${entry.data.title}",
+					"description": "${socialPreview.replace(/"/g, '\\"')}",
 					"datePublished": "${new Date(entry.data.date).toISOString()}",
 					"dateModified": "${new Date(entry.data.date).toISOString()}",
 					"author": [{
@@ -114,7 +149,8 @@ const hasBlueskyURI =
 
 		<!-- Title & Description -->
 		<title>{entry.data.title}</title>
-		<meta name="keywords" content={entry.data.tags} />
+		<meta name="description" content={socialPreview} />
+		<meta name="keywords" content={keywordsString} />
 	</Fragment>
 
 	<!-- Reading Progress Bar -->
@@ -254,7 +290,7 @@ const hasBlueskyURI =
 						});
 
 						// Update the URL hash without jumping
-						history.pushState(null, null, targetId);
+						history.pushState({}, '', targetId);
 					}
 				}
 			});
@@ -272,7 +308,7 @@ const hasBlueskyURI =
 
 				if (targetId) {
 					// Update the URL with the hash without jumping
-					history.pushState(null, null, targetId);
+					history.pushState({}, '', targetId);
 
 					// Copy the link to clipboard
 					navigator.clipboard
@@ -361,8 +397,10 @@ const hasBlueskyURI =
 		const postLinks = document.querySelectorAll('.post-content a, .prose a');
 
 		postLinks.forEach((link) => {
-			link.style.color = primaryColor;
-			link.style.textDecoration = 'none';
+			// Cast to HTMLElement to access style property
+			const htmlLink = link as HTMLElement;
+			htmlLink.style.color = primaryColor;
+			htmlLink.style.textDecoration = 'none';
 
 			// Add event listener to recreate the hover effect from CSS
 			link.addEventListener('mouseenter', (e) => {
