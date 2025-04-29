@@ -1,0 +1,244 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Get full site URL for RSS feed with proper protocol
+const baseUrl = import.meta.env.SITE || 'https://ashley.dev';
+const rssUrl = `${baseUrl}/rss.xml`;
+
+// Group RSS readers by type for dropdown organization
+const webBasedReaders = [
+  {
+    name: 'Feedly',
+    icon: '/img/rss-readers/feedly.svg',
+    url: `https://feedly.com/i/subscription/feed/${encodeURIComponent(rssUrl)}`,
+    description: 'Most popular RSS reader with apps for all platforms',
+    color: '#2BB24C',
+    autoAdd: true
+  },
+  {
+    name: 'Inoreader',
+    icon: '/img/rss-readers/inoreader.svg',
+    url: `https://www.inoreader.com/?add_feed=${encodeURIComponent(rssUrl)}`,
+    description: 'Powerful RSS reader with excellent organization features',
+    color: '#0099EB',
+    autoAdd: true
+  },
+  {
+    name: 'NewsBlur',
+    icon: '/img/rss-readers/newsblur.svg',
+    url: `https://www.newsblur.com/?url=${encodeURIComponent(rssUrl)}`,
+    description: 'News reader with social features and powerful filtering',
+    color: '#FF9633',
+    autoAdd: true
+  },
+  {
+    name: 'The Old Reader',
+    icon: '/img/rss-readers/oldreader.svg',
+    url: `https://theoldreader.com/feeds/subscribe?url=${encodeURIComponent(rssUrl)}`,
+    description: 'Simple and reliable RSS reader inspired by Google Reader',
+    color: '#D23A2E',
+    autoAdd: true
+  },
+  {
+    name: 'Feedbin',
+    icon: '/img/rss-readers/feedbin.svg',
+    url: `https://feedbin.com/?subscribe=${encodeURIComponent(rssUrl)}`,
+    description: 'Clean, minimal RSS reader with excellent search',
+    color: '#6B747A',
+    autoAdd: true
+  },
+  {
+    name: 'FeedLand',
+    icon: '/img/rss-readers/feedland.svg',
+    url: `http://feedland.com/?addFeed=${encodeURIComponent(rssUrl)}`,
+    description: 'Open source RSS aggregator with community features',
+    color: '#ff6c2f',
+    autoAdd: true
+  }
+];
+
+// SEO metadata for the page
+const pageTitle = 'Subscribe to ashley.dev - RSS Feed';
+const pageDescription = 'Subscribe to ashley.dev\'s RSS feed to stay updated with the latest content';
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <main class="max-w-4xl mx-auto px-4 py-10">
+    <h1 class="text-3xl md:text-4xl font-bold text-white mb-3">Subscribe to RSS Feed</h1>
+    <p class="text-lg text-gray-300 mb-8">
+      Stay updated with the latest content from ashley.dev by subscribing to the RSS feed using your favorite RSS reader.
+    </p>
+
+    <div class="mb-10">
+      <h2 class="text-2xl font-semibold text-white mb-6">Direct RSS Link</h2>
+      <div class="flex items-center space-x-3 bg-black border border-gray-700 p-4 rounded-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
+          <path d="M4 11a9 9 0 0 1 9 9"></path>
+          <path d="M4 4a16 16 0 0 1 16 16"></path>
+          <circle cx="5" cy="19" r="1"></circle>
+        </svg>
+        <input 
+          type="text" 
+          value={rssUrl} 
+          readonly 
+          class="bg-gray-900 text-gray-200 flex-1 py-2 px-3 rounded-md border border-gray-700 focus:border-primary focus:outline-none"
+        />
+        <button 
+          id="copy-button" 
+          class="bg-gray-800 hover:bg-gray-700 text-gray-200 py-2 px-4 rounded-md border border-gray-700 transition-colors"
+        >
+          Copy
+        </button>
+      </div>
+    </div>
+
+    <div class="mb-10">
+      <details class="mb-6 bg-black border border-gray-700 rounded-lg" open>
+        <summary class="flex justify-between items-center p-4 cursor-pointer text-2xl font-semibold text-white">
+          Web-based RSS Readers
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform summary-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="p-4 pt-0 border-t border-gray-700">
+          <p class="text-gray-400 mb-4">These readers work in your web browser and don't require any software installation.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {webBasedReaders.map((reader) => (
+              <a 
+                href={reader.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="flex items-start p-4 bg-gray-900 border border-gray-700 rounded-lg hover:border-primary transition-all duration-200 group"
+                style={`--hover-color: ${reader.color}`}
+              >
+                <div class="w-10 h-10 mr-4 flex-shrink-0 bg-gray-800 rounded-lg flex items-center justify-center reader-icon">
+                  {reader.icon ? (
+                    <img src={reader.icon} alt={reader.name} width="24" height="24" />
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 11a9 9 0 0 1 9 9"></path>
+                      <path d="M4 4a16 16 0 0 1 16 16"></path>
+                      <circle cx="5" cy="19" r="1"></circle>
+                    </svg>
+                  )}
+                </div>
+                <div class="flex-1">
+                  <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-medium text-white">{reader.name}</h3>
+                  </div>
+                  <p class="text-sm text-gray-400">{reader.description}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </details>
+
+      <details class="bg-black border border-gray-700 rounded-lg">
+        <summary class="flex justify-between items-center p-4 cursor-pointer text-2xl font-semibold text-white">
+          About RSS
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform summary-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="p-4 pt-0 border-t border-gray-700">
+          <p class="text-gray-300 mb-4">
+            RSS (Really Simple Syndication) is a web feed technology that allows you to subscribe to websites and get notified when they publish new content, without having to visit each site individually.
+          </p>
+          <p class="text-gray-300 mb-4">
+            By subscribing to ashley.dev's RSS feed, you'll receive updates whenever new content is published, delivered directly to your feed reader of choice.
+          </p>
+          <p class="text-gray-300">
+            Unlike social media platforms, RSS gives you complete control over what you see, with no algorithms deciding what content to show you.
+          </p>
+        </div>
+      </details>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .reader-icon img {
+    filter: grayscale(0.5);
+    transition: filter 0.2s ease-in-out;
+  }
+  a:hover .reader-icon img {
+    filter: grayscale(0);
+  }
+  a:hover {
+    border-color: var(--hover-color) !important;
+  }
+  
+  details[open] .summary-icon {
+    transform: rotate(180deg);
+  }
+  
+  details summary {
+    list-style: none;
+  }
+  
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  /* Animation for the accordion */
+  details summary {
+    transition: background-color 0.2s;
+  }
+  
+  details summary:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .summary-icon {
+    transition: transform 0.3s ease;
+  }
+</style>
+
+<script>
+  // Copy functionality for the RSS URL
+  document.addEventListener('DOMContentLoaded', () => {
+    const copyButton = document.getElementById('copy-button');
+    const urlInput = document.querySelector('input[readonly]');
+    
+    if (copyButton && urlInput) {
+      copyButton.addEventListener('click', () => {
+        // Select the text field
+        urlInput.select();
+        urlInput.setSelectionRange(0, 99999); // For mobile devices
+        
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(urlInput.value);
+        
+        // Update button text temporarily
+        const originalText = copyButton.textContent;
+        copyButton.textContent = 'Copied!';
+        
+        setTimeout(() => {
+          copyButton.textContent = originalText;
+        }, 2000);
+      });
+    }
+
+    // Handle fallback for desktop app subscription protocols
+    const appLinks = document.querySelectorAll('a[data-fallback]');
+    appLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const isMacOS = link.getAttribute('data-is-macos') === 'true';
+        
+        // For macOS apps, we'll try the protocol first then fallback to the RSS URL
+        // We don't prevent default immediately, allowing the protocol to try executing
+        if (isMacOS) {
+          // Set timeout to check if the protocol handler worked
+          // If the page is still here after a short delay, we'll use the fallback
+          setTimeout(() => {
+            const fallbackUrl = link.getAttribute('data-fallback');
+            if (fallbackUrl) {
+              window.location.href = fallbackUrl;
+            }
+          }, 500);
+        }
+      });
+    });
+  });
+</script>
