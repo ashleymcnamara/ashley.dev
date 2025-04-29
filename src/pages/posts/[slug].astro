@@ -93,7 +93,7 @@ const hasBlueskyURI =
 
 <Layout title={entry.data.title}>
 	<Fragment slot="head">
-		<!-- Start: Facebook open graph -->
+		<!-- Start: Facebook open graph (image only) -->
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:type" content="article" />
 		<meta property="og:image" content={ogImageUrl} />
@@ -101,26 +101,22 @@ const hasBlueskyURI =
 		<meta property="og:site_name" content="ashley.dev" />
 		<!-- End: Facebook open graph -->
 
-		<!-- Start: Twitter card -->
+		<!-- Start: Twitter card (image only) -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:image" content={ogImageUrl} />
 		<meta name="twitter:site" content="@ashleymacnamara" />
 		<meta name="twitter:creator" content="@ashleymacnamara" />
 		<!-- End: Twitter card -->
 
-		<!-- Start: Dublin Core (DC) -->
-		<meta name="DC.Title" content={entry.data.title} />
-
-		<!-- TODO: update for blog posts
-			<meta name="DC.Creator" content={dublinCore.creator} />
-			<meta name="DC.Rights" content={dublinCore.rights} />
-			<meta name="DC.Publisher" content={dublinCore.publisher} />
-			<meta name="DC.Language" content={dublinCore.language} />
-			<meta name="DC.Type" content={dublinCore.type} />
-			<meta name="DC.Format" content={dublinCore.format} /> -->
-		<!-- End: Dublin Core (DC) -->
-
-		<!-- Start: Structured data for better SEO -->
+		 <!-- Replace the standard title tag with a non-empty but minimal title
+		     This prevents platforms from falling back to extracting text from the page content -->
+		<title>{entry.data.title}</title>
+		
+		<!-- SEO metadata (won't affect social previews but keeps your SEO intact) -->
+		<meta name="description" content={socialPreview} />
+		<meta name="keywords" content={keywordsString} />
+		
+		<!-- Structured data for search engines only -->
 		<script
 			type="application/ld+json"
 			set:html={`
@@ -145,12 +141,6 @@ const hasBlueskyURI =
 				}
 			`}
 		/>
-		<!-- End: Structured data -->
-
-		<!-- Title & Description -->
-		<title>{entry.data.title}</title>
-		<meta name="description" content={socialPreview} />
-		<meta name="keywords" content={keywordsString} />
 	</Fragment>
 
 	<!-- Reading Progress Bar -->
