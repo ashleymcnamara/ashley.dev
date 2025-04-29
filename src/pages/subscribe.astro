@@ -57,30 +57,6 @@ const webBasedReaders = [
   }
 ];
 
-// Desktop and mobile RSS reader apps
-const desktopMobileApps = [
-  {
-    name: 'Reader',
-    icon: '/img/rss-readers/reader.svg',
-    url: `https://apple.com/apple-news`,
-    description: 'Apple\'s clean and simple reading app for iOS and macOS',
-    color: '#007AFF',
-    autoAdd: true,
-    altLink: {
-      text: 'Direct RSS Link',
-      url: rssUrl
-    }
-  },
-  {
-    name: 'Kindle',
-    icon: '/img/rss-readers/kindle.svg',
-    url: `https://www.amazon.com/gp/sendtokindle?url=${encodeURIComponent(rssUrl)}`,
-    description: 'Send RSS feeds to your Kindle for a distraction-free reading experience',
-    color: '#FF9900',
-    autoAdd: true
-  }
-];
-
 // SEO metadata for the page
 const pageTitle = 'Subscribe to ashley.dev - RSS Feed';
 const pageDescription = 'Subscribe to ashley.dev\'s RSS feed to stay updated with the latest content';
@@ -153,65 +129,6 @@ const pageDescription = 'Subscribe to ashley.dev\'s RSS feed to stay updated wit
                   <p class="text-sm text-gray-400">{reader.description}</p>
                 </div>
               </a>
-            ))}
-          </div>
-        </div>
-      </details>
-    </div>
-
-    <div class="mb-10">
-      <details class="bg-black border border-gray-700 rounded-lg" open>
-        <summary class="flex justify-between items-center p-4 cursor-pointer text-2xl font-semibold text-white">
-          Desktop and Mobile RSS Reader Apps
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform summary-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </summary>
-        <div class="p-4 pt-0 border-t border-gray-700">
-          <p class="text-gray-400 mb-4">These apps work on your desktop or mobile device and provide a native experience.</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {desktopMobileApps.map((app) => (
-              <div 
-                class="flex items-start p-4 bg-gray-900 border border-gray-700 rounded-lg hover:border-primary transition-all duration-200 group"
-                style={`--hover-color: ${app.color}`}
-              >
-                <div class="w-10 h-10 mr-4 flex-shrink-0 bg-gray-800 rounded-lg flex items-center justify-center reader-icon">
-                  {app.icon ? (
-                    <img src={app.icon} alt={app.name} width="24" height="24" />
-                  ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M4 11a9 9 0 0 1 9 9"></path>
-                      <path d="M4 4a16 16 0 0 1 16 16"></path>
-                      <circle cx="5" cy="19" r="1"></circle>
-                    </svg>
-                  )}
-                </div>
-                <div class="flex-1">
-                  <div class="flex justify-between items-center">
-                    <h3 class="text-lg font-medium text-white">{app.name}</h3>
-                  </div>
-                  <p class="text-sm text-gray-400">{app.description}</p>
-                  <div class="mt-2 space-y-1">
-                    <a 
-                      href={app.url}
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      class="inline-block text-sm text-primary hover:underline" 
-                    >
-                      Visit {app.name} →
-                    </a>
-                    {app.altLink && (
-                      <a 
-                        href={app.altLink.url}
-                        class="block text-sm text-primary hover:underline"
-                        title="Use this link to add to Apple Reader"
-                      >
-                        {app.altLink.text} →
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
             ))}
           </div>
         </div>
