@@ -62,21 +62,22 @@ const desktopMobileApps = [
   {
     name: 'Reader',
     icon: '/img/rss-readers/reader.svg',
-    url: `reader://subscribe?url=${encodeURIComponent(rssUrl)}`,
+    url: `https://apple.com/apple-news`,
     description: 'Apple\'s clean and simple reading app for iOS and macOS',
     color: '#007AFF',
     autoAdd: true,
-    isMacOS: true,
-    dataFallback: rssUrl
+    altLink: {
+      text: 'Direct RSS Link',
+      url: rssUrl
+    }
   },
   {
     name: 'Kindle',
     icon: '/img/rss-readers/kindle.svg',
-    url: `kindle://subscribe?url=${encodeURIComponent(rssUrl)}`,
+    url: `https://www.amazon.com/gp/sendtokindle?url=${encodeURIComponent(rssUrl)}`,
     description: 'Send RSS feeds to your Kindle for a distraction-free reading experience',
     color: '#FF9900',
-    autoAdd: true,
-    dataFallback: `https://www.amazon.com/gp/sendtokindle?url=${encodeURIComponent(rssUrl)}`
+    autoAdd: true
   }
 ];
 
@@ -170,14 +171,9 @@ const pageDescription = 'Subscribe to ashley.dev\'s RSS feed to stay updated wit
           <p class="text-gray-400 mb-4">These apps work on your desktop or mobile device and provide a native experience.</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             {desktopMobileApps.map((app) => (
-              <a 
-                href={app.url} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <div 
                 class="flex items-start p-4 bg-gray-900 border border-gray-700 rounded-lg hover:border-primary transition-all duration-200 group"
                 style={`--hover-color: ${app.color}`}
-                data-fallback={app.dataFallback}
-                data-is-macos={app.isMacOS}
               >
                 <div class="w-10 h-10 mr-4 flex-shrink-0 bg-gray-800 rounded-lg flex items-center justify-center reader-icon">
                   {app.icon ? (
@@ -195,8 +191,27 @@ const pageDescription = 'Subscribe to ashley.dev\'s RSS feed to stay updated wit
                     <h3 class="text-lg font-medium text-white">{app.name}</h3>
                   </div>
                   <p class="text-sm text-gray-400">{app.description}</p>
+                  <div class="mt-2 space-y-1">
+                    <a 
+                      href={app.url}
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      class="inline-block text-sm text-primary hover:underline" 
+                    >
+                      Visit {app.name} →
+                    </a>
+                    {app.altLink && (
+                      <a 
+                        href={app.altLink.url}
+                        class="block text-sm text-primary hover:underline"
+                        title="Use this link to add to Apple Reader"
+                      >
+                        {app.altLink.text} →
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>
@@ -267,26 +282,5 @@ const pageDescription = 'Subscribe to ashley.dev\'s RSS feed to stay updated wit
         }, 2000);
       });
     }
-
-    // Handle fallback for desktop app subscription protocols
-    const appLinks = document.querySelectorAll('a[data-fallback]');
-    appLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        const isMacOS = link.getAttribute('data-is-macos') === 'true';
-        
-        // For macOS apps, we'll try the protocol first then fallback to the RSS URL
-        // We don't prevent default immediately, allowing the protocol to try executing
-        if (isMacOS) {
-          // Set timeout to check if the protocol handler worked
-          // If the page is still here after a short delay, we'll use the fallback
-          setTimeout(() => {
-            const fallbackUrl = link.getAttribute('data-fallback');
-            if (fallbackUrl) {
-              window.location.href = fallbackUrl;
-            }
-          }, 500);
-        }
-      });
-    });
   });
 </script>
