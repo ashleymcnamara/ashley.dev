@@ -10,6 +10,15 @@ const sortedPosts = allPosts.sort((a: any, b: any) => {
   return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
 });
 
+// Function to format dates in a readable way
+function formatDate(date: string | Date): string {
+  return new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
 // Function to extract a preview from the markdown content
 function extractPreview(content: string, maxLength: number = 150): string {
   // Remove frontmatter if present (shouldn't be needed but just to be safe)
@@ -34,7 +43,10 @@ function extractPreview(content: string, maxLength: number = 150): string {
 }
 
 // Extract all unique tags from blog posts
-const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))].sort();
+const allTags = [...new Set(sortedPosts.flatMap(post => 
+  // Filter out any empty tags before adding to the set
+  (post.data.tags || []).filter(tag => tag && tag.trim().length > 0)
+))].sort();
 ---
 
 <div>
@@ -50,12 +62,12 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))].
                 <div class="flex flex-col justify-center items-start border border-gray-700 rounded-lg p-6 bg-black blog-post" data-tags={post.data.tags?.join(',')}>
                     <div class="w-full">
                         <a 
-                            href={`/posts/${post.data.slug || post.slug}`}
+                            href={`/posts/${post.slug}`}
                             class="text-white hover:text-primary"
                         >
                             <h3 class="text-xl font-semibold mb-2">{post.data.title}</h3>
                         </a>
-                        <p class="text-sm text-gray-400">{post.data.date.toString()}</p>
+                        <p class="text-sm text-gray-400">{formatDate(post.data.date)}</p>
                     </div>
                     
                     <!-- Tags display -->
@@ -67,13 +79,13 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))].
                         ))}
                     </div>
                     
-                    {/* Post preview */}
+                    <!-- Post preview -->
                     <div class="text-gray-300 mb-4 mt-2">
                         <p>{preview}</p>
                     </div>
                     
                     <a 
-                        href={`/posts/${post.data.slug || post.slug}`}
+                        href={`/posts/${post.slug}`}
                         class="px-4 py-2.5 mt-2 text-center border border-gray-600 rounded-lg hover:text-primary hover:border-primary"
                     >
                         Read More
@@ -93,11 +105,11 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))].
     <div class="mt-10 pt-6 border-t border-gray-700">
         <h3 class="text-xl font-semibold text-white mb-4">Filter by Tags</h3>
         <div class="flex flex-wrap gap-2" id="tag-filters">
-            <button class="tag-filter active flex items-center justify-center px-3 py-1 text-sm rounded-lg bg-black text-gray-100 transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5" data-tag="all">
+            <button class="tag-filter active flex items-center justify-center px-3 py-1 text-sm rounded-lg bg-black text-gray-100 transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5" data-tag="all" aria-label="Show all posts" aria-pressed="true">
                 All Posts
             </button>
             {allTags.map(tag => (
-                <button class="tag-filter flex items-center justify-center px-3 py-1 text-sm rounded-lg bg-black text-gray-100 transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5" data-tag={tag}>
+                <button class="tag-filter flex items-center justify-center px-3 py-1 text-sm rounded-lg bg-black text-gray-100 transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5" data-tag={tag} aria-label={`Filter by tag ${tag}`} aria-pressed="false">
                     #{tag}
                 </button>
             ))}
@@ -106,17 +118,10 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))].
 </div>
 
 <script is:inline>
-  // This script runs immediately when the page loads
-  console.log('DEBUGGING: ContentBlogs component loading');
-  
   // Wait for DOM to be fully loaded
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('DEBUGGING: ContentBlogs DOM loaded');
-    
     // Simple function to filter by tag
     function filterByTag(selectedTag) {
-      console.log('DEBUGGING: Filtering by tag:', selectedTag);
-      
       // Get all tag filter buttons
       const tagButtons = document.querySelectorAll('.tag-filter');
       
@@ -125,17 +130,17 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))].
         btn.classList.remove('active');
         btn.classList.remove('bg-primary');
         btn.classList.add('bg-black');
+        btn.setAttribute('aria-pressed', 'false');
       });
       
       // Find and activate the selected tag button
       const selectedButton = document.querySelector(`.tag-filter[data-tag="${selectedTag}"]`);
       if (selectedButton) {
-        console.log('DEBUGGING: Found tag button for:', selectedTag);
         selectedButton.classList.add('active');
         selectedButton.classList.remove('bg-black');
         selectedButton.classList.add('bg-primary');
+        selectedButton.setAttribute('aria-pressed', 'true');
       } else {
-        console.log('DEBUGGING: Tag button not found for:', selectedTag);
         return;
       }
       
@@ -164,7 +169,7 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))].
     
     // Add click event to tag filter buttons
     document.querySelectorAll('.tag-filter').forEach(button => {
-      button.addEventListener('click', (e) => {
+      button.addEventListener('click', () => {
         const tag = button.getAttribute('data-tag');
         if (tag) filterByTag(tag);
       });
@@ -192,7 +197,6 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))].
     
     // Check for the stored tag parameter from the blog.astro page
     if (window.tagToFilter) {
-      console.log('DEBUGGING: Found stored tag parameter:', window.tagToFilter);
       // Give the DOM a moment to fully render
       setTimeout(() => {
         filterByTag(window.tagToFilter);
