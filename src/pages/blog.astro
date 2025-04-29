@@ -66,15 +66,16 @@ import ContentBlogs from '../components/ContentBlogs.astro';
 </Layout>
 
 <script>
+  // TypeScript declaration for the global function - moved to top level
+  declare global {
+    interface Window {
+      applyBlogTagFilter: (tagName: string) => boolean;
+      tagToFilter?: string | null;
+    }
+  }
+
   // Process URL parameters for tag filtering
   document.addEventListener('DOMContentLoaded', () => {
-    // Add TypeScript declaration for the global function
-    declare global {
-      interface Window {
-        applyBlogTagFilter: (tagName: string) => boolean;
-      }
-    }
-    
     const urlParams = new URLSearchParams(window.location.search);
     const tagParam = urlParams.get('tag');
     
@@ -82,7 +83,7 @@ import ContentBlogs from '../components/ContentBlogs.astro';
       // Wait for a bit to ensure the ContentBlogs component has initialized
       setTimeout(() => {
         // Use the global function from ContentBlogs if it exists
-        if (window.applyBlogTagFilter) {
+        if (typeof window.applyBlogTagFilter === 'function') {
           window.applyBlogTagFilter(tagParam);
         }
       }, 300); // Longer delay to ensure everything is ready
