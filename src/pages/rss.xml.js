@@ -22,5 +22,7 @@ export function GET(context) {
     })),
     // (optional) inject custom xml
     customData: `<language>en-us</language>`,
+    // Adding XSL stylesheet reference
+    stylesheet: '/styles/rss.xsl',
   });
 }
