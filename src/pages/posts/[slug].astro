@@ -93,7 +93,8 @@ const hasBlueskyURI =
 
 <Layout title={entry.data.title}>
 	<Fragment slot="head">
-		<!-- Start: Facebook open graph (image only) -->
+		<!-- Start: Facebook open graph -->
+		<meta property="og:title" content="Ashley Willis" />
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:type" content="article" />
 		<meta property="og:image" content={ogImageUrl} />
@@ -101,8 +102,9 @@ const hasBlueskyURI =
 		<meta property="og:site_name" content="ashley.dev" />
 		<!-- End: Facebook open graph -->
 
-		<!-- Start: Twitter card (image only) -->
+		<!-- Start: Twitter card -->
 		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Ashley Willis" />
 		<meta name="twitter:image" content={ogImageUrl} />
 		<meta name="twitter:site" content="@ashleymacnamara" />
 		<meta name="twitter:creator" content="@ashleymacnamara" />
