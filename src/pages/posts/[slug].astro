@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import BlueskyLikes from '../../components/BlueskyLikes.astro';
+import { generateOgImage } from '../../utils/og/generateOgImage';
 
 // Generate static paths for all posts
 export async function getStaticPaths() {
@@ -17,6 +18,10 @@ export async function getStaticPaths() {
 // The entry prop is passed from getStaticPaths
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+// Generate OG image path
+const ogImagePath = await generateOgImage(entry);
+const ogImageUrl = new URL(ogImagePath || '/meta.png', Astro.site).href;
 
 // Safely handle the date
 let formattedDate;
@@ -93,7 +98,7 @@ const hasBlueskyURI =
 		<meta property="og:description" content={socialPreview} />
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:type" content="article" />
-		<!-- <meta property="og:image" content={openGraph.image} /> -->
+		<meta property="og:image" content={ogImageUrl} />
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:site_name" content="ashley.dev" />
 		<!-- End: Facebook open graph -->
@@ -102,7 +107,7 @@ const hasBlueskyURI =
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={entry.data.title} />
 		<meta name="twitter:description" content={socialPreview} />
-		<!-- <meta name="twitter:image" content={twitter.image} /> -->
+		<meta name="twitter:image" content={ogImageUrl} />
 		<meta name="twitter:site" content="@ashleymacnamara" />
 		<meta name="twitter:creator" content="@ashleymacnamara" />
 		<!-- End: Twitter card -->

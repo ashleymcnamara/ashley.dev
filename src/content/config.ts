@@ -6,6 +6,7 @@ const postsCollection = defineCollection({
         date: z.string(),
         tags: z.array(z.string()).optional(),
         blueskyPostURI: z.string().optional(),
+        ogImage: z.string().optional(), // Optional custom OG image path
     }),
 });
 
