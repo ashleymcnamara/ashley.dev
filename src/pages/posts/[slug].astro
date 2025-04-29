@@ -95,7 +95,6 @@ const hasBlueskyURI =
 	<Fragment slot="head">
 		<!-- Start: Facebook open graph -->
 		<meta property="og:title" content={entry.data.title} />
-		<meta property="og:description" content={socialPreview} />
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:type" content="article" />
 		<meta property="og:image" content={ogImageUrl} />
@@ -106,7 +105,6 @@ const hasBlueskyURI =
 		<!-- Start: Twitter card -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={entry.data.title} />
-		<meta name="twitter:description" content={socialPreview} />
 		<meta name="twitter:image" content={ogImageUrl} />
 		<meta name="twitter:site" content="@ashleymacnamara" />
 		<meta name="twitter:creator" content="@ashleymacnamara" />
@@ -114,7 +112,6 @@ const hasBlueskyURI =
 
 		<!-- Start: Dublin Core (DC) -->
 		<meta name="DC.Title" content={entry.data.title} />
-		<meta name="DC.Description" content={socialPreview} />
 
 		<!-- TODO: update for blog posts
 			<meta name="DC.Creator" content={dublinCore.creator} />
@@ -133,7 +130,6 @@ const hasBlueskyURI =
 					"@context": "https://schema.org",
 					"@type": "NewsArticle",
 					"headline": "${entry.data.title}",
-					"description": "${socialPreview.replace(/"/g, '\\"')}",
 					"datePublished": "${new Date(entry.data.date).toISOString()}",
 					"dateModified": "${new Date(entry.data.date).toISOString()}",
 					"author": [{
@@ -146,7 +142,8 @@ const hasBlueskyURI =
 							"https://twitter.com/ashleymcnamara",
 							"https://www.linkedin.com/in/ashleymcnamara/"
 						]
-					}]
+					}],
+					"image": "${ogImageUrl}"
 				}
 			`}
 		/>
