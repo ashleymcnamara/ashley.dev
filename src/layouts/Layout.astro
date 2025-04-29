@@ -3,203 +3,229 @@ import '../styles/global.scss';
 
 // Base domain URL without trailing slash
 const domainBaseURL = 'https://ashley.dev';
-const ogImageUrl    = `${domainBaseURL}/meta.png`;
+const ogImageUrl = `${domainBaseURL}/meta.png`;
 
 // Website publisher & region
-const authorPublisher   = 'Ashley Willis';
-const geoRegion         = 'seattle-us';
+const authorPublisher = 'Ashley Willis';
+const geoRegion = 'seattle-us';
 
 // SEO title, description and keywords
-const seoTitle          = 'Ashley Willis – ashley.dev';
-const seoDescription    = 'Developer advocate, open source champion, and maker of things.';
-const seoKeywords       = 'Developer Advocacy, Ashley Willis, Ashley McNamara, Seattle, GitHub, Golang, Kubernetes, Open Source, DevRel, Developer Relations, DevOps';
+const seoTitle = 'Ashley Willis – ashley.dev';
+const seoDescription =
+	'Developer advocate, open source champion, and maker of things.';
+const seoKeywords =
+	'Developer Advocacy, Ashley Willis, Ashley McNamara, Seattle, GitHub, Golang, Kubernetes, Open Source, DevRel, Developer Relations, DevOps';
 
 // Twitter card data
 const twitter = {
-    title:          seoTitle,
-    description:    seoDescription,
-    image:          ogImageUrl,
-    site:           '@ashleymcnamara',
-    creator:        '@ashleymcnamara'
+	title: seoTitle,
+	description: seoDescription,
+	image: ogImageUrl,
+	site: '@ashleymcnamara',
+	creator: '@ashleymcnamara',
 };
 
 // Open graph data
 const openGraph = {
-    title:          seoTitle,
-    description:    seoDescription,
-    url:            domainBaseURL,
-    image:          ogImageUrl,
-    type:           'website',
-    locale:         'en_US',
-    siteName:       'ashley.dev'
+	title: seoTitle,
+	description: seoDescription,
+	url: domainBaseURL,
+	image: ogImageUrl,
+	type: 'website',
+	locale: 'en_US',
+	siteName: 'ashley.dev',
 };
 
 // Dublin core
 const dublinCore = {
-    title:          seoTitle,
-    creator:        authorPublisher,
-    publisher:      authorPublisher,
-    rights:         authorPublisher,
-    description:    seoDescription,
-    language:       'en',
-    type:           'Software',
-    format:         'text/html'
+	title: seoTitle,
+	creator: authorPublisher,
+	publisher: authorPublisher,
+	rights: authorPublisher,
+	description: seoDescription,
+	language: 'en',
+	type: 'Software',
+	format: 'text/html',
 };
-
 ---
 
 <!doctype html>
 <html lang="en" class="bg-black text-gray-100 font-mono">
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-SVZ41CFHVX"
+		></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+			gtag('config', 'G-SVZ41CFHVX');
+		</script>
 
-    <head>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SVZ41CFHVX"></script>
-        <script is:inline>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-SVZ41CFHVX');
-        </script>
+		<!-- Crawler & Robots -->
+		<meta
+			name="robots"
+			content="index, follow, noodp, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+		/>
+		<meta name="revisit-after" content="7 days" />
+		<meta name="revisit" content="after 7 days" />
 
-        <!-- Crawler & Robots -->
-        <meta name="robots" content="index, follow, noodp, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="revisit-after" content="7 days" />
-        <meta name="revisit" content="after 7 days" />
+		<!-- RSS Feed -->
+		<link
+			href="/rss.xml"
+			type="application/atom+xml"
+			rel="alternate"
+			title="ashley.dev Feed"
+		/>
 
-        <!-- RSS Feed -->
-        <link href="/rss.xml" type="application/atom+xml" rel="alternate" title="ashley.dev Feed">
+		<!-- Start: Meta-Tags -->
+		<meta charset="UTF-8" />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Pragma" content="cache" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- End: Meta-Tags -->
 
-        <!-- Start: Meta-Tags -->
-        <meta charset="UTF-8" />
-        <meta http-equiv="content-type"         content="text/html; charset=UTF-8">
-        <meta http-equiv="Pragma"               content="cache" />
-        <meta http-equiv="X-UA-Compatible"      content="IE=edge">
-        <meta name="viewport"                   content="width=device-width, initial-scale=1">
-        <!-- End: Meta-Tags -->
+		<!-- Start: DNS prefetch and preconnect -->
+		<!-- <link rel="preload" as="image" href="/img/logo.svg" /> -->
+		<link rel="preconnect" href="https://brain.papersend.io" />
+		<!-- End: DNS prefetch and preconnect -->
 
-        <!-- Start: DNS prefetch and preconnect -->
-        <!-- <link rel="preload" as="image" href="/img/logo.svg" /> -->
-        <link rel="preconnect" href="https://brain.papersend.io" />
-        <!-- End: DNS prefetch and preconnect -->
-
-        <!-- Start: Theming and Favicons -->
-        <link rel="icon" type="image/svg+xml" crossorigin="anonymous" href="/img/logo.svg" />
-        <!-- <link rel="alternate icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+		<!-- Start: Theming and Favicons -->
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			crossorigin="anonymous"
+			href="/img/logo.svg"
+		/>
+		<!-- <link rel="alternate icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
         <link rel="alternate icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
         <link rel="icon" type="image/x-icon" href="/img/favicon/favicon.ico">
         <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
         <link rel="manifest" href="/img/favicon/site.webmanifest"> -->
-        <!-- End: Theming and Favicons -->
+		<!-- End: Theming and Favicons -->
 
-        <!-- Start: Misc meta tags -->
-        <link rel="sitemap"                     href="/sitemap-index.xml" />
-        <link rel="canonical"                   href={Astro.url} />
+		<!-- Start: Misc meta tags -->
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		<link rel="canonical" href={Astro.url} />
 
-        <meta name="geo.region"                 content={geoRegion}>
-        <meta name="author"                     content={authorPublisher}>
-        <meta name="publisher"                  content={authorPublisher}>
-        <meta name="copyright"                  content={authorPublisher}>
-        <!-- End: Misc meta tags -->
+		<meta name="geo.region" content={geoRegion} />
+		<meta name="author" content={authorPublisher} />
+		<meta name="publisher" content={authorPublisher} />
+		<meta name="copyright" content={authorPublisher} />
+		<!-- End: Misc meta tags -->
 
-        <!-- Start: Facebook open graph -->
-        <meta property="og:title"               content={openGraph.title}>
-        <meta property="og:description"         content={openGraph.description}>
-        <meta property="og:url"                 content={openGraph.url}>
-        <meta property="og:type"                content={openGraph.type}>
-        <meta property="og:image"               content={openGraph.image}>
-        <meta property="og:locale"              content={openGraph.locale}>
-        <meta property="og:site_name"           content={openGraph.siteName}>
-        <!-- End: Facebook open graph -->
+		<slot name="head">
+			<!-- Start: Facebook open graph -->
+			<meta property="og:title" content={openGraph.title} />
+			<meta property="og:description" content={openGraph.description} />
+			<meta property="og:url" content={openGraph.url} />
+			<meta property="og:type" content={openGraph.type} />
+			<meta property="og:image" content={openGraph.image} />
+			<meta property="og:locale" content={openGraph.locale} />
+			<meta property="og:site_name" content={openGraph.siteName} />
+			<!-- End: Facebook open graph -->
 
-        <!-- Start: Twitter card -->
-        <meta name="twitter:card"               content="summary_large_image">
-        <meta name="twitter:title"              content={twitter.title}>
-        <meta name="twitter:description"        content={twitter.description}>
-        <meta name="twitter:image"              content={twitter.image}>
-        <meta name="twitter:site"               content={twitter.site}>
-        <meta name="twitter:creator"            content={twitter.creator}>
-        <!-- End: Twitter card -->
+			<!-- Start: Twitter card -->
+			<meta name="twitter:card" content="summary_large_image" />
+			<meta name="twitter:title" content={twitter.title} />
+			<meta name="twitter:description" content={twitter.description} />
+			<meta name="twitter:image" content={twitter.image} />
+			<meta name="twitter:site" content={twitter.site} />
+			<meta name="twitter:creator" content={twitter.creator} />
+			<!-- End: Twitter card -->
 
-        <!-- Start: Dublin Core (DC) -->
-        <meta name="DC.Title"                   content={dublinCore.title}>
-        <meta name="DC.Creator"                 content={dublinCore.creator}>
-        <meta name="DC.Rights"                  content={dublinCore.rights}>
-        <meta name="DC.Publisher"               content={dublinCore.publisher}>
-        <meta name="DC.Description"             content={dublinCore.description}>
-        <meta name="DC.Language"                content={dublinCore.language}>
-        <meta name="DC.Type"                    content={dublinCore.type}>
-        <meta name="DC.Format"                  content={dublinCore.format}>
-        <!-- End: Dublin Core (DC) -->
+			<!-- Start: Dublin Core (DC) -->
+			<meta name="DC.Title" content={dublinCore.title} />
+			<meta name="DC.Creator" content={dublinCore.creator} />
+			<meta name="DC.Rights" content={dublinCore.rights} />
+			<meta name="DC.Publisher" content={dublinCore.publisher} />
+			<meta name="DC.Description" content={dublinCore.description} />
+			<meta name="DC.Language" content={dublinCore.language} />
+			<meta name="DC.Type" content={dublinCore.type} />
+			<meta name="DC.Format" content={dublinCore.format} />
+			<!-- End: Dublin Core (DC) -->
 
-        <!-- Start: Structured data for better SEO -->
-        <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Ashley Willis",
-              "jobTitle": "Sr. Director of Developer Advocacy",
-              "url": "https://ashley.dev",
-              "sameAs": [
-                "https://github.com/ashleymcnamara",
-                "https://twitter.com/ashleymcnamara",
-                "https://www.linkedin.com/in/ashleymcnamara/"
-              ]
-            }
-        </script>
-        <!-- End: Structured data -->
+			<!-- Start: Structured data for better SEO -->
+			<script type="application/ld+json">
+				{
+					"@context": "https://schema.org",
+					"@type": "Person",
+					"name": "Ashley Willis",
+					"jobTitle": "Sr. Director of Developer Advocacy",
+					"url": "https://ashley.dev",
+					"sameAs": [
+						"https://github.com/ashleymcnamara",
+						"https://twitter.com/ashleymcnamara",
+						"https://www.linkedin.com/in/ashleymcnamara/"
+					]
+				}
+			</script>
+			<!-- End: Structured data -->
 
-        <!-- Title & Description -->
-        <title>{seoTitle}</title>
-        <meta name="description" content={seoDescription}>
-        <meta name="abstract"    content={seoDescription}>
-        <meta name="keywords"    content={seoKeywords}>
+			<!-- Title & Description -->
+			<title>{seoTitle}</title>
+			<meta name="description" content={seoDescription} />
+			<meta name="abstract" content={seoDescription} />
+			<meta name="keywords" content={seoKeywords} />
+		</slot>
 
-        <style>
-            .emoji {
-                height: 1.2em;
-                width: 1.2em;
-                vertical-align: -0.2em;
-                margin: 0 0.05em;
-            }
-            
-            /* Site layout with proper footer */
-            body {
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                padding: 1rem;
-            }
-            
-            .site-content {
-                flex: 1 0 auto;
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            .site-footer {
-                flex-shrink: 0;
-                width: 100%;
-                padding: 0.5rem 0;
-                text-align: center;
-                margin-top: 1rem;
-            }
-        </style>
+		<style>
+			.emoji {
+				height: 1.2em;
+				width: 1.2em;
+				vertical-align: -0.2em;
+				margin: 0 0.05em;
+			}
 
-    </head>
+			/* Site layout with proper footer */
+			body {
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				padding: 1rem;
+			}
 
-    <body>
-        <!-- Main content wrapper -->
-        <div class="site-content">
-            <slot />
-        </div>
-        
-        <!-- Global footer -->
-        <footer class="site-footer">
-            Built with <a href="https://astro.build" title="Astro" target="_blank" class="text-primary hover:underline">Astro</a> by <a href="https://ashley.dev/" target="_blank" title="ashley.dev" class="text-primary hover:underline">ashley.dev</a>
-        </footer>
-    </body>
+			.site-content {
+				flex: 1 0 auto;
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+			}
 
+			.site-footer {
+				flex-shrink: 0;
+				width: 100%;
+				padding: 0.5rem 0;
+				text-align: center;
+				margin-top: 1rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Main content wrapper -->
+		<div class="site-content">
+			<slot />
+		</div>
+
+		<!-- Global footer -->
+		<footer class="site-footer">
+			Built with <a
+				href="https://astro.build"
+				title="Astro"
+				target="_blank"
+				class="text-primary hover:underline">Astro</a
+			> by <a
+				href="https://ashley.dev/"
+				target="_blank"
+				title="ashley.dev"
+				class="text-primary hover:underline">ashley.dev</a
+			>
+		</footer>
+	</body>
 </html>
