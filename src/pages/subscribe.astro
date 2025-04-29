@@ -179,7 +179,7 @@ const pageDescription = 'Subscribe to ashley.dev\'s RSS feed to stay updated wit
   // Copy functionality for the RSS URL
   document.addEventListener('DOMContentLoaded', () => {
     const copyButton = document.getElementById('copy-button');
-    const urlInput = document.querySelector('input[readonly]');
+    const urlInput = document.querySelector('input[readonly]') as HTMLInputElement;
     
     if (copyButton && urlInput) {
       copyButton.addEventListener('click', () => {
