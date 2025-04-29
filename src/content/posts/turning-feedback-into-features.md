@@ -8,7 +8,7 @@ While I was building [ashley.dev](https://ashley.dev), I wanted it to feel genui
 
 But when [Tierney Cyren](https://bsky.app/profile/bnb.im) reviewed the site (and I'm incredibly grateful they did), they pointed something out: from a developer’s perspective, seeing `npx connect` might imply that there’s a real `npx` command you could run. Not only would that be confusing, it actually wouldn’t work at all. And if there’s one thing developers are good at, it’s noticing when something feels broken.
 
-That simple review didn’t just catch a small mistake, it sparked something bigger. Rather than just brushing it off, Tierney introduced me to something they had built a few years earlier: **[npm cards](https://github.com/bnb/bitandbang)**. It’s a clever way to publish a small, custom business card that someone _could_ run directly in the terminal using ``.
+That simple review didn’t just catch a small mistake, it sparked something bigger. Rather than just brushing it off, Tierney introduced me to something they had built a few years earlier: **[npm cards](https://github.com/bnb/bitandbang)**. It’s a clever way to publish a small, custom business card that someone _could_ run directly in the terminal.
 
 It was one of those moments where thoughtful feedback made everything better and reminded me why I love this community so much.
 
