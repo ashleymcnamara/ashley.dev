@@ -75,7 +75,7 @@ So maybe this shift isn’t as dramatic as it feels. But it does mean we need to
 
 Of course, lowering barriers doesn’t just help the good actors. It also opens the door for people to build fast, messy, and potentially harmful systems without having the experience or ethics to understand what they’re unleashing. That kind of scale, in the wrong hands, is more than a nuisance. It’s a real risk.
 
-And then there’s the labor side of this. If companies start using AI to justify shrinking engineering teams, flattening pay, or skipping mentorship entirely, that’s not the future of work. That’s just cutting corners. We’ve seen this story before, and the only thing new is the tool.
+And then there’s the labor side of this. As companies start using AI to justify shrinking engineering teams, flattening pay, or skipping mentorship entirely, that’s not the future of work. That’s just cutting corners. We’ve seen this story before, and the only thing new is the tool.
 
 So yes, vibe coding has a lot of promise. But we also need to stay vigilant. To protect the parts of the craft that matter.
 
