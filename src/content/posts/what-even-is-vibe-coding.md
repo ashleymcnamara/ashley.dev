@@ -1,8 +1,8 @@
 ---
 title: "What Even Is Vibe Coding?"
 date: "2025-05-07"
-tags: ["GitHubCopilot", "AI", "AICodingAssistants"]
-blueskyPostURI: ""
+tags: ["GitHubCopilot", "AIDevTools", "VibeCoding"]
+blueskyPostURI: "https://bsky.app/profile/ashley.dev/post/3loltbvnp7s2r"
 ---
 
 When I first heard the phrase *vibe coding*, I rolled my eyes a little. It sounded like another fleeting buzzword, one of those things that shows up in a thread, gets memed into the ground, and disappears before it ever really lands. As someone who respects the craft of building software, the idea of *just vibing* through development felt like it was missing the point entirely.
