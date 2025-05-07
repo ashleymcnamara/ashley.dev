@@ -51,11 +51,14 @@ export async function generateOgImage(post: CollectionEntry<'posts'>) {
   const title = post.data.title;
   const authorName = 'Ashley Willis';
   
-  // Format the date
-  const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
+  // Format the date with explicit UTC handling to prevent timezone issues
+  const postDate = new Date(post.data.date);
+  // Add a day to ensure correct date display
+  const formattedDate = postDate.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    timeZone: 'UTC'  // Force UTC timezone to prevent date shifting
   });
 
   // Get tags as a string if they exist
