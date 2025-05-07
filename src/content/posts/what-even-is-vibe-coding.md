@@ -13,7 +13,7 @@ But then I saw where it came from.
 
 The term popped up in early 2025 from [Andrej Karpathy](https://x.com/karpathy/status/1886192184808149383), who described it like this:
 
-> “Fully giving in to the vibes. See things, say things, run things, copy paste things. No reading the diffs. Just vibes.”
+> Fully giving in to the vibes. See things, say things, run things, copy paste things. No reading the diffs. Just vibes.
 
 At first glance, it reads like satire. But underneath the humor is something real: a different way of working. Vibe coding, at its core, is about using natural language to tell an AI coding assistant what you want, and then watching it try to build it for you. You’re not manually managing logic or carefully threading state through components, you’re describing intent and letting the model do the busywork.
 
@@ -33,7 +33,7 @@ Originally, vibe coding meant letting go entirely, describe what you want, hit r
 
 [Simon Willison](https://simonwillison.net/2025/May/1/not-vibe-coding/) pushed back on the way the term started evolving. He said:
 
-> “Vibe coding does not mean ‘using AI tools to help write code.’ It means ‘generating code with AI without caring about the code that is produced.’”
+> Vibe coding does not mean ‘using AI tools to help write code.’ It means ‘generating code with AI without caring about the code that is produced.
 
 And he’s not wrong. But language shifts. And lately, “vibe coding” has been getting used as shorthand for *any* AI-assisted development, even when the dev is still reviewing the output, writing tests, and guiding the structure. In other words: we started using “vibe coding” to describe something much more responsible than the name implies.
 
