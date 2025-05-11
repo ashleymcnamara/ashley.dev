@@ -5,8 +5,6 @@ tags: ["MCP", "AIProtocols", "AIStandards"]
 blueskyPostURI: ""
 ---
 
-### MCP: A Protocol to Watch (Even If You're Not Sure What to Do With It Yet)
-
 Mother's Day. Brunch for some. Thoughts on AI infrastructure for others. I contain multitudes. I'm not a *regular* mom, I'm a *cool* mom. The kind who reads the [MCP spec](https://modelcontextprotocol.io/specification/2025-03-26) *and* the spa menu.
 
 There’s always something new. Some protocol or platform or “agent infrastructure layer” that shows up with just enough momentum to make you pause and ask, *Is this going to be a thing?*
@@ -115,5 +113,4 @@ As I said, I haven’t built anything with MCP myself. My perspective is cautiou
 
 Writing helps me think. Sharing helps it stick. And staying close to the conversation, even when I’m not deep in the weeds, still feels important. So that’s what this post is, me trying to stay in it. And if you want a hands-on critique from someone who’s actually used MCP, Raz’s piece is an excellent read.
 
-Sometimes an imperfect protocol that exists is better than a perfect one that doesn’t. Sometimes a brunch-less Sunday spent reading specs is still time well spent.
-Happy Mother's Day <3
+Sometimes an imperfect protocol that exists is better than a perfect one that doesn’t. Sometimes a brunch-less Sunday spent reading specs is still time well spent. Happy Mother's Day <3
