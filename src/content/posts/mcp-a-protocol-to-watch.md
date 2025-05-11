@@ -2,7 +2,7 @@
 title: "MCP: A Protocol to Watch (Even If You're Not Sure What to Do With It Yet)"
 date: "2025-05-11"
 tags: ["MCP", "AIProtocols", "AIStandards"]
-blueskyPostURI: ""
+blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3low2zmjays2a"
 ---
 
 Mother's Day. Brunch for some. Thoughts on AI infrastructure for others. I contain multitudes. I'm not a *regular* mom, I'm a *cool* mom. The kind who reads the [MCP spec](https://modelcontextprotocol.io/specification/2025-03-26) *and* the spa menu.
