@@ -28,6 +28,7 @@ export interface SpeakingEngagement {
     status: 'upcoming' | 'past';
     tags?: string[];
     link?: ContentLink;
+    time?: string;
 }
 
 /**

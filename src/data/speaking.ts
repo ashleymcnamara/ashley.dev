@@ -2,8 +2,18 @@ import type { SpeakingEngagement } from '../types/content';
 
 export const speakingEngagements: SpeakingEngagement[] = [
     // Upcoming engagements
-    
-    // Past engagements
+    {
+        title: 'Shipping Joy: What Developer Tools Can Learn from Toys',
+        event: 'RenderATL',
+        date: 'June 12, 2025',
+        description: 'What do 3D printed toys and your favorite dev tools have in common? (If the answer is "nothing," we should talk.) In this lightning talk, Ashley Willis explores what it means to design developer tools that delight.\n\nDrawing parallels between toy design and tool design, Ashley unpacks how things like instant gratification, emotional safety, and playfulness can transform how we build, ship, and connect with the software we use every day. You don\'t need to reinvent the wheel, you just need to make the wheel fun to spin.\n\nIf you\'ve ever felt like coding used to be more joyful, or wondered how to create tools that people genuinely want to use, this talk is for you.\n\nThursday, June 12, 2025 2:40 pm - 2:50 pm (10 minutes)',
+        status: 'upcoming',
+        tags: ['developer tools', 'UX design', 'developer experience', 'lightning talk'],
+        link: {
+            url: 'https://www.renderatl.com/speakers',
+            buttonLabel: 'Event Details'
+        }
+    },
     {
         title: 'Trust: The Key to Leading Successful Teams',
         event: 'Render ATL',
