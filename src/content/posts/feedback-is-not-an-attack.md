@@ -5,6 +5,21 @@ tags: ["TechLeadership", "WorkplaceCulture"]
 blueskyPostURI: ""
 ---
 
+## TL;DR
+
+This one’s a bit of a ramble because I care a lot about this topic.
+So here’s the TL;DR for anyone who doesn’t have the energy (or executive function) to read the whole thing:
+
+- Feedback isn’t just critique. It’s care.
+- Giving it well takes emotional labor, timing, and trust.
+- Receiving it well takes reflection, not defensiveness.
+- Direct doesn’t always mean kind. Praise isn’t always welcome in public. And just because you heard something doesn’t mean it’s yours to pass along.
+
+Bottom line: Feedback should be thoughtful, specific, grounded, and mutual.
+If you’re not doing it with intention, you’re not doing it right.
+
+## Feedback is not an attack. It’s a mirror.
+
 I just got back from a conference, and over dinner one night, the conversation turned, like it often does, to work. But not the surface-level stuff. Not metrics or launches or hiring challenges. We started talking about feedback.
 
 Not just how to receive it, but how to give it, the emotional calculus involved in saying something hard, the risk of being misunderstood, and the quiet toll it takes on people who care enough to do it well. That conversation has stuck with me.
