@@ -40,7 +40,7 @@ And yet, it’s still one of the clearest forms of care we have. Especially when
 
 ## The Myth of Direct Feedback
 
-One of the first things I ask when someone joins my team is how they like to receive feedback. It’s part of a longer survey we fill out together, questions about recognition preferences, food allergies in case I send them snacks, recent promotions, even how they like to be celebrated. It’s not just a feel-good form. It’s a way for me to get to know how they operate and what matters to them, especially the things they may not say out loud.
+One of the first things I ask when someone joins my team is how they like to receive feedback. It’s part of a [longer survey](https://gist.github.com/ashleymcnamara/c4534d59952b695dc98f7ff4ee1d2b82) we fill out together, questions about recognition preferences, food allergies in case I send them snacks, recent promotions, even how they like to be celebrated. It’s not just a feel-good form. It’s a way for me to get to know how they operate and what matters to them, especially the things they may not say out loud.
 
 Almost everyone checks the box for “direct feedback.” That’s the default answer. And I believe most people genuinely *want* to believe that about themselves. Direct feedback sounds efficient. Honest. Grown-up. But what I’ve learned over time is that what people say in theory and what they respond to in practice don’t always match.
 
@@ -52,7 +52,7 @@ It’s rarely that they *don’t* want feedback. It’s that they want it with m
 
 These are all valid responses. That’s the nuance I want to get to, not the checkbox version, but the lived version. And when we get there, I say the same thing every time: “Let’s update your survey.” Because if I’m going to use this to guide how I support you, I need it to reflect where you’re actually at, not what you thought I wanted to hear.
 
-At GitHub, we use Human User Guides now, and while the format is a little different, the spirit is the same. It’s a way to document what makes you feel safe, respected, seen. I’ll admit I haven’t kept mine as up to date as I’d like. This team has been running fast. It’s easy to let rituals like that slide. But writing this is a good reminder that the clearer we are about how we like to receive feedback, the easier it is to build a culture where feedback actually *works.*
+At GitHub, we use [Human User Guides](https://gist.github.com/ashleymcnamara/b5ac1a2aa94607368d1a3b8cf538fd04) now, and while the format is a little different, the spirit is the same. It’s a way to document what makes you feel safe, respected, seen. I’ll admit I haven’t kept mine as up to date as I’d like. This team has been running fast. It’s easy to let rituals like that slide. But writing this is a good reminder that the clearer we are about how we like to receive feedback, the easier it is to build a culture where feedback actually *works.*
 
 Because the myth isn’t that people don’t want feedback. Most people do. The myth is that they want it *unfiltered.* In reality, what most people want is feedback that’s direct *and* kind. Honest *and* safe. Delivered with enough clarity that it’s useful, and enough care that it’s not destabilizing.
 
