@@ -32,7 +32,7 @@ That tension, that flicker of fear, is very real. Because feedback doesn’t jus
 
 Personally, I tend to assume feedback is true, even when it’s not. I rarely question it in the moment. My default reaction is, “Yep, they must be right.” Whether or not that holds up later takes some time to uncover. It’s not that I lack confidence. It’s that I’ve never believed that tenure guarantees insight. Even if I’ve been in the industry longer than someone else, I don’t think that makes me right. Everyone has different experiences. Everyone sees something I might not. And if I walk into every situation assuming I’m the expert, I’m probably not listening closely enough.
 
-That mindset, what researchers would call intellectual humility, is part of why I crave feedback, even when it’s hard. But I also know I sit on the other side of the spectrum from folks who instinctively resist it. There’s a psychology to how we receive feedback. Some people view it as a threat to identity. Others view it as a mirror. I try to see it as the latter. Not always immediately. But eventually.
+That mindset, what researchers would call [intellectual humility](https://en.wikipedia.org/wiki/Intellectual_humility), is part of why I crave feedback, even when it’s hard. But I also know I sit on the other side of the spectrum from folks who instinctively resist it. There’s a psychology to how we receive feedback. Some people view it as a threat to identity. Others view it as a mirror. I try to see it as the latter. Not always immediately. But eventually.
 
 Because the truth is, feedback can land hard. Even when it’s accurate. Even when it’s kind. Even when it’s necessary.
 
