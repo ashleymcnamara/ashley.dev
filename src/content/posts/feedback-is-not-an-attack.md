@@ -104,7 +104,7 @@ And honestly, sometimes the people with the least amount of experience ask the b
 
 So I try to treat feedback as a learning opportunity no matter where it comes from. I don’t rank it based on tenure. I don’t filter it through a credibility hierarchy. Everyone has a lived experience, and that experience shapes how they move through the world. That includes what they notice. That includes what they name. And that includes what they offer back to you.
 
-The moment I start believing I know best because I’ve been here longest is the moment I stop growing. And I’ve worked too hard to become the kind of leader who listens down and punches up, only to turn around and become someone who can’t be challenged. So when someone offers me feedback, no matter how junior, I don’t ask, “Who are they to say this?” I ask, “What are they seeing that I might not?” That posture has never let me down.
+The moment I start thinking I know best just because I’ve been here longest is the moment I stop listening, and that’s when I stop leading. So when someone offers me feedback, no matter how junior, I don’t ask, “Who are they to say this?” I ask, “What are they seeing that I might not?” That posture has never let me down.
 
 ## Feedback Is More Than Critique
 
