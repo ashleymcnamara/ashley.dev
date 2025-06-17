@@ -10,7 +10,7 @@ blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lrrbu
 This one’s a bit of a ramble because I care a lot about this topic.
 So here’s the TL;DR for anyone who doesn’t have the energy (or executive function) to read the whole thing:
 
-<ul style="color: #F43F5E;">
+<ul>
   <li>Feedback isn’t just critique. It’s care.</li>
   <li>Giving it well takes emotional labor, timing, and trust.</li>
   <li>Receiving it well takes reflection, not defensiveness.</li>
