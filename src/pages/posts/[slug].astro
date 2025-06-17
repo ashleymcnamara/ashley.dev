@@ -430,6 +430,31 @@ const hasBlueskyURI =
 
 		// Start observing the document with the configured parameters
 		observer.observe(document.body, { childList: true, subtree: true });
+
+		// Style bullet points using direct DOM manipulation (more reliable than CSS for Tailwind overrides)
+		function styleBulletPoints() {
+			// Create a style element
+			const style = document.createElement('style');
+			// Add CSS rule with !important to override any existing styles
+			style.innerHTML = `
+				.prose ul li::marker, 
+				.post-content ul li::marker,
+				li::marker {
+					color: #F43F5E !important;
+				}
+			`;
+			// Append to document head
+			document.head.appendChild(style);
+
+			// For browsers that might not fully support ::marker, apply inline styles to list items
+			document.querySelectorAll('.prose ul li, .post-content ul li').forEach(li => {
+				// Force the bullet color through direct styling
+				li.style.setProperty('--marker-color', '#F43F5E');
+			});
+		}
+
+		// Apply the bullet point styling
+		styleBulletPoints();
 	});
 </script>
 
@@ -777,6 +802,16 @@ const hasBlueskyURI =
 	.footnote-backref {
 		text-decoration: none !important;
 		margin-left: 0.5rem;
+	}
+
+	/* Style for bullet points in lists - Using multiple selectors to ensure override */
+	.prose ul li::marker,
+	.post-content ul li::marker,
+	.prose-invert ul li::marker,
+	article .prose ul li::marker,
+	.blog-post .prose ul li::marker,
+	div.prose-invert.max-w-none.post-content ul li::marker {
+		color: var(--color-primary, #F43F5E) !important;
 	}
 
 	/* Code block line numbers */
