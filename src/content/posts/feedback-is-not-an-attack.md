@@ -2,7 +2,7 @@
 title: "Feedback Is Not an Attack"
 date: "2025-06-16"
 tags: ["TechLeadership", "WorkplaceCulture"]
-blueskyPostURI: ""
+blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lrrbuuqsis2l"
 ---
 
 ## TL;DR
