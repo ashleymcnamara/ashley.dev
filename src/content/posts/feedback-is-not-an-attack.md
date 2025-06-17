@@ -1,5 +1,5 @@
 ---
-title: "Feedback Is a Form of Care"
+title: "Feedback Is Not an Attack"
 date: "2025-06-16"
 tags: ["TechLeadership", "WorkplaceCulture"]
 blueskyPostURI: ""
