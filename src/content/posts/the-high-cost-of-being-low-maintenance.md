@@ -2,9 +2,10 @@
 title: "The High Cost of Being Low Maintenance"
 date: "2025-06-23"
 tags: ["TechLeadership", "WorkplaceCulture", "Personal", "Management"]
+blueskyPostURI: ""
 ---
 
-# Don't Come Inside Until the Streetlights Are On
+## Don't Come Inside Until the Streetlights Are On
 
 I grew up in the '80s, where parenting often sounded like, "Don't come home until the sun goes down," or "Go drink from the hose." You didn't interrupt your parents unless something was *actually* on fire, and even then, you paused to consider if it could wait. You stayed outside. You stayed out of the way. You handled things on your own, because the expectation was: don't be a problem.
 
@@ -74,7 +75,7 @@ It floored me a bit. Because of course I trust him. Of course he could handle it
 
 And that's the trap we fall into, isn't it? We confuse accountability with ownership. We think, *This is my job, so I have to hold all of it*, even when there are people beside us who are more than willing to share the weight.
 
-What he said next stuck with me: "You're accountable for the meeting, but that doesn't mean you have to lead every single one." He even suggested a simple fix, a rotation across the team, so the responsibility could be shared. A solution that made perfect sense. A solution I should have thought of.
+What he said next made sense: "You're accountable for the meeting, but that doesn't mean you have to lead every single one." He even suggested a simple fix, a rotation across the team, so the responsibility could be shared. A solution that made perfect sense. A solution I should have thought of.
 
 But I hadn't. Because guilt and pride are sneaky. Because I didn't want to burden him. Because I didn't want to feel like I was dropping the ball. And in trying to shield him from something I assumed was mine to carry, I accidentally sent the message that I didn't trust him with it.
 
