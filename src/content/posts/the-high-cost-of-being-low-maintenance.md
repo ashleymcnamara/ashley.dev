@@ -2,7 +2,7 @@
 title: "The High Cost of Being Low Maintenance"
 date: "2025-06-23"
 tags: ["TechLeadership", "WorkplaceCulture", "Personal", "Management"]
-blueskyPostURI: ""
+blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lrrbuuqsis2l"
 ---
 
 ## Don't Come Inside Until the Streetlights Are On
