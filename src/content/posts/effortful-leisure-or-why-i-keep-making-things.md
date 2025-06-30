@@ -2,6 +2,7 @@
 title: "Effortful Leisure, or: Why I Keep Making Things"
 date: "2025-06-30"
 tags: ["Personal", "Creativity", "WorkLife", "Making"]
+blueskyPostURI: ""
 ---
 
 ## Make Something Just for You
@@ -10,7 +11,7 @@ This post started as an answer to a question I asked in Slack: *What else should
 
 So here’s both.
 
-I’ve always been a maker. Before I had a job title or a five-year plan, I had a pencil and a head full of ideas. I was the kid who doodled in the margins, the one teachers gave up on early because I wasn’t interested in what everyone else was learning. I didn’t know I was neurodivergent back then. I just thought I was a bad student. Turns out I was learning, I just needed a different path.
+I've been a maker for as long as I can remember. Before I had a job title or a five-year plan, I had a pencil and a head full of ideas. I was the kid who doodled in the margins, the one teachers gave up on early because I wasn’t interested in what everyone else was learning. I didn’t know I was neurodivergent back then. I just thought I was a bad student. Turns out I was learning, I just needed a different path.
 
 The only classes I ever really thrived in were art and creative writing. The rest of the time, I kept my hands busy. I doodled. I built things. I taught myself what I needed to know. And thanks to my dad, who was a network engineer in the Air Force, we had a computer early, one of the only ones in the neighborhood.
 
@@ -56,7 +57,7 @@ These days, I mostly make toys. Not toys for sale. Not toys for a business. Just
 
 I’m talking about food-shaped containers for my doom piles. If you’re neurodivergent, you probably know exactly what I mean: those small, stubborn piles of stuff that don’t have a designated place but can’t be thrown away. I’ve stopped fighting them. Instead, I organize them in a [Nutella jar](https://www.tiktok.com/t/ZP8rqcJ22/). Or a box that looks like [a waffle](https://bsky.app/profile/ashley.dev/post/3l43fqbtxr72t). Or a drawer that looks like an [ice cream bar](https://www.tiktok.com/t/ZP8rbLSNw/). I’ve got a [ramen bowl](https://www.tiktok.com/t/ZP8rqvPjw/) where the noodles lift off and hide glue sticks. It’s silly. It’s perfect.
 
-There’s something deeply satisfying about it, not just the aesthetics, but the fact that I made it. Sometimes I find models online (there are some [brilliant designers](https://than.gs/u/1408617) out there). Sometimes I remix them. Sometimes I [model my own](https://bsky.app/profile/ashley.dev/post/3lld3b7jl4c2o) from scratch. I'm still early in that part of the journey, but right now it’s less about mastery and more about making something that’s mine.
+There’s something deeply satisfying about it, not just the aesthetics, but the fact that I made it. Sometimes I find models online (there are some [brilliant designers](https://than.gs/u/1408617) out there). Sometimes I remix them. Sometimes I [model my own]([https://bsky.app/profile/ashley.dev/post/3lld3b7jl4c2o](https://github.com/ashleymcnamara/kubernetes-earrings)) from scratch. I'm still early in that part of the journey, but right now it’s less about mastery and more about making something that’s mine.
 
 It also helps that 3D printing (and [laser cutting](https://bsky.app/profile/ashley.dev/post/3lan6jee3es2s), and other kinds of making) can be *set and forget*. You spend time upfront dialing in the design or slicing the file, but once you hit print, it runs in the background. That works beautifully with my life right now: big job, three kids, and too many browser tabs open in my brain. It gives me a sense of progress without demanding all of my attention.
 
