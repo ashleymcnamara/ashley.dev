@@ -2,7 +2,7 @@
 title: "Effortful Leisure, or: Why I Keep Making Things"
 date: "2025-06-30"
 tags: ["Personal", "Creativity", "WorkLife", "Making"]
-blueskyPostURI: ""
+blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lstq7ovbps2e"
 ---
 
 ## Make Something Just for You
