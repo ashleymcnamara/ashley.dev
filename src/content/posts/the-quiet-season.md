@@ -2,8 +2,7 @@
 title: "The Quiet Season"
 date: "2025-08-19"
 tags: ["Personal", "Burnout", "WorkLife", "leadership"]
-blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lwrjkehlnc2b
-"
+blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lwrjkehlnc2b"
 ---
 
 I didn’t mean for this to be a quiet season. It wasn’t planned, it wasn’t marked on my calendar, and it certainly wasn’t framed in my mind as a stretch of intentional rest. In fact, I’d gone into the summer with a different kind of momentum, nine blog posts in under three months, riding a creative streak I didn’t want to lose. My goal had been at least one post a month, ideally one every two weeks. But somewhere in July, the edges started to fray. I was feeling burnt out, and I told my team as much.  
