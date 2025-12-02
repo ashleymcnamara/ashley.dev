@@ -5,8 +5,6 @@ tags: ["leadership"]
 blueskyPostURI: ""
 ---
 
-# Empathy Doesn’t Scale (But It Can Evolve)
-
 The other day I texted my group chat with other leaders outside my organization. The ones I go to when the leadership stuff gets messy and I need perspective from someone who’s not drowning in the same details I am.
 
 My question for them was: *Can you still be empathetic when your scope gets bigger?*
