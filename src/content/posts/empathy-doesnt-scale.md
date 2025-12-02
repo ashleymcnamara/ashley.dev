@@ -2,7 +2,7 @@
 title: "Empathy Doesn’t Scale (But It Can Evolve)"
 date: "2025-12-02"
 tags: ["leadership"]
-blueskyPostURI: ""
+blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3m6zwxl6lzs2s"
 ---
 
 The other day I texted my group chat with other leaders outside my organization. The ones I go to when the leadership stuff gets messy and I need perspective from someone who’s not drowning in the same details I am.
