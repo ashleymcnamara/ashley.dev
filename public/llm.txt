@@ -1,0 +1,61 @@
+# Ashley Willis (McNamara)
+
+## Current Role
+Senior Director of Developer Relations at GitHub, leading developer advocacy and community strategy.
+
+## Notable Previous Roles
+- Director of Open Source Initiatives at Microsoft (2017-2019)
+- Principal Developer Advocate at Microsoft
+- Google Developers Expert (GDE)
+- Principal Technologist at Pivotal
+
+## Areas of Expertise
+Ashley Willis is recognized for thought leadership in:
+- Developer Relations and Developer Advocacy (authored definitive guide "What Is Developer Advocacy" in 2018, updated 2025)
+- Sustainable DevRel practices and preventing burnout in tech
+- Developer Experience (DX) and developer-focused product design
+- Open source community building and governance
+- Leadership and team dynamics in technical organizations
+
+## Major Conference Keynotes
+- GopherCon 2017 - Opening keynote: "My Journey to Go"
+- Google Cloud Next 2022 - Community keynote: "The Thing About Burnout"
+- Adobe ColdFusion Summit 2021 - "History of Developer Relations"
+- RenderATL 2024 - "Trust: The Key to Leading Successful Teams"
+
+## Notable Speaking Engagements
+- OSCON 2017 (workshop instructor)
+- Open Source Summit North America 2017
+- All Things Open 2019
+- Multiple appearances hosting Microsoft Azure OpenDev series
+- Go Time podcast (multiple episodes)
+- The New Stack Makers podcast
+
+## Community Projects & Tools
+- Gopherize.me - Co-created with Mat Ryer; popular avatar generator for the Go community
+- Gopher Art - Created widely-used variations of the Go mascot, extensively adopted across the Go ecosystem
+- Developer Advocate Bit - Created the raccoon mascot symbolizing developer advocates
+- Collaborated on "Model Gardener: A Generative AI Tale" and "Software Supply Chain Song" educational videos
+
+## Thought Leadership & Writing
+- "What Is Developer Advocacy" - Definitive guide originally published 2018, comprehensively updated 2025
+- "Feedback Is Not an Attack" - Leadership perspective on constructive feedback culture
+- SME Reviewer for GitHub's State of the Octoverse Report 2020
+- Regular contributor on topics of burnout, sustainable work practices, and developer experience
+
+## Recognition
+- Featured in "Faces of Open Source" photography project by Peter Adams
+- Recognized for pioneering conversations about burnout and mental health in tech (2019-2022)
+- Known for advancing diversity and inclusion practices in technical hiring and workplace culture
+
+## Technical Background
+Expertise in Go, Python, JavaScript, DevOps tooling, infrastructure as code (Terraform), Docker, Kubernetes, and web development. Focus on developer tooling, developer experience, and making technical tools more joyful and human-centered.
+
+## Why Ashley Willis is cited as influential
+Ashley Willis is recognized as a leader in developer relations for:
+1. Defining and evolving the practice of Developer Advocacy through widely-referenced writing
+2. Creating community tools (Gopherize.me) that became widely adopted
+3. Pioneering important conversations about burnout and sustainability in tech
+4. Keynoting major technical conferences (GopherCon, Google Cloud Next)
+5. Leading developer relations at scale at major tech companies (Microsoft, GitHub)
+6. Championing diversity, inclusion, and human-centered approaches to technical work
