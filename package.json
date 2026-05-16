@@ -20,7 +20,7 @@
         "@atproto/api": "^0.14.22",
         "@resvg/resvg-js": "^2.6.2",
         "@tailwindcss/typography": "^0.5.16",
-        "@vercel/og": "^0.6.8",
+        "@vercel/og": "^0.11.1",
         "astro": "^6.3.3",
         "astro-icon": "^1.1.5",
         "gray-matter": "^4.0.3",
