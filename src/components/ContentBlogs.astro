@@ -1,6 +1,7 @@
 ---
 // Import from Astro's Content Collections API
 import { getCollection } from 'astro:content';
+import { getPostSlug } from '../utils/content';
 
 // Get all blog posts from the "posts" collection
 const allPosts = await getCollection('posts');
@@ -71,12 +72,13 @@ const allTags = [...new Set(sortedPosts.flatMap(post =>
             </div>
         ) : (
             sortedPosts.map((post, index) => {
-                const preview = extractPreview(post.body);
+                const preview = post.data.description || extractPreview(post.body);
+                const slug = getPostSlug(post);
                 return (
                 <div class="flex flex-col justify-center items-start border border-gray-700 rounded-lg p-6 bg-black blog-post" data-tags={post.data.tags?.join(',')}>
                     <div class="w-full">
                         <a 
-                            href={`/posts/${post.slug}`}
+                            href={`/posts/${slug}`}
                             class="text-white hover:text-primary"
                         >
                             <h3 class="text-xl font-semibold mb-2">{post.data.title}</h3>
@@ -99,7 +101,7 @@ const allTags = [...new Set(sortedPosts.flatMap(post =>
                     </div>
                     
                     <a 
-                        href={`/posts/${post.slug}`}
+                        href={`/posts/${slug}`}
                         class="px-4 py-2.5 mt-2 text-center border border-gray-600 rounded-lg hover:text-primary hover:border-primary"
                     >
                         Read More

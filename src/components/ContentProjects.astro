@@ -8,6 +8,9 @@ import { projects } from '../data/projects';
             <div class="flex flex-col justify-center items-start border border-gray-700 rounded-lg p-6 bg-black project-card">
                 <div class="w-full">
                     <h3 class="text-xl font-semibold text-white mb-2">{project.name}</h3>
+                    {project.summary && (
+                        <p class="text-sm text-primary">{project.summary}</p>
+                    )}
                 </div>
                 <p class="text-gray-400 my-4">{project.description}</p>
                 {project.link?.url && (

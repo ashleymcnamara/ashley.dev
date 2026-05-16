@@ -1,23 +1,24 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import BlueskyLikes from '../../components/BlueskyLikes.astro';
 import { generateOgImage } from '../../utils/og/generateOgImage';
+import { getPostSlug } from '../../utils/content';
 
 // Generate static paths for all posts
 export async function getStaticPaths() {
 	const blogEntries = await getCollection('posts');
 
 	return blogEntries.map((entry: CollectionEntry<'posts'>) => ({
-		params: { slug: entry.slug },
+		params: { slug: getPostSlug(entry) },
 		props: { entry },
 	}));
 }
 
 // The entry prop is passed from getStaticPaths
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 // Generate OG image path
 const ogImagePath = await generateOgImage(entry);
@@ -79,7 +80,7 @@ function generateSocialPreview(content: string, maxLength = 160): string {
 }
 
 // Create social media preview text
-const socialPreview = generateSocialPreview(entry.body);
+const socialPreview = entry.data.description || generateSocialPreview(entry.body);
 
 // Convert tags array to comma-separated string for keywords meta tag
 const keywordsString = entry.data.tags ? entry.data.tags.join(', ') : '';
@@ -95,6 +96,7 @@ const hasBlueskyURI =
 	<Fragment slot="head">
 		<!-- Start: Facebook open graph -->
 		<meta property="og:title" content="Ashley Willis" />
+		<meta property="og:description" content={socialPreview} />
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:type" content="article" />
 		<meta property="og:image" content={ogImageUrl} />
@@ -105,9 +107,10 @@ const hasBlueskyURI =
 		<!-- Start: Twitter card -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content="Ashley Willis" />
+		<meta name="twitter:description" content={socialPreview} />
 		<meta name="twitter:image" content={ogImageUrl} />
-		<meta name="twitter:site" content="@ashleymacnamara" />
-		<meta name="twitter:creator" content="@ashleymacnamara" />
+		<meta name="twitter:site" content="@ashleymcnamara" />
+		<meta name="twitter:creator" content="@ashleymcnamara" />
 		<!-- End: Twitter card -->
 
 		 <!-- Replace the standard title tag with a non-empty but minimal title

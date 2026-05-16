@@ -1,0 +1,7 @@
+[build]
+  command = "npm ci --min-release-age=0 && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NPM_VERSION = "11.12.1"

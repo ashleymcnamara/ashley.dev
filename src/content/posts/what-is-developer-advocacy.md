@@ -1,5 +1,6 @@
 ---
 title: "What Is Developer Advocacy? (2025 Edition)"
+description: "A refreshed look at Developer Advocacy, how the role has changed, and why serving developers still matters."
 date: "2025-04-25"
 tags: ["DevRel", "DeveloperAdvocacy", "Advocacy"]
 blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lno24nnmdc2n"

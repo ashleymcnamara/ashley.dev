@@ -1,5 +1,6 @@
 ---
 import { getSortedEngagements, getAllSpeakingTags } from '../data/speaking';
+import SpeakerKit from './SpeakerKit.astro';
 
 // Get sorted speaking engagements and all unique tags
 const sortedEngagements = getSortedEngagements();
@@ -7,6 +8,8 @@ const allTags = getAllSpeakingTags();
 ---
 
 <div>
+    <SpeakerKit />
+
     <!-- Upcoming Engagements Section -->
     <h2 class="text-2xl font-bold mb-4 text-white">Upcoming Speaking Engagements</h2>
     <div class="grid grid-cols-1 gap-6 mb-10" id="upcoming-engagements">

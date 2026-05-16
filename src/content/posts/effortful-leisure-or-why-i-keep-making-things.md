@@ -1,5 +1,6 @@
 ---
 title: "Effortful Leisure, or: Why I Keep Making Things"
+description: "A reflection on making things for yourself, creative practice, neurodivergence, and the hobbies that keep work from becoming your whole identity."
 date: "2025-06-30"
 tags: ["Personal", "Creativity", "WorkLife", "Making"]
 blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lstq7ovbps2e"

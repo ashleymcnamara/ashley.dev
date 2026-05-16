@@ -1,5 +1,6 @@
 ---
 title: "What Even Is Vibe Coding?"
+description: "A grounded explanation of vibe coding, what it is, where it came from, and why AI-assisted development still needs craft."
 date: "2025-05-07"
 tags: ["GitHubCopilot", "AIDevTools", "VibeCoding"]
 blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3loltbvnp7s2r"

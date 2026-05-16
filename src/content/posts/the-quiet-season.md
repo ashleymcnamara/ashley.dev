@@ -1,5 +1,6 @@
 ---
 title: "The Quiet Season"
+description: "A reflection on burnout, rest, leadership, and why quiet seasons are often where the real work of growth happens."
 date: "2025-08-19"
 tags: ["Personal", "Burnout", "WorkLife", "leadership"]
 blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lwrjkehlnc2b"

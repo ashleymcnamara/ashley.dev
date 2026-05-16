@@ -1,5 +1,6 @@
 ---
 title: "Turning Feedback Into Features: Building My npx Business Card"
+description: "How a small piece of site feedback turned into a real npx business card and a better developer experience."
 date: "2025-04-28"
 tags: ["DeveloperExperience", "CLI", "NodeJS"]
 blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lnvt3vztlk2k"

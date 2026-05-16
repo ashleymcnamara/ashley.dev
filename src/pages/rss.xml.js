@@ -1,6 +1,7 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import { marked } from 'marked';
+import { getPostSlug } from '../utils/content';
 
 const posts = await getCollection('posts');
 
@@ -28,17 +29,18 @@ export async function GET(context) {
     site: context.site,
     // Array of `<item>`s in output xml
     items: processedPosts.map((post) => {
+      const slug = getPostSlug(post);
       // Generate the OG image path for this post
-      const ogImagePath = `/og-images/${post.slug}.png`;
+      const ogImagePath = `/og-images/${slug}.png`;
       
       return {
         title: post.data.title,
         pubDate: new Date(post.data.date), // Using the correct date field
         // Include the full rendered HTML content
         content: post.renderedContent,
-        description: post.data.description || post.data.title, // Fallback to title if description isn't available
+        description: post.data.description || post.data.title,
         // Using the correct URL structure as seen in [slug].astro
-        link: `/posts/${post.slug}/`,
+        link: `/posts/${slug}/`,
         // Add the OG image as the image for the RSS item
         customData: `
           <media:content 

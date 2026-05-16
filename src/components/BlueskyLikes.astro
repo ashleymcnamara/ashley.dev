@@ -75,11 +75,9 @@ const { blueskyPostURI } = Astro.props;
           // If we only have a post ID (like from the URL: 3lm34df764s2w)
           if (!this.postURI.includes('/')) {
             this.postURI = `at://${MY_DID}/app.bsky.feed.post/${this.postURI}`;
-            console.log("Formatted post URI:", this.postURI);
           }
         }
 
-        console.log("Initialized with post URI:", this.postURI);
         
         // Fetch interactions
         await Promise.all([
@@ -93,7 +91,6 @@ const { blueskyPostURI } = Astro.props;
       if (!this.postURI || !this.likesContainer) return;
 
       try {
-        console.log("Fetching likes for:", this.postURI);
         const getLikesURL = `${BSKY_PUBLIC_API}app.bsky.feed.getLikes?limit=${LIMIT}&uri=${encodeURIComponent(this.postURI)}`;
         const getPostURL = `${BSKY_PUBLIC_API}app.bsky.feed.getPosts?uris=${encodeURIComponent(this.postURI)}`;
         
@@ -114,8 +111,6 @@ const { blueskyPostURI } = Astro.props;
         const postData = await postResponse.json();
         const likesData = await likesResponse.json();
         
-        console.log("Post data:", postData);
-        console.log("Likes data:", likesData);
         
         // Get total like count from post data
         const totalLikesCount = postData.posts?.[0]?.likeCount || 0;
@@ -136,7 +131,6 @@ const { blueskyPostURI } = Astro.props;
       if (!this.postURI || !this.commentsContainer) return;
 
       try {
-        console.log("Fetching comments for:", this.postURI);
         // Fetch thread data to get replies
         const threadURL = `${BSKY_PUBLIC_API}app.bsky.feed.getPostThread?uri=${encodeURIComponent(this.postURI)}`;
         const threadResponse = await fetch(threadURL);
@@ -146,7 +140,6 @@ const { blueskyPostURI } = Astro.props;
         }
         
         const threadData = await threadResponse.json();
-        console.log("Thread data:", threadData);
         
         // Get the replies from the thread
         const replies = threadData.thread?.replies || [];
@@ -162,7 +155,6 @@ const { blueskyPostURI } = Astro.props;
           };
         });
         
-        console.log(`Found ${comments.length} comments`);
         
         // Render the comments
         if (comments.length > 0) {

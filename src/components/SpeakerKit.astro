@@ -1,0 +1,45 @@
+---
+const talkTopics = [
+  'Developer Relations strategy',
+  'Open source communities',
+  'Developer experience',
+  'Burnout and sustainable work',
+  'Leadership and trust',
+  'Making technical work feel joyful',
+];
+---
+
+<section class="mb-10 border border-gray-700 rounded-lg bg-black">
+  <div class="border-b border-gray-700 px-5 py-4">
+    <p class="text-xs text-gray-500">$ speaker-kit --ashley</p>
+    <h2 class="text-2xl font-bold text-white mt-2">Speaker Kit</h2>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-0 lg:divide-x divide-gray-800">
+    <div class="p-5">
+      <p class="text-gray-300 leading-relaxed">
+        Ashley Willis is a Developer Relations leader at GitHub, open source community builder, artist, and speaker. Her talks connect technical systems with the people who build and depend on them, with a focus on trust, sustainability, developer experience, and joy.
+      </p>
+
+      <div class="flex flex-wrap gap-2 mt-5">
+        <a href="mailto:hello@ashley.dev" class="px-4 py-2.5 text-center border border-gray-600 rounded-lg hover:text-primary hover:border-primary">
+          Invite me to speak
+        </a>
+        <a href="/projects" class="px-4 py-2.5 text-center border border-gray-600 rounded-lg hover:text-primary hover:border-primary">
+          View related work
+        </a>
+      </div>
+    </div>
+
+    <div class="p-5">
+      <h3 class="text-lg font-semibold text-white mb-3">Talk Topics</h3>
+      <div class="flex flex-wrap gap-2">
+        {talkTopics.map((topic) => (
+          <span class="inline-flex items-center justify-center px-2 py-1 text-xs rounded-lg bg-black text-gray-100 border border-gray-600">
+            {topic}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

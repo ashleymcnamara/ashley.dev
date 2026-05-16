@@ -1,5 +1,6 @@
 ---
 title: "The High Cost of Being Low Maintenance"
+description: "A workplace essay about self-sufficiency, asking for help, and the hidden cost of being easy to manage."
 date: "2025-06-23"
 tags: ["TechLeadership", "WorkplaceCulture", "Personal", "Management"]
 blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lsccebrplc2g"

@@ -1,5 +1,6 @@
 ---
 title: "Empathy Doesn’t Scale (But It Can Evolve)"
+description: "A leadership essay on how empathy changes as your scope grows, and why clarity, boundaries, and care have to evolve together."
 date: "2025-12-02"
 tags: ["leadership"]
 blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3m6zwxl6lzs2s"

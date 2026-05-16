@@ -2,6 +2,11 @@
     "name": "ashley.dev",
     "type": "module",
     "version": "1.0.0",
+    "packageManager": "npm@11.12.1",
+    "engines": {
+        "node": ">=22 <25",
+        "npm": ">=11.10.0"
+    },
     "scripts": {
         "dev": "astro dev",
         "build": "astro build",
@@ -9,15 +14,14 @@
         "astro": "astro"
     },
     "dependencies": {
-        "@astrojs/check": "^0.9.4",
-        "@astrojs/markdown-remark": "^6.3.1",
-        "@astrojs/mdx": "^4.2.3",
+        "@astrojs/markdown-remark": "^7.1.2",
+        "@astrojs/mdx": "^5.0.6",
         "@astrojs/rss": "^4.0.11",
         "@atproto/api": "^0.14.22",
         "@resvg/resvg-js": "^2.6.2",
         "@tailwindcss/typography": "^0.5.16",
         "@vercel/og": "^0.6.8",
-        "astro": "^5.4.2",
+        "astro": "^6.3.3",
         "astro-icon": "^1.1.5",
         "gray-matter": "^4.0.3",
         "marked": "^15.0.11",
@@ -34,9 +38,10 @@
     },
     "devDependencies": {
         "@astrojs/sitemap": "^3.2.1",
-        "@astrojs/tailwind": "^5.1.4",
         "astro-compress": "^2.3.8",
-        "markdownlint-cli": "^0.44.0",
+        "markdownlint-cli": "^0.48.0",
+        "autoprefixer": "^10.4.21",
+        "postcss": "^8.5.6",
         "sass": "^1.85.1"
     }
 }

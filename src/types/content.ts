@@ -13,6 +13,7 @@ export interface ContentLink {
  */
 export interface Project {
     name: string;
+    summary?: string;
     description: string;
     link: ContentLink;
 }

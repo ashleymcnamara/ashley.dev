@@ -24,7 +24,7 @@ const socials: Social[] = [{
 }, {
     icon: 'bluesky',
     link: 'https://bsky.app/profile/ashley.dev',
-    title: 'View Profile'
+    title: 'View Bluesky Profile'
 }, {
     icon: 'email',
     link: '#', // Changed from mailto: to # to prevent default browser behavior
@@ -46,6 +46,7 @@ const emailAddress = 'hello@ashley.dev';
             title={social.title}
             rel="noopener noreferrer"
             id={social.id}
+            aria-label={social.title}
             data-email={social.isEmail ? emailAddress : undefined}
             class={`flex items-center justify-center w-10 h-10 rounded-lg bg-black text-gray-100 transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5 ${social.isEmail ? 'email-link' : ''}`}>
             <SocialIcon icon={social.icon} />

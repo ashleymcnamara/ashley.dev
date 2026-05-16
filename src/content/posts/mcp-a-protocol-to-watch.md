@@ -1,5 +1,6 @@
 ---
 title: "MCP: A Protocol to Watch (Even If You're Not Sure What to Do With It Yet)"
+description: "A skeptical-but-curious look at the Model Context Protocol and why it may matter for the future of AI tooling."
 date: "2025-05-11"
 tags: ["MCP", "AIProtocols", "AIStandards"]
 blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3low2zmjays2a"

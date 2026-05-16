@@ -1,5 +1,6 @@
 ---
 title: "Feedback Is Not an Attack"
+description: "A practical reflection on giving and receiving feedback with trust, timing, emotional labor, and less defensiveness."
 date: "2025-06-16"
 tags: ["TechLeadership", "WorkplaceCulture"]
 blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lrrbuuqsis2l"

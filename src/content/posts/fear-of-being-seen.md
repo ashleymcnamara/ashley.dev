@@ -1,5 +1,6 @@
 ---
 title: "Working Through the Fear of Being Seen"
+description: "A personal essay about returning to writing, navigating visibility, and rebuilding confidence after years of second-guessing."
 date: "2025-04-21"
 tags: ["TechLeadership", "Motherhood", "Personal"]
 blueskyPostURI: "at://did:plc:5tgxxpsiv36w3e37im6kd2se/app.bsky.feed.post/3lneixhjamk2i"

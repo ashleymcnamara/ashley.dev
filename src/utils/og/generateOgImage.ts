@@ -3,6 +3,7 @@ import path from 'path';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import type { CollectionEntry } from 'astro:content';
+import { getPostSlug } from '../content';
 
 // Default dimensions for OG images (1200×630 is standard for most platforms)
 const WIDTH = 1200;
@@ -47,7 +48,7 @@ const ensureDirectoryExists = (dirPath: string) => {
 };
 
 export async function generateOgImage(post: CollectionEntry<'posts'>) {
-  const slug = post.slug;
+  const slug = getPostSlug(post);
   const title = post.data.title;
   const authorName = 'Ashley Willis';
   

@@ -52,7 +52,7 @@ export const speakingEngagements: SpeakingEngagement[] = [
         }
     },
     {
-        title: 'Lets Talk About Burnout',
+        title: 'Let\'s Talk About Burnout',
         event: 'DevOps Loop',
         date: 'October 4, 2021',
         description: 'Burnout is a serious issue in both the open-source community and the wider tech world. The challenges of the post-pandemic era have made it even more critical to address. We need to take quick and compassionate action. Acknowledging the problem is important, but it\'s just the start. We should focus on taking care of ourselves and our community. In our journey together, we\'ll explore burnout in detail. We\'ll learn its signs and discover ways to set healthy boundaries in the demanding tech environment. Self-care is a key part of this conversation – it\'s crucial for building a strong and resilient community. Our goal is to go beyond talking and actually make a positive impact. By joining forces, we\'re moving towards a healthier tech community that can thrive, even in tough times.',
