@@ -1,0 +1,194 @@
+# Lighthouse CI — runs on PRs that touch source files to catch
+# accessibility, performance, and SEO regressions before they ship.
+#
+# Scores are posted as a PR comment. Accessibility has a hard floor
+# of 90 (target 95+). Performance, Best Practices, and SEO target 90+.
+
+name: Lighthouse CI
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'astro.config.*'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tailwind.config.*'
+      - 'postcss.config.*'
+      - '.lighthouserc.*'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --min-release-age=0
+
+      - name: Build site
+        run: npm run build
+
+      - name: Run Lighthouse CI
+        id: lhci
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./.lighthouserc.cjs
+          uploadArtifacts: true
+
+      - name: Post results to PR
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            // Find the LHCI manifest with report links and scores
+            const resultsDir = '.lighthouseci';
+            const manifestPath = path.join(resultsDir, 'manifest.json');
+
+            if (!fs.existsSync(manifestPath)) {
+              console.log('No Lighthouse manifest found — skipping comment.');
+              return;
+            }
+
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+
+            // Targets: accessibility aims higher than the assert floor
+            const targets = {
+              accessibility: 0.95,
+              performance: 0.90,
+              'best-practices': 0.90,
+              seo: 0.90,
+            };
+
+            const floors = {
+              accessibility: 0.90,
+              performance: 0.85,
+              'best-practices': 0.90,
+              seo: 0.90,
+            };
+
+            // Group runs by URL and pick the median score per category
+            const urlResults = {};
+            for (const entry of manifest) {
+              const url = new URL(entry.url).pathname || '/';
+              if (!urlResults[url]) urlResults[url] = [];
+
+              const report = JSON.parse(fs.readFileSync(entry.jsonPath, 'utf8'));
+              const scores = {};
+              for (const [key, cat] of Object.entries(report.categories)) {
+                scores[key] = cat.score;
+              }
+              urlResults[url].push({ scores, reportUrl: entry.url });
+            }
+
+            function median(arr) {
+              const sorted = [...arr].sort((a, b) => a - b);
+              const mid = Math.floor(sorted.length / 2);
+              return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+            }
+
+            function scoreEmoji(score, target, floor) {
+              if (score >= target) return '🟢';
+              if (score >= floor) return '🟡';
+              return '🔴';
+            }
+
+            let body = '## ⚡ Lighthouse CI Results\n\n';
+
+            const categories = ['accessibility', 'performance', 'best-practices', 'seo'];
+            const labels = {
+              accessibility: 'Accessibility',
+              performance: 'Performance',
+              'best-practices': 'Best Practices',
+              seo: 'SEO',
+            };
+
+            let hasFailure = false;
+
+            for (const [urlPath, runs] of Object.entries(urlResults)) {
+              body += `### \`${urlPath}\`\n\n`;
+              body += '| Category | Score | Target | Status |\n';
+              body += '|----------|-------|--------|--------|\n';
+
+              for (const cat of categories) {
+                const scores = runs.map(r => r.scores[cat]).filter(s => s != null);
+                if (scores.length === 0) continue;
+
+                const med = median(scores);
+                const display = Math.round(med * 100);
+                const target = targets[cat];
+                const floor = floors[cat];
+                const emoji = scoreEmoji(med, target, floor);
+                const targetDisplay = Math.round(target * 100);
+
+                if (med < floor) hasFailure = true;
+
+                body += `| ${labels[cat]} | **${display}** | ${targetDisplay} | ${emoji} |\n`;
+              }
+              body += '\n';
+            }
+
+            body += '---\n';
+            body += '🟢 Meets target · 🟡 Above floor, below target · 🔴 Below floor (fails check)\n\n';
+
+            // Add link to uploaded reports if available
+            let links = {};
+            try {
+              const linksRaw = `${{ steps.lhci.outputs.links }}`;
+              if (linksRaw) links = JSON.parse(linksRaw);
+            } catch {
+              // No report links available
+            }
+            if (links && Object.keys(links).length > 0) {
+              body += '<details><summary>📊 Full reports</summary>\n\n';
+              for (const [url, link] of Object.entries(links)) {
+                const urlPath = new URL(url).pathname || '/';
+                body += `- [\`${urlPath}\`](${link})\n`;
+              }
+              body += '\n</details>\n';
+            }
+
+            // Update existing comment or create a new one
+            const marker = '<!-- lighthouse-ci-comment -->';
+            body = marker + '\n' + body;
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const existing = comments.find(c => c.body?.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
