@@ -41,6 +41,6 @@
         "markdownlint-cli": "^0.48.0",
         "autoprefixer": "^10.4.21",
         "postcss": "^8.5.6",
-        "sass": "^1.85.1"
+        "sass": "^1.100.0"
     }
 }
