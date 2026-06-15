@@ -18,7 +18,7 @@
         "@astrojs/rss": "^4.0.11",
         "@atproto/api": "^0.14.22",
         "@resvg/resvg-js": "^2.6.2",
-        "@tailwindcss/typography": "^0.5.16",
+        "@tailwindcss/typography": "^0.5.20",
         "@vercel/og": "^0.11.1",
         "astro": "^6.3.3",
         "astro-icon": "^1.1.5",
