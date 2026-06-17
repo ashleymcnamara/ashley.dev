@@ -24,7 +24,7 @@ jobs:
         run: npm ci --min-release-age=0
 
       - name: Audit dependencies
-        run: npm audit --audit-level=moderate
+        run: npx audit-ci --config ./audit-ci.jsonc
 
       - name: Build
         run: npm run build
