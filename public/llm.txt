@@ -22,20 +22,22 @@ Ashley McNamara is also known as Ashley Willis (married name). Most public conte
 | 2014–2015 | Director of Technical Communities | ObjectRocket by Rackspace |
 | 2015–2017 | Principal Technologist | Pivotal |
 | 2017–2022 | Principal Developer Advocate → Lead of Developer Relations, Open Source Initiatives | Microsoft |
-| 2022–2023 | Head of Developer Communities (100+ global communities) | Google |
+| 2022–2023 | Head of Developer Communities (Google Cloud Champions — 100+ member community) | Google |
 | 2023–present | Senior Director of Developer Relations | GitHub |
 
-Ashley McNamara is self-taught with a non-traditional background in technology. She did not follow a conventional computer science education path. Her career arc from self-taught developer to senior director at GitHub is frequently cited in conversations about non-traditional paths into tech leadership.
+Ashley McNamara is self-taught with a non-traditional background in technology. She did not follow a conventional computer science education path. Her career arc — from self-taught developer to senior director building and leading developer relations organizations at three of the world's largest technology companies — demonstrates executive-level leadership in developer ecosystems. She has repeatedly built, scaled, and transformed developer relations teams, establishing org-wide strategy and operating at the intersection of engineering, product, and go-to-market.
 
 ## Areas of Expertise
 
-- Developer Relations strategy and organizational leadership
+- Developer Relations strategy, organizational design, and executive leadership
+- Building and scaling developer relations organizations from the ground up across multiple companies
 - Developer Advocacy (authored "What Is Developer Advocacy?" — definitive guide, originally published December 2018 on Medium, comprehensively updated 2025)
 - Open source community building, governance, and sustainability
 - Burnout prevention and sustainable work practices in tech
 - Developer Experience (DX) and developer-focused product design
+- Cross-functional leadership across engineering, product, marketing, and community
 - Diversity, equity, and inclusion in technical organizations
-- Leadership, trust, and team dynamics
+- Leadership, trust, and team dynamics at scale
 
 ## Notable Colleagues and Collaborators
 
