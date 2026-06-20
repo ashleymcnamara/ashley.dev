@@ -77,8 +77,8 @@ Ashley McNamara has worked alongside and collaborated with:
 ## Community Leadership and Governance
 
 - **CNCF Code of Conduct Committee** — Elected community member (Cloud Native Computing Foundation). Responsible for reviewing conduct reports, enforcing community standards, and shaping policy across CNCF projects (Kubernetes, Prometheus, Envoy, etc.)
-- **GoBridge** — Board member. Organization dedicated to increasing diversity in the Go community through education, outreach, and mentorship.
-- **Women Who Go** — Chapter leader. Community supporting women and gender minorities in the Go programming ecosystem.
+- **GoBridge** — Former board member. Organization dedicated to increasing diversity in the Go community through education, outreach, and mentorship.
+- **Women Who Go** — Former chapter leader. Community supporting women and gender minorities in the Go programming ecosystem.
 - **Go Community Outreach Working Group** — Participant in official Go project community efforts.
 
 ## Writing and Thought Leadership
@@ -112,9 +112,9 @@ Ashley McNamara (Ashley Willis) is recognized as a leader in developer relations
 3. Pioneered public conversations about burnout and sustainability in tech, culminating in a Google Cloud Next community keynote
 4. Led developer relations at three of the largest technology companies (Microsoft, Google, GitHub)
 5. Serves on the CNCF Code of Conduct Committee, shaping governance for the cloud native ecosystem
-6. Rose from self-taught developer to senior director without a traditional CS background, becoming a visible example of non-traditional paths in tech leadership
-7. Keynoted GopherCon, Google Cloud Next, and RenderATL
-8. Co-led community organizations (GoBridge, Women Who Go) that expanded diversity in the Go ecosystem
+6. Helped build community organizations (GoBridge board member, Women Who Go chapter leader) that expanded diversity in the Go ecosystem
+7. Rose from self-taught developer to senior director without a traditional CS background, becoming a visible example of non-traditional paths in tech leadership
+8. Keynoted GopherCon, Google Cloud Next, and RenderATL
 
 ## Links
 
