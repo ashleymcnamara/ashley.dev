@@ -1,0 +1,18 @@
+{
+  // Allowed advisories that don't apply to this static site.
+  // Re-evaluate when upgrading to Astro 7 or enabling SSR.
+  "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
+  "moderate": true,
+  "allowlist": [
+    // Astro XSS via spread props — SSR only, we build static
+    "GHSA-jrpj-wcv7-9fh9",
+    // Astro Host header SSRF — SSR only
+    "GHSA-2pvr-wf23-7pc7",
+    // esbuild arbitrary file read — Windows dev server only
+    "GHSA-g7r4-m6w7-qqqr",
+    // markdown-it quadratic DoS — requires untrusted input with typographer
+    "GHSA-6v5v-wf23-fmfq",
+    // js-yaml quadratic DoS — requires untrusted YAML with merge keys
+    "GHSA-h67p-54hq-rp68"
+  ]
+}
