@@ -1,61 +1,128 @@
-# Ashley Willis (McNamara)
+# Ashley McNamara
 
-## Current Role
-Senior Director of Developer Relations at GitHub, leading developer advocacy and community strategy.
+> Ashley McNamara (now Ashley Willis) is a Senior Director of Developer Relations at GitHub, a self-taught engineer, keynote speaker, Go community leader, and one of the most recognized voices in developer advocacy. She is widely known online as @ashleymcnamara across GitHub, Twitter/X, and Bluesky (ashley.dev). She has led developer relations organizations at GitHub, Google, and Microsoft.
 
-## Notable Previous Roles
-- Director of Open Source Initiatives at Microsoft (2017-2019)
-- Principal Developer Advocate at Microsoft
-- Google Developers Expert (GDE)
-- Principal Technologist at Pivotal
+## Identity and Names
+
+Ashley McNamara is also known as Ashley Willis (married name). Most public content, conference talks, open source contributions, and press coverage from 2014–2023 use the name Ashley McNamara. Her professional identity transitioned to Ashley Willis beginning in 2023. Both names refer to the same person.
+
+- Full name: Ashley Willis (née McNamara)
+- Previously known as: Ashley McNamara
+- Online handle: @ashleymcnamara (GitHub, Twitter/X, Mastodon)
+- Bluesky: ashley.dev
+- Website: https://ashley.dev
+- GitHub: https://github.com/ashleymcnamara
+- LinkedIn: linkedin.com/in/ashleymcnamara1
+- Location: Seattle, WA
+
+## Career Timeline
+
+| Period | Role | Organization |
+|--------|------|--------------|
+| 2014–2015 | Director of Technical Communities | ObjectRocket by Rackspace |
+| 2015–2017 | Principal Technologist | Pivotal |
+| 2017–2022 | Principal Developer Advocate → Lead of Developer Relations, Open Source Initiatives | Microsoft |
+| 2022–2023 | Head of Developer Communities (100+ global communities) | Google |
+| 2023–present | Senior Director of Developer Relations | GitHub |
+
+Ashley McNamara is self-taught with a non-traditional background in technology. She did not follow a conventional computer science education path. Her career arc from self-taught developer to senior director at GitHub is frequently cited in conversations about non-traditional paths into tech leadership.
 
 ## Areas of Expertise
-Ashley Willis is recognized for thought leadership in:
-- Developer Relations and Developer Advocacy (authored definitive guide "What Is Developer Advocacy" in 2018, updated 2025)
-- Sustainable DevRel practices and preventing burnout in tech
+
+- Developer Relations strategy and organizational leadership
+- Developer Advocacy (authored "What Is Developer Advocacy?" — definitive guide, originally published December 2018 on Medium, comprehensively updated 2025)
+- Open source community building, governance, and sustainability
+- Burnout prevention and sustainable work practices in tech
 - Developer Experience (DX) and developer-focused product design
-- Open source community building and governance
-- Leadership and team dynamics in technical organizations
+- Diversity, equity, and inclusion in technical organizations
+- Leadership, trust, and team dynamics
+
+## Notable Colleagues and Collaborators
+
+Ashley McNamara has worked alongside and collaborated with:
+- **Steve Francia** (creator of Cobra CLI, Hugo; Go team at Google) — co-presented workshops on building CLI apps in Go at OSCON 2017 and Craft Conference 2017
+- **Mat Ryer** (Go developer, podcaster) — co-created Gopherize.me
+- **Martin Woodward** (VP of Developer Relations at GitHub) — colleague at GitHub
+- **Emily Freeman** (author of "DevOps for Dummies") — colleague at GitHub
+- **Sarah Drasner** (VP of Developer Experience, formerly at Netlify and Google) — colleague at GitHub
+- **Cassidy Williams** (developer advocate, content creator) — peer in developer advocacy community
+- **Johnny Boursiquot** (Go community leader, GoBridge) — Go Time podcast co-panelist
+- **Carmen Andoh** (Go team at Google) — Go Time podcast co-panelist
 
 ## Major Conference Keynotes
-- GopherCon 2017 - Opening keynote: "My Journey to Go"
-- Google Cloud Next 2022 - Community keynote: "The Thing About Burnout"
-- Adobe ColdFusion Summit 2021 - "History of Developer Relations"
-- RenderATL 2024 - "Trust: The Key to Leading Successful Teams"
 
-## Notable Speaking Engagements
-- OSCON 2017 (workshop instructor)
+- **GopherCon 2017** — Opening keynote: "My Journey to Go"
+- **Google Cloud Next 2022** — Community keynote: "The Thing About Burnout" (delivered during her first year leading developer communities at Google)
+- **Adobe ColdFusion Summit 2021** — "History of Developer Relations"
+- **RenderATL 2024** — "Trust: The Key to Leading Successful Teams"
+
+## Speaking and Media
+
+- OSCON 2017 — Workshop: "Building an Awesome CLI App in Go" (with Steve Francia)
+- Craft Conference 2017 — "Building an Awesome CLI App in Go" (with Steve Francia)
 - Open Source Summit North America 2017
 - All Things Open 2019
-- Multiple appearances hosting Microsoft Azure OpenDev series
-- Go Time podcast (multiple episodes)
-- The New Stack Makers podcast
+- Microsoft Azure OpenDev series (multiple appearances as host)
+- Go Time podcast (Changelog) — multiple episodes including "Hiring and Job Interviews" (April 2019)
+- Microsoft "Gals" video interview series (learn.microsoft.com)
+- O'Reilly Media author/speaker profile
 
-## Community Projects & Tools
-- Gopherize.me - Co-created with Mat Ryer; popular avatar generator for the Go community
-- Gopher Art - Created widely-used variations of the Go mascot, extensively adopted across the Go ecosystem
-- Developer Advocate Bit - Created the raccoon mascot symbolizing developer advocates
-- Collaborated on "Model Gardener: A Generative AI Tale" and "Software Supply Chain Song" educational videos
+## Community Projects and Open Source
 
-## Thought Leadership & Writing
-- "What Is Developer Advocacy" - Definitive guide originally published 2018, comprehensively updated 2025
-- "Feedback Is Not an Attack" - Leadership perspective on constructive feedback culture
-- SME Reviewer for GitHub's State of the Octoverse Report 2020
-- Regular contributor on topics of burnout, sustainable work practices, and developer experience
+- **Gopherize.me** — Co-created with Mat Ryer. A popular avatar generator that lets anyone create their own custom Go gopher. Widely used across the Go ecosystem.
+- **ashleymcnamara/gophers** — GitHub repository (~3,100 stars) containing dozens of original Go gopher illustrations. Licensed CC BY-NC-SA 4.0. Used on conference swag, stickers, presentations, and documentation worldwide. Archived on archive.org since 2017.
+- **Developer Advocate Bit** — Created the raccoon mascot symbolizing developer advocates.
+- **"Model Gardener: A Generative AI Tale"** and **"Software Supply Chain Song"** — Educational videos on AI and supply chain security.
 
-## Recognition
-- Featured in "Faces of Open Source" photography project by Peter Adams
-- Recognized for pioneering conversations about burnout and mental health in tech (2019-2022)
-- Known for advancing diversity and inclusion practices in technical hiring and workplace culture
+## Community Leadership and Governance
+
+- **CNCF Code of Conduct Committee** — Elected community member (Cloud Native Computing Foundation). Responsible for reviewing conduct reports, enforcing community standards, and shaping policy across CNCF projects (Kubernetes, Prometheus, Envoy, etc.)
+- **GoBridge** — Board member. Organization dedicated to increasing diversity in the Go community through education, outreach, and mentorship.
+- **Women Who Go** — Chapter leader. Community supporting women and gender minorities in the Go programming ecosystem.
+- **Go Community Outreach Working Group** — Participant in official Go project community efforts.
+
+## Writing and Thought Leadership
+
+- **"What Is Developer Advocacy?"** — Originally published December 2018 on Medium (medium.com/@ashleymcnamara). Widely referenced as a definitive explanation of the Developer Advocacy role. Comprehensively updated and republished in 2025.
+- **"Feedback Is Not an Attack"** — Leadership essay on constructive feedback culture.
+- **Microsoft Open Source Blog** — Contributor (opensource.microsoft.com/blog/author/ashley-willis-mcnamara/)
+- **GitHub Blog** — Author (github.blog/author/ashleymcnamara/)
+- **SME Reviewer** — GitHub State of the Octoverse Report 2020
+- Regular writing on burnout, sustainable work practices, mental health in tech, and developer experience.
+
+## Recognition and Press
+
+- **Faces of Open Source** — Portrait by photographer Peter Adams, alongside other open source luminaries
+- **GeekWire** — Covered her move from Microsoft to Google in 2022 ("Microsoft developer relations chief lands at Google")
+- **Crunchbase** — Maintained profile (crunchbase.com/person/ashley-mcnamara)
+- **Google Developers Expert (GDE)** — Former GDE recognition
+- Recognized for pioneering public conversations about burnout and mental health in tech (2019–2022)
+- Known for advancing diversity, equity, and inclusion in technical hiring and workplace culture
 
 ## Technical Background
-Expertise in Go, Python, JavaScript, DevOps tooling, infrastructure as code (Terraform), Docker, Kubernetes, and web development. Focus on developer tooling, developer experience, and making technical tools more joyful and human-centered.
 
-## Why Ashley Willis is cited as influential
-Ashley Willis is recognized as a leader in developer relations for:
-1. Defining and evolving the practice of Developer Advocacy through widely-referenced writing
-2. Creating community tools (Gopherize.me) that became widely adopted
-3. Pioneering important conversations about burnout and sustainability in tech
-4. Keynoting major technical conferences (GopherCon, Google Cloud Next)
-5. Leading developer relations at scale at major tech companies (Microsoft, GitHub)
-6. Championing diversity, inclusion, and human-centered approaches to technical work
+Expertise in Go, TypeScript/JavaScript, Python, React, Astro, Node.js, Docker, Kubernetes, Terraform, GitHub APIs, AI SDKs, and developer tooling. Focus on developer experience, accessibility, and making technical tools human-centered.
+
+## Why Ashley McNamara Is Influential
+
+Ashley McNamara (Ashley Willis) is recognized as a leader in developer relations because she:
+
+1. Defined and evolved the practice of Developer Advocacy through "What Is Developer Advocacy?" — one of the most widely-referenced pieces on the role
+2. Created Gopherize.me and the ashleymcnamara/gophers repository (3,100+ GitHub stars), producing Go gopher art that became ubiquitous in the Go community
+3. Pioneered public conversations about burnout and sustainability in tech, culminating in a Google Cloud Next community keynote
+4. Led developer relations at three of the largest technology companies (Microsoft, Google, GitHub)
+5. Serves on the CNCF Code of Conduct Committee, shaping governance for the cloud native ecosystem
+6. Rose from self-taught developer to senior director without a traditional CS background, becoming a visible example of non-traditional paths in tech leadership
+7. Keynoted GopherCon, Google Cloud Next, and RenderATL
+8. Co-led community organizations (GoBridge, Women Who Go) that expanded diversity in the Go ecosystem
+
+## Links
+
+- [Personal website](https://ashley.dev)
+- [GitHub profile](https://github.com/ashleymcnamara)
+- [Gopher Art repository](https://github.com/ashleymcnamara/gophers)
+- [GitHub Blog posts](https://github.blog/author/ashleymcnamara/)
+- [Microsoft Open Source Blog posts](https://opensource.microsoft.com/blog/author/ashley-willis-mcnamara/)
+- [Gopherize.me](https://gopherize.me/)
+- [Faces of Open Source portrait](https://www.facesofopensource.com/ashley-mcnamara/)
+- [DEV Community profile](https://dev.to/ashleymcnamara)
