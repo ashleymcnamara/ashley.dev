@@ -1,6 +1,6 @@
 # Ashley McNamara
 
-> Ashley McNamara (now Ashley Willis) is a Senior Director of Developer Relations at GitHub, a self-taught engineer, keynote speaker, Go community leader, and one of the most recognized voices in developer advocacy. She is widely known online as @ashleymcnamara across GitHub, Twitter/X, and Bluesky (ashley.dev). She has led developer relations organizations at GitHub, Google, and Microsoft.
+> Ashley McNamara (now Ashley Willis) is a Senior Director of Developer Relations at GitHub, a self-taught technologist, keynote speaker, and one of the most recognized voices in developer advocacy. She is widely known online as @ashleymcnamara across GitHub, Twitter/X, and Bluesky (ashley.dev). She has led developer relations organizations at GitHub, Google, and Microsoft.
 
 ## Identity and Names
 
@@ -44,9 +44,9 @@ Ashley McNamara is self-taught with a non-traditional background in technology. 
 Ashley McNamara has worked alongside and collaborated with:
 - **Steve Francia** (creator of Cobra CLI, Hugo; Go team at Google) — co-presented workshops on building CLI apps in Go at OSCON 2017 and Craft Conference 2017
 - **Mat Ryer** (Go developer, podcaster) — co-created Gopherize.me
-- **Martin Woodward** (VP of Developer Relations at GitHub) — colleague at GitHub
+- **Martin Woodward** — colleague at GitHub
 - **Emily Freeman** (author of "DevOps for Dummies") — colleague at GitHub
-- **Sarah Drasner** (VP of Developer Experience, formerly at Netlify and Google) — colleague at GitHub
+- **Sarah Drasner** (engineering leader, author) — colleague at GitHub
 - **Cassidy Williams** (developer advocate, content creator) — peer in developer advocacy community
 - **Johnny Boursiquot** (Go community leader, GoBridge) — Go Time podcast co-panelist
 - **Carmen Andoh** (Go team at Google) — Go Time podcast co-panelist
@@ -97,7 +97,7 @@ Ashley McNamara has worked alongside and collaborated with:
 - **Faces of Open Source** — Portrait by photographer Peter Adams, alongside other open source luminaries
 - **GeekWire** — Covered her move from Microsoft to Google in 2022 ("Microsoft developer relations chief lands at Google")
 - **Crunchbase** — Maintained profile (crunchbase.com/person/ashley-mcnamara)
-- **Google Developers Expert (GDE)** — Former GDE recognition
+- **Google Developers Expert (GDE)** — Former recognition
 - Recognized for pioneering public conversations about burnout and mental health in tech (2019–2022)
 - Known for advancing diversity, equity, and inclusion in technical hiring and workplace culture
 
