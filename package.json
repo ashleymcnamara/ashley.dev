@@ -42,5 +42,8 @@
         "autoprefixer": "^10.4.21",
         "postcss": "^8.5.15",
         "sass": "^1.100.0"
+    },
+    "overrides": {
+        "esbuild": "^0.28.1"
     }
 }
