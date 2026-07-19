@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 .wrangler/
 .vscode/
+
+# Impeccable runtime cache
+.impeccable/hook.cache.json

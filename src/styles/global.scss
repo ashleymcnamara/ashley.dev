@@ -6,18 +6,43 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
 }
 
 :root {
     --color-primary: #F43F5E;
-    --code-background: #141414; /* Darker background for code blocks */
+    --color-canvas: #000000;
+    --color-surface: #111827;
+    --color-text-primary: #F3F4F6;
+    --color-text-secondary: #D1D5DB;
+    --color-text-muted: #9CA3AF;
+    --color-line-strong: #6B7280;
+    --color-line: #4B5563;
+    --code-background: #141414;
 }
 
-/* Hide webkit (Chrome, Safari) scrollbars */
+html {
+    scrollbar-color: var(--color-line-strong) var(--color-canvas);
+    scrollbar-width: thin;
+}
+
 *::-webkit-scrollbar {
-    display: none;
+    width: 0.625rem;
+    height: 0.625rem;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--color-canvas);
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--color-line-strong);
+    border: 2px solid var(--color-canvas);
+    border-radius: 9999px;
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
 }
 
 /* Improve mobile scrolling behavior */
@@ -25,14 +50,6 @@
     height: 100%;
     width: 100%;
     -webkit-overflow-scrolling: touch; /* For better scrolling on iOS */
-}
-
-/* Fix for mobile overflow issues */
-@media (max-width: 768px) {
-    html, body {
-        overflow-x: hidden;
-        position: relative;
-    }
 }
 
 /* Code block styling to match VS Code dark theme */
@@ -49,21 +66,21 @@ pre {
 pre[data-filename]::before {
     content: attr(data-filename);
     display: block;
-    background: #1c1c1c; /* Darker header background */
-    color: #d4d4d4;
+    background: var(--color-surface);
+    color: var(--color-text-secondary);
     font-family: Monaco, Menlo, 'Courier New', monospace;
     font-size: 0.85rem;
     padding: 0.25rem 1rem;
     border-top-left-radius: 0.375rem;
     border-top-right-radius: 0.375rem;
-    border-bottom: 1px solid #2d2d2d;
+    border-bottom: 1px solid var(--color-line);
     margin: -1rem -1rem 1rem -1rem;
 }
 
 /* Inline code styling */
 :not(pre) > code {
-    background-color: var(--code-background); /* Using the same darker background */
-    color: #d4d4d4;
+    background-color: var(--code-background);
+    color: var(--color-text-secondary);
     padding: 0.2em 0.4em;
     border-radius: 0.25rem;
     font-family: Monaco, Menlo, 'Courier New', monospace;
@@ -73,15 +90,24 @@ pre[data-filename]::before {
 
 /* Enhanced line highlighting */
 .highlighted-line {
-    background-color: rgba(255, 255, 255, 0.07);
+    background-color: rgba(244, 63, 94, 0.14);
     display: block;
     margin: 0 -1rem;
     padding: 0 1rem;
-    border-left: 3px solid var(--color-primary);
 }
 
-/* If you have a dark mode toggle, ensure code blocks look good in both modes */
 .dark pre, .dark code {
     background-color: var(--code-background);
-    color: #d4d4d4;
+    color: var(--color-text-secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }

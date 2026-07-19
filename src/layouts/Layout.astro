@@ -10,16 +10,26 @@ const authorPublisher = 'Ashley Willis';
 const geoRegion = 'seattle-us';
 
 // SEO title, description and keywords
-const seoTitle = 'Ashley Willis - Developer Relations Leader, Former GDE, Keynote Speaker';
-const seoDescription =
+const defaultSeoTitle = 'Ashley Willis - Developer Relations Leader, Former GDE, Keynote Speaker';
+const defaultSeoDescription =
 	'Senior Director of Developer Relations at GitHub. Former Microsoft Director of Open Source Initiatives and Google Developers Expert. Creator of Gopherize.me and author of "What Is Developer Advocacy."';
 const seoKeywords =
 	'Developer Advocacy, Ashley Willis, Ashley McNamara, Seattle, GitHub, Golang, Kubernetes, Open Source, DevRel, Developer Relations, DevOps';
 
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title: pageTitle = defaultSeoTitle,
+	description: pageDescription = defaultSeoDescription,
+} = Astro.props;
+
 // Twitter card data
 const twitter = {
-	title: seoTitle,
-	description: seoDescription,
+	title: pageTitle,
+	description: pageDescription,
 	image: ogImageUrl,
 	site: '@ashleymcnamara',
 	creator: '@ashleymcnamara',
@@ -27,9 +37,9 @@ const twitter = {
 
 // Open graph data
 const openGraph = {
-	title: seoTitle,
-	description: seoDescription,
-	url: domainBaseURL,
+	title: pageTitle,
+	description: pageDescription,
+	url: Astro.url.href,
 	image: ogImageUrl,
 	type: 'website',
 	locale: 'en_US',
@@ -38,11 +48,11 @@ const openGraph = {
 
 // Dublin core
 const dublinCore = {
-	title: seoTitle,
+	title: pageTitle,
 	creator: authorPublisher,
 	publisher: authorPublisher,
 	rights: authorPublisher,
-	description: seoDescription,
+	description: pageDescription,
 	language: 'en',
 	type: 'Software',
 	format: 'text/html',
@@ -50,7 +60,7 @@ const dublinCore = {
 ---
 
 <!doctype html>
-<html lang="en" class="bg-black text-gray-100 font-mono">
+<html lang="en" class="bg-canvas text-text-primary font-mono">
 	<head>
 		<!-- Google tag (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-SVZ41CFHVX"
@@ -177,9 +187,9 @@ const dublinCore = {
 			<!-- End: Structured data -->
 
 			<!-- Title & Description -->
-			<title>{seoTitle}</title>
-			<meta name="description" content={seoDescription} />
-			<meta name="abstract" content={seoDescription} />
+			<title>{pageTitle}</title>
+			<meta name="description" content={pageDescription} />
+			<meta name="abstract" content={pageDescription} />
 			<meta name="keywords" content={seoKeywords} />
 		</slot>
 
@@ -230,10 +240,12 @@ const dublinCore = {
 				href="https://astro.build"
 				title="Astro"
 				target="_blank"
+				rel="noopener noreferrer"
 				class="text-primary hover:underline">Astro</a
 			> by <a
 				href="https://ashley.dev/"
 				target="_blank"
+				rel="noopener noreferrer"
 				title="ashley.dev"
 				class="text-primary hover:underline">ashley.dev</a
 			>

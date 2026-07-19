@@ -7,23 +7,23 @@ const { blueskyPostURI } = Astro.props;
 ---
 
 {blueskyPostURI && (
-  <div class="mt-8 pt-6 border-t border-gray-600">
+  <div class="mt-8 pt-6 border-t border-line-strong">
     <h3 class="text-xl font-medium mb-4">Bluesky Interactions</h3>
     
     <!-- Likes Section -->
-    <div id="bluesky-likes" data-post-uri={blueskyPostURI} class="flex flex-col items-start gap-3 mb-6">
-      <div class="flex items-center text-gray-400">
-        <div class="loading-spinner mr-2"></div>
+    <div id="bluesky-likes" data-post-uri={blueskyPostURI} aria-live="polite" aria-busy="true" class="flex flex-col items-start gap-3 mb-6">
+      <div class="flex items-center text-text-muted">
+        <div class="loading-spinner mr-2" aria-hidden="true"></div>
         <span>Loading likes...</span>
       </div>
     </div>
     
     <!-- Comments Section -->
-    <div id="bluesky-comments" data-post-uri={blueskyPostURI} class="flex flex-col items-start gap-3 mt-6">
+    <div id="bluesky-comments" data-post-uri={blueskyPostURI} aria-live="polite" aria-busy="true" class="flex flex-col items-start gap-3 mt-6">
       <h4 class="text-lg font-medium mb-2">Comments</h4>
       <div class="comments-container w-full">
-        <div class="flex items-center text-gray-400">
-          <div class="loading-spinner mr-2"></div>
+        <div class="flex items-center text-text-muted">
+          <div class="loading-spinner mr-2" aria-hidden="true"></div>
           <span>Loading comments...</span>
         </div>
       </div>
@@ -33,7 +33,7 @@ const { blueskyPostURI } = Astro.props;
 
 <script>
   // Set maximum number of avatars to display
-  const LIMIT = 55; // Increased limit to show more likes
+  const LIMIT = 24;
   // Use the public Bluesky API endpoint
   const BSKY_PUBLIC_API = "https://public.api.bsky.app/xrpc/";
   const IDENTIFIER = import.meta.env?.BLUESKY_IDENTIFIER || "ashley.dev";
@@ -170,6 +170,7 @@ const { blueskyPostURI } = Astro.props;
 
     private renderLikes(likes: any[], totalCount: number) {
       if (!this.likesContainer) return;
+      this.likesContainer.setAttribute('aria-busy', 'false');
       
       // Create elements for the likes count and avatars
       const likesCount = document.createElement('h4');
@@ -190,25 +191,40 @@ const { blueskyPostURI } = Astro.props;
         avatarItem.style.filter = 'drop-shadow(0px 0.125rem 0.125rem rgba(0, 0, 0, 0.25))';
         
         if (like.actor.avatar) {
+          const profileLink = document.createElement('a');
+          profileLink.href = `https://bsky.app/profile/${like.actor.handle}`;
+          profileLink.target = '_blank';
+          profileLink.rel = 'noopener noreferrer';
+          profileLink.className = 'block w-full h-full rounded-full';
+          profileLink.setAttribute(
+            'aria-label',
+            `View ${like.actor.displayName || like.actor.handle} on Bluesky`
+          );
+
           const img = document.createElement('img');
           img.className = 'w-full h-full rounded-full';
-          // Use thumbnail version of avatar for better performance
           img.src = like.actor.avatar.replace("avatar", "avatar_thumbnail");
           img.alt = like.actor.displayName || like.actor.handle;
           img.title = like.actor.displayName || like.actor.handle;
-          
-          // Add click handler to navigate to the user's profile
-          img.style.cursor = 'pointer';
-          img.addEventListener('click', () => {
-            window.open(`https://bsky.app/profile/${like.actor.handle}`, '_blank');
-          });
-          
-          avatarItem.appendChild(img);
+          img.width = 40;
+          img.height = 40;
+          img.loading = 'lazy';
+          img.decoding = 'async';
+
+          profileLink.appendChild(img);
+          avatarItem.appendChild(profileLink);
         } else {
-          // Placeholder for users without avatars
-          avatarItem.className += ' flex justify-center items-center bg-blue-500 font-bold';
-          avatarItem.setAttribute('aria-label', like.actor.displayName || like.actor.handle);
-          avatarItem.textContent = '@';
+          const profileLink = document.createElement('a');
+          profileLink.href = `https://bsky.app/profile/${like.actor.handle}`;
+          profileLink.target = '_blank';
+          profileLink.rel = 'noopener noreferrer';
+          profileLink.className = 'flex w-full h-full justify-center items-center rounded-full bg-primary text-black font-bold';
+          profileLink.setAttribute(
+            'aria-label',
+            `View ${like.actor.displayName || like.actor.handle} on Bluesky`
+          );
+          profileLink.textContent = '@';
+          avatarItem.appendChild(profileLink);
         }
         
         avatarsContainer.appendChild(avatarItem);
@@ -217,16 +233,18 @@ const { blueskyPostURI } = Astro.props;
       // If there are more likes than what we display, show how many more
       if (totalCount > likes.length) {
         const moreItem = document.createElement('li');
-        moreItem.className = 'w-10 h-10 rounded-full flex justify-center items-center bg-blue-500 text-white font-bold';
+        moreItem.className = 'w-10 h-10 rounded-full flex justify-center items-center bg-primary text-black font-bold';
         moreItem.textContent = `+${totalCount - likes.length}`;
+        moreItem.setAttribute('aria-label', `${totalCount - likes.length} more likes`);
         avatarsContainer.appendChild(moreItem);
       }
       
       // Add a link to the Bluesky post
       const viewOnBluesky = document.createElement('a');
-      viewOnBluesky.className = 'text-sm text-blue-400 hover:underline mt-2 block';
+      viewOnBluesky.className = 'text-sm text-primary hover:underline mt-2 block';
       viewOnBluesky.href = `https://bsky.app/profile/${IDENTIFIER}/post/${this.postURI?.split('/').pop()}`;
       viewOnBluesky.target = '_blank';
+      viewOnBluesky.rel = 'noopener noreferrer';
       viewOnBluesky.textContent = 'Like this post on Bluesky to see your face here';
 
       // Clear existing content and append new elements
@@ -238,13 +256,15 @@ const { blueskyPostURI } = Astro.props;
     
     private renderEmptyLikes() {
       if (!this.likesContainer) return;
+      this.likesContainer.setAttribute('aria-busy', 'false');
       
       this.likesContainer.innerHTML = `
         <h4 class="text-lg font-medium mb-2">0 Likes</h4>
-        <p class="text-gray-400">Be the first to like this post on Bluesky!</p>
-        <a class="text-sm text-blue-400 hover:underline mt-2 block" 
-           href="https://bsky.app/profile/${IDENTIFIER}/post/${this.postURI?.split('/').pop()}" 
-           target="_blank">
+        <p class="text-text-muted">Be the first to like this post on Bluesky!</p>
+        <a class="text-sm text-primary hover:underline mt-2 block"
+           href="https://bsky.app/profile/${IDENTIFIER}/post/${this.postURI?.split('/').pop()}"
+           target="_blank"
+           rel="noopener noreferrer">
           Like this post on Bluesky
         </a>
       `;
@@ -252,6 +272,7 @@ const { blueskyPostURI } = Astro.props;
     
     private renderComments(comments: any[]) {
       if (!this.commentsContainer) return;
+      this.commentsContainer.setAttribute('aria-busy', 'false');
       
       const commentsWrapper = this.commentsContainer.querySelector('.comments-container');
       if (!commentsWrapper) return;
@@ -267,7 +288,7 @@ const { blueskyPostURI } = Astro.props;
       // Create comment elements
       sortedComments.forEach(comment => {
         const commentEl = document.createElement('div');
-        commentEl.className = 'comment bg-gray-800 bg-opacity-50 rounded-lg p-4 mb-3 w-full';
+        commentEl.className = 'comment bg-surface rounded-lg border border-line p-4 mb-3 w-full';
         
         // Comment header with author info
         const commentHeader = document.createElement('div');
@@ -279,9 +300,11 @@ const { blueskyPostURI } = Astro.props;
         
         // Author avatar
         const authorAvatar = document.createElement('img');
-        authorAvatar.className = 'w-6 h-6 rounded-full border border-gray-700 mr-2';
+        authorAvatar.className = 'w-6 h-6 rounded-full border border-line mr-2';
         authorAvatar.width = 24;
         authorAvatar.height = 24;
+        authorAvatar.loading = 'lazy';
+        authorAvatar.decoding = 'async';
         authorAvatar.src = comment.actor.avatar?.replace("avatar", "avatar_thumbnail") || 'https://bsky.social/static/default-avatar.webp';
         authorAvatar.alt = `${comment.actor.displayName || comment.actor.handle}'s avatar`;
         
@@ -297,7 +320,7 @@ const { blueskyPostURI } = Astro.props;
         
         // Timestamp
         const timestamp = document.createElement('span');
-        timestamp.className = 'text-gray-500 text-xs mt-1 w-full md:w-auto md:mt-0 md:ml-auto';
+        timestamp.className = 'text-text-muted text-xs mt-1 w-full md:w-auto md:mt-0 md:ml-auto';
         
         // Format timestamp
         const date = new Date(comment.createdAt);
@@ -315,9 +338,10 @@ const { blueskyPostURI } = Astro.props;
         
         // Create "View on Bluesky" link
         const viewLink = document.createElement('a');
-        viewLink.className = 'text-xs text-blue-400 hover:underline mt-2 inline-block';
+        viewLink.className = 'text-xs text-primary hover:underline mt-2 inline-block';
         viewLink.href = `https://bsky.app/profile/${comment.actor.handle}/post/${comment.uri.split('/').pop()}`;
         viewLink.target = '_blank';
+        viewLink.rel = 'noopener noreferrer';
         viewLink.textContent = 'View on Bluesky';
         
         // Assemble comment element
@@ -338,15 +362,17 @@ const { blueskyPostURI } = Astro.props;
     
     private renderEmptyComments() {
       if (!this.commentsContainer) return;
+      this.commentsContainer.setAttribute('aria-busy', 'false');
       
       const commentsWrapper = this.commentsContainer.querySelector('.comments-container');
       if (!commentsWrapper) return;
       
       commentsWrapper.innerHTML = `
-        <p class="text-gray-400">No comments yet</p>
-        <a class="text-sm text-blue-400 hover:underline mt-2 block" 
-           href="https://bsky.app/profile/${IDENTIFIER}/post/${this.postURI?.split('/').pop()}" 
-           target="_blank">
+        <p class="text-text-muted">No comments yet</p>
+        <a class="text-sm text-primary hover:underline mt-2 block"
+           href="https://bsky.app/profile/${IDENTIFIER}/post/${this.postURI?.split('/').pop()}"
+           target="_blank"
+           rel="noopener noreferrer">
           Comment on this post on Bluesky
         </a>
       `;
@@ -354,16 +380,18 @@ const { blueskyPostURI } = Astro.props;
 
     private renderLikesError() {
       if (!this.likesContainer) return;
-      this.likesContainer.innerHTML = '<p class="text-gray-400">Unable to load likes</p>';
+      this.likesContainer.setAttribute('aria-busy', 'false');
+      this.likesContainer.innerHTML = '<p class="text-text-muted">Unable to load likes</p>';
     }
     
     private renderCommentsError() {
       if (!this.commentsContainer) return;
+      this.commentsContainer.setAttribute('aria-busy', 'false');
       
       const commentsWrapper = this.commentsContainer.querySelector('.comments-container');
       if (!commentsWrapper) return;
       
-      commentsWrapper.innerHTML = '<p class="text-gray-400">Unable to load comments</p>';
+      commentsWrapper.innerHTML = '<p class="text-text-muted">Unable to load comments</p>';
     }
   }
 
@@ -385,50 +413,14 @@ const { blueskyPostURI } = Astro.props;
     to { transform: rotate(360deg); }
   }
   
-  /* Fixed position container to prevent side-to-side movement */
   #bluesky-comments {
-    overflow-x: hidden; /* Prevent horizontal scrolling at the component level */
     position: relative;
     width: 100%;
   }
   
-  /* Comment container with improved scrolling stability */
   .comments-container {
-    max-height: 500px;
-    overflow-y: auto;
-    scrollbar-width: none; /* Hide Firefox scrollbar */
     width: 100%;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    overscroll-behavior: contain; /* Prevent scroll chaining */
     position: relative;
-    margin-right: -20px; /* Create space for the custom scrollbar */
-    padding-right: 20px; /* Add padding to offset the negative margin */
-  }
-  
-  /* Hide webkit scrollbars */
-  .comments-container::-webkit-scrollbar {
-    width: 0;
-    background: transparent; /* Hide the scrollbar but allow scrolling */
-    display: none;
-  }
-  
-  /* Custom scrollbar that doesn't take up layout space */
-  .comments-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 6px;
-    width: 3px;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 3px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-  }
-  
-  .comments-container:hover::after {
-    opacity: 1;
   }
   
   /* Fix for horizontal overflow in comments */
@@ -465,13 +457,11 @@ const { blueskyPostURI } = Astro.props;
     
     .comments-container {
       margin-right: 0;
-      padding-right: 12px;
       width: 100%;
-      overflow-x: hidden;
     }
     
     .comment {
-      width: calc(100% - 6px);
+      width: 100%;
     }
   }
 </style>

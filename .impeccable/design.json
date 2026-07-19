@@ -1,0 +1,334 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-19T18:30:59.303Z",
+  "title": "Design System: Ashley.dev",
+  "extensions": {
+    "colorMeta": {
+      "signal-rose": {
+        "role": "primary",
+        "displayName": "Signal Rose",
+        "canonical": "oklch(64.5% 0.246 16.439)",
+        "tonalRamp": [
+          "oklch(20% 0.08 16.439)",
+          "oklch(30% 0.12 16.439)",
+          "oklch(40% 0.16 16.439)",
+          "oklch(52% 0.21 16.439)",
+          "oklch(64.5% 0.246 16.439)",
+          "oklch(74% 0.19 16.439)",
+          "oklch(84% 0.12 16.439)",
+          "oklch(94% 0.04 16.439)"
+        ]
+      },
+      "night-canvas": {
+        "role": "neutral",
+        "displayName": "Night Canvas",
+        "canonical": "oklch(0% 0 0)",
+        "tonalRamp": [
+          "oklch(0% 0 0)",
+          "oklch(15% 0 0)",
+          "oklch(28% 0 0)",
+          "oklch(42% 0 0)",
+          "oklch(56% 0 0)",
+          "oklch(70% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(96% 0 0)"
+        ]
+      },
+      "code-charcoal": {
+        "role": "neutral",
+        "displayName": "Code Charcoal",
+        "canonical": "oklch(18.2% 0 0)",
+        "tonalRamp": [
+          "oklch(12% 0 0)",
+          "oklch(18.2% 0 0)",
+          "oklch(30% 0 0)",
+          "oklch(43% 0 0)",
+          "oklch(57% 0 0)",
+          "oklch(71% 0 0)",
+          "oklch(85% 0 0)",
+          "oklch(96% 0 0)"
+        ]
+      },
+      "interface-graphite": {
+        "role": "neutral",
+        "displayName": "Interface Graphite",
+        "canonical": "oklch(21% 0.034 264.665)",
+        "tonalRamp": [
+          "oklch(15% 0.02 264.665)",
+          "oklch(21% 0.034 264.665)",
+          "oklch(33% 0.034 264.665)",
+          "oklch(46% 0.03 264.665)",
+          "oklch(59% 0.025 264.665)",
+          "oklch(72% 0.02 264.665)",
+          "oklch(85% 0.012 264.665)",
+          "oklch(96% 0.004 264.665)"
+        ]
+      },
+      "rail-gray": {
+        "role": "neutral",
+        "displayName": "Rail Gray",
+        "canonical": "oklch(55.1% 0.027 264.364)",
+        "tonalRamp": [
+          "oklch(16% 0.018 264.364)",
+          "oklch(28% 0.024 264.364)",
+          "oklch(40% 0.027 264.364)",
+          "oklch(55.1% 0.027 264.364)",
+          "oklch(66% 0.022 264.364)",
+          "oklch(77% 0.017 264.364)",
+          "oklch(87% 0.011 264.364)",
+          "oklch(96% 0.004 264.364)"
+        ]
+      },
+      "divider-gray": {
+        "role": "neutral",
+        "displayName": "Divider Gray",
+        "canonical": "oklch(44.6% 0.03 256.802)",
+        "tonalRamp": [
+          "oklch(16% 0.018 256.802)",
+          "oklch(27% 0.024 256.802)",
+          "oklch(36% 0.028 256.802)",
+          "oklch(44.6% 0.03 256.802)",
+          "oklch(58% 0.026 256.802)",
+          "oklch(71% 0.02 256.802)",
+          "oklch(84% 0.012 256.802)",
+          "oklch(95% 0.004 256.802)"
+        ]
+      },
+      "strong-white": {
+        "role": "neutral",
+        "displayName": "Strong White",
+        "canonical": "oklch(100% 0 0)",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(28% 0 0)",
+          "oklch(42% 0 0)",
+          "oklch(56% 0 0)",
+          "oklch(70% 0 0)",
+          "oklch(82% 0 0)",
+          "oklch(92% 0 0)",
+          "oklch(100% 0 0)"
+        ]
+      },
+      "soft-white": {
+        "role": "neutral",
+        "displayName": "Soft White",
+        "canonical": "oklch(96.7% 0.003 264.542)",
+        "tonalRamp": [
+          "oklch(15% 0.003 264.542)",
+          "oklch(28% 0.003 264.542)",
+          "oklch(42% 0.003 264.542)",
+          "oklch(56% 0.003 264.542)",
+          "oklch(70% 0.003 264.542)",
+          "oklch(82% 0.003 264.542)",
+          "oklch(91% 0.003 264.542)",
+          "oklch(96.7% 0.003 264.542)"
+        ]
+      },
+      "body-gray": {
+        "role": "neutral",
+        "displayName": "Body Gray",
+        "canonical": "oklch(87.2% 0.01 258.338)",
+        "tonalRamp": [
+          "oklch(15% 0.01 258.338)",
+          "oklch(27% 0.01 258.338)",
+          "oklch(39% 0.01 258.338)",
+          "oklch(52% 0.01 258.338)",
+          "oklch(65% 0.01 258.338)",
+          "oklch(76% 0.01 258.338)",
+          "oklch(87.2% 0.01 258.338)",
+          "oklch(95% 0.006 258.338)"
+        ]
+      },
+      "muted-gray": {
+        "role": "neutral",
+        "displayName": "Muted Gray",
+        "canonical": "oklch(71.4% 0.019 261.325)",
+        "tonalRamp": [
+          "oklch(15% 0.015 261.325)",
+          "oklch(26% 0.019 261.325)",
+          "oklch(38% 0.019 261.325)",
+          "oklch(50% 0.019 261.325)",
+          "oklch(61% 0.019 261.325)",
+          "oklch(71.4% 0.019 261.325)",
+          "oklch(84% 0.012 261.325)",
+          "oklch(95% 0.004 261.325)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Article titles and the largest page-level statements."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Major content sections and primary page headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Project, talk, post, and card titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default interface and long-form copy."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Tabs, tags, metadata, and compact controls."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shell-ambient",
+        "value": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+        "purpose": "The outer site and article frame only."
+      },
+      {
+        "name": "utility-low",
+        "value": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+        "purpose": "Back links, table-of-contents panels, and comparable article utilities."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-fast",
+        "value": "150ms ease-in-out",
+        "purpose": "Compact control hover and selected-state feedback."
+      },
+      {
+        "name": "state-standard",
+        "value": "200ms ease-in-out",
+        "purpose": "Navigation, border, and background state changes."
+      },
+      {
+        "name": "content-reveal",
+        "value": "600ms ease-out",
+        "purpose": "Optional article entrance; disabled when reduced motion is requested."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "xs",
+        "value": "480px"
+      },
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      },
+      {
+        "name": "2xl",
+        "value": "1536px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "The default text action for reading, navigation, and secondary calls to action.",
+      "html": "<button class=\"ds-button-outline\">Read more</button>",
+      "css": ".ds-button-outline { appearance: none; background: #000; color: #f3f4f6; border: 1px solid #6b7280; border-radius: 0.5rem; padding: 0.625rem 1rem; font: 400 1rem/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; transition: color 150ms ease-in-out, border-color 150ms ease-in-out; } .ds-button-outline:hover { color: var(--color-primary, #f43f5e); border-color: var(--color-primary, #f43f5e); } .ds-button-outline:focus-visible { outline: 2px solid var(--color-primary, #f43f5e); outline-offset: 2px; }"
+    },
+    {
+      "name": "Accent Button",
+      "kind": "button",
+      "refersTo": "button-accent",
+      "description": "A selected or highest-priority action using the full Signal Rose fill.",
+      "html": "<button class=\"ds-button-accent\">All posts</button>",
+      "css": ".ds-button-accent { appearance: none; background: var(--color-primary, #f43f5e); color: #000; border: 1px solid var(--color-primary, #f43f5e); border-radius: 0.5rem; padding: 0.625rem 1rem; font: 400 1rem/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; transition: filter 150ms ease-in-out; } .ds-button-accent:hover { filter: brightness(1.08); } .ds-button-accent:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "filter-chip",
+      "description": "A compact tag or filter control that uses fill only for selection.",
+      "html": "<button class=\"ds-filter-chip\" aria-pressed=\"false\">#devrel</button>",
+      "css": ".ds-filter-chip { appearance: none; background: #000; color: #f3f4f6; border: 1px solid #6b7280; border-radius: 0.5rem; padding: 0.25rem 0.5rem; font: 400 0.75rem/1rem ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; transition: background 150ms ease-in-out, color 150ms ease-in-out, transform 150ms ease-in-out; } .ds-filter-chip:hover, .ds-filter-chip[aria-pressed=\"true\"] { background: var(--color-primary, #f43f5e); color: #000; } .ds-filter-chip:hover { transform: translateY(-2px); } .ds-filter-chip:focus-visible { outline: 2px solid var(--color-primary, #f43f5e); outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-filter-chip { transition: none; } .ds-filter-chip:hover { transform: none; } }"
+    },
+    {
+      "name": "Content Card",
+      "kind": "card",
+      "refersTo": "content-card",
+      "description": "A flat bordered utility panel; primary content collections use divider-led lists instead.",
+      "html": "<article class=\"ds-content-card\"><h3>Developer Relations strategy</h3><p>Concrete work and ideas, framed without decorative depth.</p><a href=\"#\">View details</a></article>",
+      "css": ".ds-content-card { background: #000; color: #d1d5db; border: 1px solid #4b5563; border-radius: 0.5rem; padding: 1.5rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; } .ds-content-card h3 { margin: 0 0 0.5rem; color: #fff; font-size: 1.25rem; line-height: 1.4; } .ds-content-card p { margin: 0 0 1rem; line-height: 1.75; } .ds-content-card a { color: #f3f4f6; text-decoration: none; } .ds-content-card a:hover { color: var(--color-primary, #f43f5e); } .ds-content-card a:focus-visible { outline: 2px solid var(--color-primary, #f43f5e); outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "text-field",
+      "description": "A dark utility field for copyable links and compact form input.",
+      "html": "<label class=\"ds-field-label\" for=\"ds-feed-url\">RSS feed</label><input class=\"ds-text-field\" id=\"ds-feed-url\" value=\"https://ashley.dev/rss.xml\" readonly>",
+      "css": ".ds-field-label { display: block; margin-bottom: 0.5rem; color: #d1d5db; font: 400 0.75rem/1rem ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; } .ds-text-field { width: min(100%, 32rem); background: #111827; color: #f3f4f6; border: 1px solid #6b7280; border-radius: 0.375rem; padding: 0.5rem 0.75rem; font: 400 1rem/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; } .ds-text-field:focus-visible { border-color: var(--color-primary, #f43f5e); outline: 2px solid var(--color-primary, #f43f5e); outline-offset: 2px; }"
+    },
+    {
+      "name": "Tab Navigation",
+      "kind": "nav",
+      "refersTo": "site-shell",
+      "description": "The sticky file-oriented destination rail with a rose active indicator.",
+      "html": "<nav class=\"ds-tab-nav\" aria-label=\"Primary\"><a class=\"ds-tab is-active\" href=\"#\" aria-current=\"page\">about.ts</a><a class=\"ds-tab\" href=\"#\">projects.md</a><a class=\"ds-tab\" href=\"#\">speaking.md</a><a class=\"ds-tab\" href=\"#\">blog.md</a></nav>",
+      "css": ".ds-tab-nav { display: flex; overflow-x: auto; background: #000; border: 1px solid #6b7280; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; } .ds-tab { flex: 1 0 auto; min-width: 6rem; padding: 0.5rem; color: #f3f4f6; border-right: 1px solid #6b7280; border-bottom: 2px solid transparent; text-align: center; text-decoration: none; font-size: 0.75rem; } .ds-tab:last-child { border-right: 0; } .ds-tab:hover { color: var(--color-primary, #f43f5e); } .ds-tab.is-active { color: var(--color-primary, #f43f5e); border-bottom-color: var(--color-primary, #f43f5e); } .ds-tab:focus-visible { outline: 2px solid var(--color-primary, #f43f5e); outline-offset: -3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Human-Readable Source",
+    "overview": "Ashley.dev is a high-contrast, content-first personal site that treats technical fluency as a language, not a costume. A true-black canvas, a single rose signal color, and structural gray borders create a precise frame for the real evidence: Ashley's work, writing, talks, and point of view.\n\nThe terminal window, file-oriented navigation, command prompt, and code-shaped biography are intentional brand devices. Future additions should strengthen that language through useful content and coherent interaction rather than replacing it or piling on unrelated technical decoration. The system should feel candid, humane, and technically credible because the metaphor helps visitors understand Ashley.",
+    "keyCharacteristics": [
+      "True-black, high-contrast surfaces with one unmistakable signal color.",
+      "Structural borders and compact spacing instead of decorative layers.",
+      "Direct, content-led hierarchy that makes evidence easy to scan.",
+      "Monospace and terminal framing as deliberate identity, kept useful rather than ornamental.",
+      "Restrained motion that clarifies state and respects reduced-motion preferences."
+    ],
+    "rules": [
+      {
+        "name": "The Signal, Not Wallpaper Rule",
+        "body": "Signal Rose marks identity, action, selection, and focus; it never becomes a decorative gradient or ambient glow.",
+        "section": "colors"
+      },
+      {
+        "name": "The Syntax Is Content Rule",
+        "body": "Terminal prompts, filenames, and code-shaped content are welcome when they reveal real information, clarify navigation, or carry Ashley's voice; decorative noise that does none of those things is forbidden.",
+        "section": "typography"
+      },
+      {
+        "name": "The Frame Before Float Rule",
+        "body": "Use a one-pixel border before adding shadow; never stack cards or add decorative glass surfaces to manufacture depth.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Border Carries State Rule",
+        "body": "Use Signal Rose on text, border, and focus to communicate interaction; never rely on lift, hover, or color alone.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do use Signal Rose for active state, focus, meaningful links, and concise emphasis against Night Canvas.",
+      "Do use the terminal frame, command language, filenames, and code-shaped content as recognizable navigation and storytelling devices.",
+      "Do let concrete projects, talks, writing, and experience establish credibility before adding promotional copy.",
+      "Do keep body copy at 65-75ch when a page becomes long-form, with at least a 1.75 line height on the dark canvas.",
+      "Do preserve complete keyboard access, visible focus, semantic landmarks, and reduced-motion behavior in every component.",
+      "Do use one-pixel borders and deliberate spacing before introducing additional surfaces or shadow."
+    ],
+    "donts": [
+      "Don't dilute the intentional terminal structure with noisy boot sequences, meaningless command output, or technical decoration that obscures real content.",
+      "Don't introduce generic SaaS landing-page patterns, inflated self-promotion, or corporate executive-bio language.",
+      "Don't use Signal Rose as gradient text, decorative glow, or a colored side-stripe border on cards, callouts, or alerts.",
+      "Don't nest cards, use glassmorphism as decoration, or repeat identical icon-heading-copy card grids.",
+      "Don't hide content until an animation runs, and never ship motion without a `prefers-reduced-motion` alternative."
+    ]
+  }
+}

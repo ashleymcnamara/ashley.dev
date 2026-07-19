@@ -92,10 +92,10 @@ const hasBlueskyURI =
 	entry.data.blueskyPostURI.trim() !== '';
 ---
 
-<Layout title={entry.data.title}>
+<Layout title={entry.data.title} description={socialPreview}>
 	<Fragment slot="head">
 		<!-- Start: Facebook open graph -->
-		<meta property="og:title" content="Ashley Willis" />
+		<meta property="og:title" content={entry.data.title} />
 		<meta property="og:description" content={socialPreview} />
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:type" content="article" />
@@ -106,17 +106,13 @@ const hasBlueskyURI =
 
 		<!-- Start: Twitter card -->
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content="Ashley Willis" />
+		<meta name="twitter:title" content={entry.data.title} />
 		<meta name="twitter:description" content={socialPreview} />
 		<meta name="twitter:image" content={ogImageUrl} />
 		<meta name="twitter:site" content="@ashleymcnamara" />
 		<meta name="twitter:creator" content="@ashleymcnamara" />
 		<!-- End: Twitter card -->
 
-		 <!-- Replace the standard title tag with a non-empty but minimal title
-		     This prevents platforms from falling back to extracting text from the page content -->
-		<title>{entry.data.title}</title>
-		
 		<!-- SEO metadata (won't affect social previews but keeps your SEO intact) -->
 		<meta name="description" content={socialPreview} />
 		<meta name="keywords" content={keywordsString} />
@@ -149,11 +145,12 @@ const hasBlueskyURI =
 	</Fragment>
 
 	<!-- Reading Progress Bar -->
-	<div id="progress-bar" class="reading-progress-bar"></div>
+	<div id="progress-bar" class="reading-progress-bar" aria-hidden="true"></div>
+	<p id="post-status" class="sr-only" role="status" aria-live="polite"></p>
 
 	<!-- Start: Main Wrapper -->
 	<main
-		class="flex flex-col w-full max-w-full md:max-w-7xl border border-gray-600 rounded-2xl overflow-hidden shadow-2xl relative bg-black mb-6 mx-auto blog-post"
+		class="flex flex-col w-full max-w-full md:max-w-7xl border border-line-strong rounded-2xl overflow-hidden shadow-2xl relative bg-canvas mb-6 mx-auto blog-post"
 	>
 		<!-- Start: Content Area -->
 		<div class="w-full p-0">
@@ -161,12 +158,12 @@ const hasBlueskyURI =
 			<div class="min-h-full flex flex-col">
 				<!-- Start: Header bar (similar to the tab bar in home) -->
 				<div
-					class="flex flex-col bg-black border-b border-gray-600 sticky top-0 z-10 p-4 backdrop-blur-md bg-opacity-90"
+					class="flex flex-col bg-canvas border-b border-line-strong sticky top-0 z-10 p-4 backdrop-blur-md bg-opacity-90"
 				>
 					<div class="flex-grow">
 						<a
 							href="/blog"
-							class="px-4 py-2.5 border border-gray-600 rounded-lg hover:text-primary hover:border-primary transition-all duration-300 inline-block mb-4 back-button"
+							class="inline-flex min-h-11 items-center px-4 py-2.5 border border-line-strong rounded-lg hover:text-primary hover:border-primary transition-colors duration-300 mb-4 back-button"
 						>
 							&larr; Back to Blog
 						</a>
@@ -178,13 +175,13 @@ const hasBlueskyURI =
 				<!-- End: Header bar -->
 
 				<!-- Start: Post content -->
-				<div class="p-6 flex-grow overflow-y-auto bg-black">
+				<div class="p-6 flex-grow bg-canvas">
 					<article>
 						<div class="flex flex-wrap items-center gap-3 mb-8 meta-info">
-							<p class="text-gray-400">{formattedDate}</p>
+							<p class="text-text-muted">{formattedDate}</p>
 
 							<!-- Reading Time -->
-							<p class="text-gray-400 flex items-center">
+							<p class="text-text-muted flex items-center">
 								<span class="inline-block mr-1">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -207,18 +204,18 @@ const hasBlueskyURI =
 							<div class="flex flex-wrap gap-2">
 								{
 									entry.data.tags?.map((tag: string) => (
-										<span
-											class="inline-flex items-center justify-center px-3 py-1 text-xs rounded-full bg-black text-gray-100 cursor-pointer transition-all duration-300 border border-gray-600 hover:bg-primary hover:-translate-y-1 hover:text-white tag-link"
-											data-tag={tag}
+										<a
+											href={`/blog?tag=${encodeURIComponent(tag)}`}
+											class="inline-flex min-h-9 items-center justify-center px-3 py-1 text-xs rounded-full bg-canvas text-text-primary transition-[color,background-color,border-color,transform] duration-300 border border-line-strong hover:bg-primary hover:-translate-y-1 hover:text-black"
 										>
 											#{tag}
-										</span>
+										</a>
 									))
 								}
 							</div>
 						</div>
 
-						<div class="prose prose-invert max-w-none post-content">
+						<div class="prose prose-invert post-content">
 							<Content />
 						</div>
 
@@ -247,27 +244,27 @@ const hasBlueskyURI =
 		// Reading progress bar functionality
 		const progressBar = document.getElementById('progress-bar');
 		let totalHeight = document.body.scrollHeight - window.innerHeight;
+		let progressFrame: number | null = null;
 
-		// Recalculate height on window resize
-		window.addEventListener('resize', () => {
+		const updateProgress = () => {
 			totalHeight = document.body.scrollHeight - window.innerHeight;
-		});
+			const progress = totalHeight > 0
+				? Math.min(window.scrollY / totalHeight, 1)
+				: 0;
+			if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
+			progressFrame = null;
+		};
 
-		// Recalculate after images and other resources load
-		window.addEventListener('load', () => {
-			totalHeight = document.body.scrollHeight - window.innerHeight;
-		});
-
-		window.addEventListener('scroll', () => {
-			// Make sure we have the most accurate height measurement
-			const currentHeight = document.body.scrollHeight - window.innerHeight;
-			if (currentHeight !== totalHeight) {
-				totalHeight = currentHeight;
+		const scheduleProgressUpdate = () => {
+			if (progressFrame === null) {
+				progressFrame = window.requestAnimationFrame(updateProgress);
 			}
+		};
 
-			const progress = Math.min((window.scrollY / totalHeight) * 100, 100);
-			if (progressBar) progressBar.style.width = `${progress}%`;
-		});
+		window.addEventListener('resize', scheduleProgressUpdate);
+		window.addEventListener('load', scheduleProgressUpdate);
+		window.addEventListener('scroll', scheduleProgressUpdate, { passive: true });
+		scheduleProgressUpdate();
 
 		// Add click listeners to the Table of Contents links for smooth scrolling
 		const tocLinks = document.querySelectorAll('.toc-link');
@@ -278,9 +275,11 @@ const hasBlueskyURI =
 				if (targetId && targetId.startsWith('#')) {
 					const targetElement = document.querySelector(targetId);
 					if (targetElement) {
-						// Smooth scroll to the target element
+						const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+							? 'auto'
+							: 'smooth';
 						targetElement.scrollIntoView({
-							behavior: 'smooth',
+							behavior,
 							block: 'start',
 						});
 
@@ -309,9 +308,13 @@ const hasBlueskyURI =
 					navigator.clipboard
 						.writeText(window.location.href)
 						.then(() => {
+							const status = document.getElementById('post-status');
+							if (status) status.textContent = 'Link copied to clipboard.';
+
 							// Show a small toast notification
 							const toast = document.createElement('div');
 							toast.textContent = 'Link copied to clipboard!';
+							toast.setAttribute('aria-hidden', 'true');
 							toast.style.position = 'fixed';
 							toast.style.bottom = '20px';
 							toast.style.right = '20px';
@@ -319,7 +322,7 @@ const hasBlueskyURI =
 							toast.style.color = 'white';
 							toast.style.padding = '10px 15px';
 							toast.style.borderRadius = '4px';
-							toast.style.zIndex = '9999';
+							toast.style.zIndex = '50';
 							toast.style.animation = 'fadeIn 0.3s, fadeOut 0.3s 2s forwards';
 
 							document.body.appendChild(toast);
@@ -331,6 +334,8 @@ const hasBlueskyURI =
 						})
 						.catch((err) => {
 							console.error('Could not copy link: ', err);
+							const status = document.getElementById('post-status');
+							if (status) status.textContent = 'Unable to copy the link.';
 						});
 				}
 			});
@@ -346,18 +351,6 @@ const hasBlueskyURI =
 					link.classList.remove('visible');
 				});
 			}
-		});
-
-		const tagLinks = document.querySelectorAll('.tag-link');
-
-		tagLinks.forEach((link) => {
-			link.addEventListener('click', () => {
-				// Extract tag name from the data attribute
-				const tagName = link.getAttribute('data-tag');
-
-				// Navigate to blog page with tag as query parameter
-				window.location.href = `/blog?tag=${tagName}`;
-			});
 		});
 
 		// Add functionality for the back button to remember which referrer it came from
@@ -384,80 +377,6 @@ const hasBlueskyURI =
 			}
 		}
 
-		// Force all links in blog content to be the primary color
-		const primaryColor =
-			getComputedStyle(document.documentElement)
-				.getPropertyValue('--color-primary')
-				.trim() || '#F43F5E';
-		const postLinks = document.querySelectorAll('.post-content a, .prose a');
-
-		postLinks.forEach((link) => {
-			// Cast to HTMLElement to access style property
-			const htmlLink = link as HTMLElement;
-			htmlLink.style.color = primaryColor;
-			htmlLink.style.textDecoration = 'none';
-
-			// Add event listener to recreate the hover effect from CSS
-			link.addEventListener('mouseenter', (e) => {
-				const target = e.target as HTMLElement;
-				target.style.opacity = '0.9';
-			});
-
-			link.addEventListener('mouseleave', (e) => {
-				const target = e.target as HTMLElement;
-				target.style.opacity = '1';
-			});
-		});
-
-		// DIRECT STYLING FOR HEADINGS: Force all headings to be pink
-		const allHeadings = document.querySelectorAll(
-			'.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6',
-		);
-		allHeadings.forEach((heading) => {
-			(heading as HTMLElement).style.color = primaryColor;
-		});
-
-		// Set up a mutation observer to handle dynamically loaded content
-		const observer = new MutationObserver((mutations) => {
-			mutations.forEach((mutation) => {
-				if (mutation.type === 'childList') {
-					const newHeadings = document.querySelectorAll(
-						'.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6',
-					);
-					newHeadings.forEach((heading) => {
-						(heading as HTMLElement).style.color = primaryColor;
-					});
-				}
-			});
-		});
-
-		// Start observing the document with the configured parameters
-		observer.observe(document.body, { childList: true, subtree: true });
-
-		// Style bullet points using direct DOM manipulation (more reliable than CSS for Tailwind overrides)
-		function styleBulletPoints() {
-			// Create a style element
-			const style = document.createElement('style');
-			// Add CSS rule with !important to override any existing styles
-			style.innerHTML = `
-				.prose ul li::marker, 
-				.post-content ul li::marker,
-				li::marker {
-					color: #F43F5E !important;
-				}
-			`;
-			// Append to document head
-			document.head.appendChild(style);
-
-			// For browsers that might not fully support ::marker, apply inline styles to list items
-			document.querySelectorAll('.prose ul li, .post-content ul li').forEach(li => {
-				// Force the bullet color through direct styling
-				li.style.setProperty('--marker-color', '#F43F5E');
-			});
-		}
-
-		// Apply the bullet point styling
-		styleBulletPoints();
 	});
 </script>
 
@@ -469,14 +388,12 @@ const hasBlueskyURI =
 		left: 0;
 		height: 3px;
 		background-color: var(--color-primary, #f43f5e);
-		width: 0%;
+		width: 100%;
+		transform: scaleX(0);
+		transform-origin: left;
 		z-index: 100;
-		transition: width 0.1s ease;
-	}
-
-	/* Enhanced styling for blog content */
-	.blog-post {
-		transition: all 0.3s ease-in-out;
+		transition: transform 0.1s linear;
+		will-change: transform;
 	}
 
 	.post-title {
@@ -500,11 +417,14 @@ const hasBlueskyURI =
 	}
 
 	.post-content {
-		color: #f8f8f8;
+		width: 100%;
+		max-width: 72ch;
+		margin-inline: auto;
+		color: var(--color-text-primary);
 		font-size: 1.05rem;
 		line-height: 1.8;
 		letter-spacing: 0.01em;
-		word-spacing: -2px; /* Changed to -2px to decrease spacing between words */
+		text-wrap: pretty;
 	}
 
 	.post-content p {
@@ -520,7 +440,7 @@ const hasBlueskyURI =
 		color: var(--color-primary, #f43f5e) !important;
 		text-decoration: none;
 		position: relative;
-		transition: all 0.2s ease;
+		transition: color 0.2s ease, opacity 0.2s ease;
 	}
 
 	.prose a:hover {
@@ -579,11 +499,10 @@ const hasBlueskyURI =
 	}
 
 	.prose blockquote {
-		border-left: 4px solid var(--color-primary, #f43f5e);
-		padding-left: 1rem;
+		border: 1px solid var(--color-line);
 		font-style: italic;
 		margin: 1.5rem 0;
-		color: #d1d5db;
+		color: var(--color-text-secondary);
 		background: rgba(255, 255, 255, 0.05);
 		padding: 1rem;
 		border-radius: 0.25rem;
@@ -610,6 +529,7 @@ const hasBlueskyURI =
 			--color-primary,
 			#f43f5e
 		) !important; /* Added !important to ensure override */
+		text-wrap: balance;
 	}
 
 	.prose h1,
@@ -651,7 +571,7 @@ const hasBlueskyURI =
 	/* Table of Contents Styles */
 	.toc-container {
 		background: rgba(0, 0, 0, 0.2);
-		border: 1px solid rgba(255, 255, 255, 0.1);
+		border: 1px solid var(--color-line);
 		border-radius: 0.5rem;
 		padding: 1.5rem;
 		margin: 2rem 0;
@@ -699,12 +619,12 @@ const hasBlueskyURI =
 	}
 
 	.toc-link {
-		color: #d1d5db !important;
+		color: var(--color-text-secondary) !important;
 		text-decoration: none !important;
 		position: relative;
 		display: inline-flex;
 		align-items: center;
-		transition: all 0.2s ease;
+		transition: color 0.2s ease, transform 0.2s ease;
 	}
 
 	.toc-link:hover {
@@ -743,12 +663,17 @@ const hasBlueskyURI =
 	}
 
 	.heading-custom:hover .anchor-link,
+	.heading-custom:focus-within .anchor-link,
 	.anchor-link.visible {
 		opacity: 0.7;
 	}
 
 	.anchor-link:hover {
 		opacity: 1 !important;
+	}
+
+	.anchor-link:focus-visible {
+		opacity: 1;
 	}
 
 	.anchor-icon {
@@ -758,7 +683,7 @@ const hasBlueskyURI =
 
 	/* Callout box styles for important content */
 	.callout {
-		border-left: 4px solid var(--color-primary, #f43f5e);
+		border: 1px solid var(--color-primary, #f43f5e);
 		background: rgba(255, 255, 255, 0.05);
 		padding: 1.5rem;
 		margin: 2rem 0;
@@ -789,7 +714,7 @@ const hasBlueskyURI =
 	figcaption {
 		text-align: center;
 		font-style: italic;
-		color: #d1d5db;
+		color: var(--color-text-secondary);
 		font-size: 0.9em;
 		margin-top: 0.75rem;
 		opacity: 0.8;
@@ -813,7 +738,7 @@ const hasBlueskyURI =
 	.prose-invert ul li::marker,
 	article .prose ul li::marker,
 	.blog-post .prose ul li::marker,
-	div.prose-invert.max-w-none.post-content ul li::marker {
+	div.prose-invert.post-content ul li::marker {
 		color: var(--color-primary, #F43F5E) !important;
 	}
 
@@ -834,7 +759,7 @@ const hasBlueskyURI =
 		width: 1.5rem;
 		margin-right: 1rem;
 		text-align: right;
-		color: rgba(255, 255, 255, 0.4);
+		color: var(--color-text-muted);
 		user-select: none;
 	}
 </style>

@@ -3,28 +3,35 @@ import { projects } from '../data/projects';
 ---
 
 <div class="h-full">
-    <div class="grid grid-cols-1 gap-6 mb-10 projects-container">
-        {projects.map(project => (
-            <div class="flex flex-col justify-center items-start border border-gray-700 rounded-lg p-6 bg-black project-card">
+    <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-6">Projects</h1>
+
+    <div class="border-y border-line mb-10 projects-container">
+        {projects.map(project => {
+            const target = project.link?.target || '_blank';
+
+            return (
+            <article class="flex flex-col justify-center items-start py-6 border-b border-line last:border-b-0 project-entry">
                 <div class="w-full">
-                    <h3 class="text-xl font-semibold text-white mb-2">{project.name}</h3>
+                    <h2 class="text-xl font-semibold text-text-primary mb-2">{project.name}</h2>
                     {project.summary && (
                         <p class="text-sm text-primary">{project.summary}</p>
                     )}
                 </div>
-                <p class="text-gray-400 my-4">{project.description}</p>
+                <p class="text-text-muted my-4">{project.description}</p>
                 {project.link?.url && (
                     <a
                         href={project.link.url}
                         title={project.link.title || project.name}
-                        target={project.link.target || '_blank'}
-                        class="px-4 py-2.5 mt-2 text-center border border-gray-600 rounded-lg hover:text-primary hover:border-primary"
+                        target={target}
+                        rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+                        class="inline-flex min-h-11 items-center mt-1 text-primary hover:underline"
                     >
-                        {project.link.buttonLabel || 'Open Project Website'}
+                        {project.link.buttonLabel || 'Open Project Website'} <span aria-hidden="true" class="ml-2">→</span>
                     </a>
                 )}
-            </div>
-        ))}
+            </article>
+            );
+        })}
     </div>
 </div>
 
@@ -35,7 +42,7 @@ import { projects } from '../data/projects';
         padding-bottom: 1rem;
     }
     
-    .project-card {
+    .project-entry {
         height: auto;
     }
     
