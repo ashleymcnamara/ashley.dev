@@ -13,7 +13,14 @@ export default {
         },
         extend: {
             colors: {
-                primary: '#F43F5E'
+                primary: 'var(--color-primary)',
+                canvas: 'var(--color-canvas)',
+                surface: 'var(--color-surface)',
+                'text-primary': 'var(--color-text-primary)',
+                'text-secondary': 'var(--color-text-secondary)',
+                'text-muted': 'var(--color-text-muted)',
+                'line-strong': 'var(--color-line-strong)',
+                line: 'var(--color-line)',
             }
         }
     },

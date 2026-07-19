@@ -64,51 +64,57 @@ const pageDescription = 'Subscribe to ashley.dev\'s RSS feed to stay updated wit
 
 <Layout title={pageTitle} description={pageDescription}>
   <main class="max-w-4xl mx-auto px-4 py-10">
-    <h1 class="text-3xl md:text-4xl font-bold text-white mb-3">Subscribe to RSS Feed</h1>
-    <p class="text-lg text-gray-300 mb-8">
+    <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-3">Subscribe to RSS Feed</h1>
+    <p class="text-lg text-text-secondary mb-8">
       Stay updated with the latest content from ashley.dev by subscribing to the RSS feed using your favorite RSS reader.
     </p>
 
     <div class="mb-10">
-      <h2 class="text-2xl font-semibold text-white mb-6">Direct RSS Link</h2>
-      <div class="flex items-center space-x-3 bg-black border border-gray-700 p-4 rounded-lg">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
-          <path d="M4 11a9 9 0 0 1 9 9"></path>
-          <path d="M4 4a16 16 0 0 1 16 16"></path>
-          <circle cx="5" cy="19" r="1"></circle>
-        </svg>
-        <input 
-          type="text" 
-          value={rssUrl} 
-          readonly 
-          class="bg-gray-900 text-gray-200 flex-1 py-2 px-3 rounded-md border border-gray-700 focus:border-primary focus:outline-none"
-        />
-        <button 
-          id="copy-button" 
-          class="bg-gray-800 hover:bg-gray-700 text-gray-200 py-2 px-4 rounded-md border border-gray-700 transition-colors"
+      <h2 class="text-2xl font-semibold text-text-primary mb-6">Direct RSS Link</h2>
+      <label for="rss-url" class="block text-sm text-text-secondary mb-2">Feed URL</label>
+      <div class="flex flex-col sm:flex-row gap-3 bg-canvas border border-line-strong p-4 rounded-lg">
+        <div class="flex min-w-0 flex-1 items-center gap-3">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 text-primary">
+            <path d="M4 11a9 9 0 0 1 9 9"></path>
+            <path d="M4 4a16 16 0 0 1 16 16"></path>
+            <circle cx="5" cy="19" r="1"></circle>
+          </svg>
+          <input
+            id="rss-url"
+            type="text"
+            value={rssUrl}
+            readonly
+            class="min-w-0 w-full bg-surface text-text-secondary py-2 px-3 rounded-md border border-line-strong focus:border-primary"
+          />
+        </div>
+        <button
+          id="copy-button"
+          type="button"
+          class="min-h-11 w-full sm:w-auto bg-gray-800 hover:bg-gray-700 text-text-secondary py-2 px-4 rounded-md border border-line-strong transition-colors"
         >
           Copy
         </button>
       </div>
+      <p id="copy-status" class="sr-only" role="status" aria-live="polite"></p>
     </div>
 
     <div class="mb-10">
-      <details class="bg-black border border-gray-700 rounded-lg" open>
-        <summary class="flex justify-between items-center p-4 cursor-pointer text-2xl font-semibold text-white">
+      <details class="bg-canvas border border-line rounded-lg" open>
+        <summary class="flex min-h-11 justify-between items-center p-4 cursor-pointer text-2xl font-semibold text-text-primary">
           Web-based RSS Readers
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform summary-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </summary>
-        <div class="p-4 pt-0 border-t border-gray-700">
-          <p class="text-gray-400 mb-4">These readers work in your web browser and don't require any software installation.</p>
+        <div class="p-4 pt-0 border-t border-line">
+          <p class="text-text-muted mb-4">These readers work in your web browser and don't require any software installation.</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             {webBasedReaders.map((reader) => (
               <a 
                 href={reader.url} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                class="flex items-start p-4 bg-gray-900 border border-gray-700 rounded-lg hover:border-primary transition-all duration-200 group"
+                class="flex items-start p-4 bg-surface border border-line-strong rounded-lg hover:border-primary transition-colors duration-200 group"
                 style={`--hover-color: ${reader.color}`}
               >
                 <div class="w-10 h-10 mr-4 flex-shrink-0 bg-gray-800 rounded-lg flex items-center justify-center reader-icon">
@@ -124,9 +130,9 @@ const pageDescription = 'Subscribe to ashley.dev\'s RSS feed to stay updated wit
                 </div>
                 <div class="flex-1">
                   <div class="flex justify-between items-center">
-                    <h3 class="text-lg font-medium text-white">{reader.name}</h3>
+                    <h3 class="text-lg font-medium text-text-primary">{reader.name}</h3>
                   </div>
-                  <p class="text-sm text-gray-400">{reader.description}</p>
+                  <p class="text-sm text-text-muted">{reader.description}</p>
                 </div>
               </a>
             ))}
@@ -179,24 +185,29 @@ const pageDescription = 'Subscribe to ashley.dev\'s RSS feed to stay updated wit
   // Copy functionality for the RSS URL
   document.addEventListener('DOMContentLoaded', () => {
     const copyButton = document.getElementById('copy-button');
-    const urlInput = document.querySelector('input[readonly]') as HTMLInputElement;
+    const urlInput = document.getElementById('rss-url') as HTMLInputElement | null;
+    const copyStatus = document.getElementById('copy-status');
     
     if (copyButton && urlInput) {
-      copyButton.addEventListener('click', () => {
-        // Select the text field
-        urlInput.select();
-        urlInput.setSelectionRange(0, 99999); // For mobile devices
-        
-        // Copy the text inside the text field
-        navigator.clipboard.writeText(urlInput.value);
-        
-        // Update button text temporarily
+      copyButton.addEventListener('click', async () => {
         const originalText = copyButton.textContent;
-        copyButton.textContent = 'Copied!';
-        
-        setTimeout(() => {
-          copyButton.textContent = originalText;
-        }, 2000);
+
+        try {
+          await navigator.clipboard.writeText(urlInput.value);
+          copyButton.textContent = 'Copied!';
+          if (copyStatus) copyStatus.textContent = 'RSS feed URL copied to clipboard.';
+
+          setTimeout(() => {
+            copyButton.textContent = originalText;
+          }, 2000);
+        } catch (error) {
+          console.error('Unable to copy RSS URL:', error);
+          urlInput.focus();
+          urlInput.select();
+          if (copyStatus) {
+            copyStatus.textContent = 'Copy failed. The feed URL is selected so you can copy it manually.';
+          }
+        }
       });
     }
   });

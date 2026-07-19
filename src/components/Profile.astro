@@ -2,6 +2,12 @@
 import { Picture } from 'astro:assets';
 import ProfilePicture from '../assets/profile.png';
 
+interface Props {
+    isPrimaryHeading?: boolean;
+}
+
+const { isPrimaryHeading = false } = Astro.props;
+
 const profile = {
     name: 'Ashley Willis',
     title: 'Sr. Director of Developer Advocacy',
@@ -21,20 +27,25 @@ const profile = {
             height={96}
             alt={'Profile picture ' + profile.name}
             title={profile.name}
-            class="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover border-2 border-primary mx-auto sm:mx-0"
+            class="w-20 h-20 md:w-24 md:h-24 flex-shrink-0 rounded-xl object-cover border-2 border-primary mx-auto sm:mx-0"
         />
 
         <div>
-
-            <h1 class="text-xl md:text-2xl font-extrabold mb-1 inline-block relative text-text-primary">
-                {profile.name}
-            </h1>
+            {isPrimaryHeading ? (
+                <h1 class="text-xl md:text-2xl font-extrabold mb-1 inline-block relative text-text-primary">
+                    {profile.name}
+                </h1>
+            ) : (
+                <p class="text-xl md:text-2xl font-extrabold mb-1 inline-block relative text-text-primary">
+                    {profile.name}
+                </p>
+            )}
 
             <p class="text-sm mb-2 text-primary">
                 {profile.title}
             </p>
 
-            <p class="flex items-center justify-center sm:justify-start text-sm text-gray-400">
+            <p class="flex items-center justify-center sm:justify-start text-sm text-text-muted">
                 <svg class="-mt-0.5 inline mr-2" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 {profile.location}
             </p>
@@ -43,7 +54,7 @@ const profile = {
 
     </div>
 
-    <p class="text-sm leading-relaxed mt-2 text-gray-400 max-w-prose">
+    <p class="text-sm leading-relaxed mt-2 text-text-muted max-w-prose">
         {profile.description}
     </p>
 

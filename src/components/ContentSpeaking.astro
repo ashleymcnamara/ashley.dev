@@ -8,131 +8,139 @@ const allTags = getAllSpeakingTags();
 ---
 
 <div>
+    <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-6">Speaking</h1>
+
     <SpeakerKit />
 
     <!-- Upcoming Engagements Section -->
-    <h2 class="text-2xl font-bold mb-4 text-white">Upcoming Speaking Engagements</h2>
-    <div class="grid grid-cols-1 gap-6 mb-10" id="upcoming-engagements">
+    <h2 class="text-2xl font-bold mb-4 text-text-primary">Upcoming Speaking Engagements</h2>
+    <div class="border-y border-line mb-10" id="upcoming-engagements">
         {sortedEngagements.filter(engagement => engagement.status === 'upcoming').map(engagement => (
-            <div 
-                class="flex flex-col justify-center items-start border border-gray-700 rounded-lg p-6 bg-black speaking-card" 
+            <article
+                class="flex flex-col justify-center items-start py-6 border-b border-line last:border-b-0 speaking-card"
                 data-tags={engagement.tags?.join(',')}
             >
                 <div class="flex flex-col md:flex-row justify-between w-full">
                     <div>
-                        <h3 class="text-xl font-semibold text-white mb-1">{engagement.title}</h3>
+                        <h3 class="text-xl font-semibold text-text-primary mb-1">{engagement.title}</h3>
                         <p class="text-primary font-medium">{engagement.event}</p>
                     </div>
                     <div class="md:text-right mt-2 md:mt-0">
-                        <p class="text-white">{engagement.date}</p>
+                        <p class="text-text-primary">{engagement.date}</p>
                     </div>
                 </div>
                 
                 {engagement.tags && engagement.tags.length > 0 && (
-                    <div class="flex flex-wrap gap-1 mt-2 mb-4">
+                    <div class="flex flex-wrap gap-2 mt-3 mb-4">
                         {engagement.tags.map(tag => (
-                            <span class="tag-span inline-flex items-center justify-center px-2 py-1 text-xs rounded-lg bg-black text-gray-100 cursor-pointer transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5">
+                            <button type="button" data-tag={tag} aria-label={`Filter by tag ${tag}`} class="tag-span inline-flex min-h-9 items-center justify-center px-2 py-1 text-xs rounded-lg bg-canvas text-text-primary cursor-pointer transition-[color,background-color,border-color,transform] duration-150 border border-line-strong hover:bg-primary hover:text-black hover:-translate-y-0.5">
                                 #{tag}
-                            </span>
+                            </button>
                         ))}
                     </div>
                 )}
                 
-                <p class="text-gray-400 my-4">{engagement.description}</p>
+                <p class="text-text-muted my-4">{engagement.description}</p>
                 {engagement.link?.url && (
                     <a
                         href={engagement.link.url}
                         title={engagement.link.title || engagement.event}
                         target={engagement.link.target || '_blank'}
-                        class="px-4 py-2.5 mt-2 text-center border border-gray-600 rounded-lg hover:text-primary hover:border-primary"
+                        rel={(engagement.link.target || '_blank') === '_blank' ? 'noopener noreferrer' : undefined}
+                        class="inline-flex min-h-11 items-center mt-1 text-primary hover:underline"
                     >
-                        {engagement.link.buttonLabel || 'Event Details'}
+                        {engagement.link.buttonLabel || 'Event Details'} <span aria-hidden="true" class="ml-2">→</span>
                     </a>
                 )}
-            </div>
+            </article>
         ))}
         
         {sortedEngagements.filter(engagement => engagement.status === 'upcoming').length === 0 && (
-            <div id="no-upcoming-default" class="flex flex-col justify-center items-center border border-gray-700 rounded-lg p-6 bg-black text-center">
-                <p class="text-gray-400">No upcoming speaking engagements at this time.</p>
-                <p class="text-gray-400 mt-2">Check back soon for updates!</p>
+            <div id="no-upcoming-default" class="flex flex-col justify-center items-center py-6 text-center">
+                <p class="text-text-muted">No upcoming speaking engagements at this time.</p>
+                <p class="text-text-muted mt-2">Check back soon for updates!</p>
             </div>
         )}
         
-        <div id="no-upcoming-results" class="border border-gray-700 rounded-lg p-6 bg-black text-center hidden">
-            <p class="text-gray-400">No upcoming speaking engagements match your filter.</p>
-            <p class="text-gray-400 mt-2">Try selecting a different tag.</p>
+        <div id="no-upcoming-results" role="status" aria-live="polite" class="py-6 text-center hidden">
+            <p class="text-text-muted">No upcoming speaking engagements match your filter.</p>
+            <p class="text-text-muted mt-2">Try selecting a different tag.</p>
         </div>
     </div>
     
     <!-- Past Engagements Section -->
-    <h2 class="text-2xl font-bold mb-4 mt-8 text-white">Past Speaking Engagements</h2>
-    <div class="grid grid-cols-1 gap-6 mb-10" id="past-engagements">
+    <h2 class="text-2xl font-bold mb-4 mt-8 text-text-primary">Past Speaking Engagements</h2>
+    <div class="border-y border-line mb-10" id="past-engagements">
         {sortedEngagements.filter(engagement => engagement.status === 'past').map(engagement => (
-            <div 
-                class="flex flex-col justify-center items-start border border-gray-700 rounded-lg p-6 bg-black speaking-card" 
+            <article
+                class="flex flex-col justify-center items-start py-6 border-b border-line last:border-b-0 speaking-card"
                 data-tags={engagement.tags?.join(',')}
             >
                 <div class="flex flex-col md:flex-row justify-between w-full">
                     <div>
-                        <h3 class="text-xl font-semibold text-white mb-1">{engagement.title}</h3>
+                        <h3 class="text-xl font-semibold text-text-primary mb-1">{engagement.title}</h3>
                         <p class="text-primary font-medium">{engagement.event}</p>
                     </div>
                     <div class="md:text-right mt-2 md:mt-0">
-                        <p class="text-white">{engagement.date}</p>
+                        <p class="text-text-primary">{engagement.date}</p>
                     </div>
                 </div>
                 
                 {engagement.tags && engagement.tags.length > 0 && (
-                    <div class="flex flex-wrap gap-1 mt-2 mb-4">
+                    <div class="flex flex-wrap gap-2 mt-3 mb-4">
                         {engagement.tags.map(tag => (
-                            <span class="tag-span inline-flex items-center justify-center px-2 py-1 text-xs rounded-lg bg-black text-gray-100 cursor-pointer transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5">
+                            <button type="button" data-tag={tag} aria-label={`Filter by tag ${tag}`} class="tag-span inline-flex min-h-9 items-center justify-center px-2 py-1 text-xs rounded-lg bg-canvas text-text-primary cursor-pointer transition-[color,background-color,border-color,transform] duration-150 border border-line-strong hover:bg-primary hover:text-black hover:-translate-y-0.5">
                                 #{tag}
-                            </span>
+                            </button>
                         ))}
                     </div>
                 )}
                 
-                <p class="text-gray-400 my-4">{engagement.description}</p>
+                <p class="text-text-muted my-4">{engagement.description}</p>
                 {engagement.link?.url && (
                     <a
                         href={engagement.link.url}
                         title={engagement.link.title || engagement.event}
                         target={engagement.link.target || '_blank'}
-                        class="px-4 py-2.5 mt-2 text-center border border-gray-600 rounded-lg hover:text-primary hover:border-primary"
+                        rel={(engagement.link.target || '_blank') === '_blank' ? 'noopener noreferrer' : undefined}
+                        class="inline-flex min-h-11 items-center mt-1 text-primary hover:underline"
                     >
-                        {engagement.link.buttonLabel || 'View Details'}
+                        {engagement.link.buttonLabel || 'View Details'} <span aria-hidden="true" class="ml-2">→</span>
                     </a>
                 )}
-            </div>
+            </article>
         ))}
         
-        <div id="no-past-results" class="border border-gray-700 rounded-lg p-6 bg-black text-center hidden">
-            <p class="text-gray-400">No past speaking engagements match your filter.</p>
-            <p class="text-gray-400 mt-2">Try selecting a different tag.</p>
+        <div id="no-past-results" role="status" aria-live="polite" class="py-6 text-center hidden">
+            <p class="text-text-muted">No past speaking engagements match your filter.</p>
+            <p class="text-text-muted mt-2">Try selecting a different tag.</p>
         </div>
     </div>
     
     <!-- Tag Filter Section (Moved to bottom) -->
-    <div class="mt-12 pt-8 border-t border-gray-800">
-        <h3 class="text-xl font-semibold mb-4 text-white">Filter by Tags</h3>
+    <div class="mt-12 pt-8 border-t border-line">
+        <h2 class="text-xl font-semibold mb-4 text-text-primary">Filter by Tags</h2>
         
         <div class="flex flex-wrap gap-2 mb-4" id="tag-filters">
             <button 
-                class="tag-filter active flex items-center justify-center px-3 py-1 text-sm rounded-lg bg-black text-gray-100 transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5"
-                data-tag="all">
+                type="button"
+                class="tag-filter active flex min-h-11 items-center justify-center px-3 py-2 text-sm rounded-lg bg-primary text-black transition-[color,background-color,border-color,transform] duration-150 border border-primary hover:-translate-y-0.5"
+                data-tag="all"
+                aria-pressed="true">
                 All Sessions
             </button>
             {allTags.map(tag => (
                 <button 
-                    class="tag-filter flex items-center justify-center px-3 py-1 text-sm rounded-lg bg-black text-gray-100 transition-all duration-150 border border-gray-600 hover:bg-primary hover:-translate-y-0.5"
-                    data-tag={tag}>
+                    type="button"
+                    class="tag-filter flex min-h-11 items-center justify-center px-3 py-2 text-sm rounded-lg bg-canvas text-text-primary transition-[color,background-color,border-color,transform] duration-150 border border-line-strong hover:bg-primary hover:text-black hover:-translate-y-0.5"
+                    data-tag={tag}
+                    aria-pressed="false">
                     #{tag}
                 </button>
             ))}
         </div>
         
-        <div id="no-results" class="hidden py-4 text-center text-gray-400">
+        <div id="no-results" role="status" aria-live="polite" class="hidden py-4 text-center text-text-muted">
             No speaking engagements found for the selected tag.
         </div>
     </div>
@@ -163,8 +171,6 @@ const allTags = getAllSpeakingTags();
         const noUpcomingDefault = document.getElementById('no-upcoming-default');
         const noUpcomingResults = document.getElementById('no-upcoming-results');
         const noPastResults = document.getElementById('no-past-results');
-        const allButton = document.querySelector('.tag-filter[data-tag="all"]');
-        
         // Function to update section-specific visibility
         function updateSectionVisibility(selectedTag: string) {
             // Check visibility of upcoming section cards
@@ -214,54 +220,16 @@ const allTags = getAllSpeakingTags();
             });
         });
         
-        // Function to ensure all sessions are shown by default
+        // Ensure all sessions and section messages are correct on first render.
         function showAllSessions() {
-            // 1. Make sure all cards are visible
             document.querySelectorAll('.speaking-card').forEach(card => {
                 (card as HTMLElement).style.display = 'flex';
             });
-            
-            // 2. Update section visibility with 'all' tag
             updateSectionVisibility('all');
-            
-            // 3. Set the "All Sessions" button to active state
-            if (allButton) {
-                // Remove active class from all buttons
-                tagButtons.forEach(btn => {
-                    btn.classList.remove('active');
-                    btn.classList.remove('bg-primary');
-                    btn.classList.add('bg-black');
-                });
-                
-                // Add active class to the all button
-                allButton.classList.add('active');
-                allButton.classList.remove('bg-black');
-                allButton.classList.add('bg-primary');
-            }
         }
         
         // Initialize the visibility based on default "All" selection immediately
         showAllSessions();
-        
-        // Call it again after a small delay to ensure it applies after all DOM operations
-        setTimeout(showAllSessions, 100);
-        
-        // Add a listener for when the speaking tab becomes visible
-        const speakingTab = document.getElementById('content3');
-        if (speakingTab) {
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.attributeName === 'class' && 
-                        !speakingTab.classList.contains('hidden') && 
-                        speakingTab.classList.contains('opacity-100')) {
-                        // Tab became visible, make sure all items are shown
-                        showAllSessions();
-                    }
-                });
-            });
-            
-            observer.observe(speakingTab, { attributes: true });
-        }
         
         // Check for tag parameter in the URL and activate the appropriate filter
         const urlParams = new URLSearchParams(window.location.search);
@@ -277,7 +245,10 @@ const allTags = getAllSpeakingTags();
                     // Scroll to the tag filters section
                     const filtersContainer = document.getElementById('tag-filters');
                     if (filtersContainer) {
-                        filtersContainer.scrollIntoView({ behavior: 'smooth' });
+                        const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                            ? 'auto'
+                            : 'smooth';
+                        filtersContainer.scrollIntoView({ behavior });
                     }
                 }
             }, 100); // Small delay to ensure DOM is fully processed

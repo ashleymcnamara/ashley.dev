@@ -29,14 +29,26 @@ export function setupTagFiltering(options: TagFilterOptions): () => void {
       tagButtons.forEach(btn => {
         btn.classList.remove('active');
         btn.classList.remove('bg-primary');
-        btn.classList.add('bg-black');
+        btn.classList.remove('text-black');
+        btn.classList.remove('border-primary');
+        btn.classList.add('bg-canvas');
+        btn.classList.add('text-text-primary');
+        btn.classList.add('border-line-strong');
+        btn.setAttribute('aria-pressed', 'false');
       });
       
-      const clickedButton = document.querySelector(`${tagButtonsSelector}[data-tag="${selectedTag}"]`);
+      const clickedButton = document.querySelector(
+        `${tagButtonsSelector}[data-tag="${CSS.escape(selectedTag)}"]`
+      );
       if (clickedButton) {
         clickedButton.classList.add('active');
-        clickedButton.classList.remove('bg-black');
+        clickedButton.classList.remove('bg-canvas');
+        clickedButton.classList.remove('text-text-primary');
+        clickedButton.classList.remove('border-line-strong');
         clickedButton.classList.add('bg-primary');
+        clickedButton.classList.add('text-black');
+        clickedButton.classList.add('border-primary');
+        clickedButton.setAttribute('aria-pressed', 'true');
       }
       
       let visibleCount = 0;
@@ -86,14 +98,18 @@ export function setupTagFiltering(options: TagFilterOptions): () => void {
           
           if (tagText) {
             // Find and click the corresponding filter button
-            const tagButton = document.querySelector(`${tagButtonsSelector}[data-tag="${tagText}"]`);
+            const tagButton = document.querySelector(
+              `${tagButtonsSelector}[data-tag="${CSS.escape(tagText)}"]`
+            );
             if (tagButton) {
               (tagButton as HTMLElement).click();
               
-              // Optional: Scroll to the filters if a specific element ID is provided
               const filtersContainer = document.getElementById('tag-filters');
               if (filtersContainer) {
-                filtersContainer.scrollIntoView({ behavior: 'smooth' });
+                const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                  ? 'auto'
+                  : 'smooth';
+                filtersContainer.scrollIntoView({ behavior });
               }
             }
           }
@@ -103,38 +119,7 @@ export function setupTagFiltering(options: TagFilterOptions): () => void {
     
     // Initial setup of tag span listeners
     setupTagSpanListeners();
-    
-    // For dynamic content, we can use a MutationObserver to watch for new tag spans
-    // This is optional but helpful if content is loaded dynamically
-    const observer = new MutationObserver((mutations) => {
-      let shouldSetupListeners = false;
-      
-      mutations.forEach(mutation => {
-        if (mutation.type === 'childList' && mutation.addedNodes.length) {
-          shouldSetupListeners = true;
-        }
-      });
-      
-      if (shouldSetupListeners) {
-        setupTagSpanListeners();
-      }
-    });
-    
-    // Start observing the document body for changes
-    observer.observe(document.body, { 
-      childList: true,
-      subtree: true
-    });
-    
-    // Initialize the "All" button as active by default
-    const allButton = document.querySelector(`${tagButtonsSelector}[data-tag="${allTagValue}"]`);
-    if (allButton) {
-      allButton.classList.remove('bg-black');
-      allButton.classList.add('bg-primary');
-      allButton.classList.add('active');
-    }
-    
-    // Return the observer to allow for cleanup if needed
-    return observer;
+
+    filterByTag(allTagValue);
   };
 }
