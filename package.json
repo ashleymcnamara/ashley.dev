@@ -20,7 +20,7 @@
         "@resvg/resvg-js": "^2.6.2",
         "@tailwindcss/typography": "^0.5.20",
         "@vercel/og": "^0.11.1",
-        "astro": "^6.4.8",
+        "astro": "^7.0.9",
         "astro-icon": "^1.1.5",
         "gray-matter": "^4.0.3",
         "marked": "^15.0.11",
