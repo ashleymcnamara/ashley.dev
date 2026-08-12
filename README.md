@@ -1,3 +1,5 @@
+
+
 # Ashley.dev - Personal Website
 
 This repository contains the source code for [ashley.dev](https://ashley.dev), my personal website built with Astro and Tailwind CSS.
@@ -68,8 +70,8 @@ Speaking engagements and projects are managed through TypeScript data files in t
 │   ├── components/         # Reusable UI components
 │   │   ├── BlueskyLikes.astro  # Bluesky likes and comments component
 │   │   └── ...             # Other components
+│   ├── content.config.ts   # Content collection configuration
 │   ├── content/
-│   │   ├── config.ts       # Content collection configuration
 │   │   └── posts/          # Blog posts in Markdown
 │   ├── data/
 │   │   ├── projects.ts     # Project data
