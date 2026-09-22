@@ -3,10 +3,10 @@ import { defineConfig } from 'astro/config';
 import compress from 'astro-compress';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
+import { unified } from '@astrojs/markdown-remark';
 import remarkEmoji from 'remark-emoji';
 import { rehypeHeadingColors } from './src/utils/rehypeHeadingColors.js';
 import { rehypeTableOfContents } from './src/utils/rehypeTableOfContents.js';
-import rehypeShiki from 'rehype-shiki';
 import * as shikiThemes from 'shiki/themes';
 
 export default defineConfig({
@@ -20,6 +20,19 @@ export default defineConfig({
     // Make environment variables available on the client side
     vite: {
         envPrefix: 'BLUESKY_',
+    },
+
+    markdown: {
+        shikiConfig: {
+            theme: shikiThemes.vitesseDark,
+        },
+        processor: unified({
+            rehypePlugins: [
+                rehypeHeadingColors,
+                rehypeTableOfContents,
+            ],
+            remarkPlugins: [remarkEmoji],
+        }),
     },
 
     integrations: [
@@ -49,17 +62,6 @@ export default defineConfig({
                 }
             }
         }),
-        mdx({
-            rehypePlugins: [
-                rehypeHeadingColors, 
-                rehypeTableOfContents,
-                [rehypeShiki, { 
-                    theme: shikiThemes.vitesseDark,
-                    useBackground: true,
-                    layoutMode: 'normal'
-                }]
-            ],
-            remarkPlugins: [remarkEmoji],
-        }),
+        mdx(),
     ]
 });
