@@ -1,18 +1,19 @@
 {
   // Allowed advisories that don't apply to this static site.
-  // Re-evaluate when upgrading to Astro 7 or enabling SSR.
+  // Re-evaluate if builds begin processing untrusted content or assets.
   "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
   "moderate": true,
   "allowlist": [
-    // Astro XSS via spread props — SSR only, we build static
-    "GHSA-jrpj-wcv7-9fh9",
-    // Astro Host header SSRF — SSR only
-    "GHSA-2pvr-wf23-7pc7",
-    // esbuild arbitrary file read — Windows dev server only
-    "GHSA-g7r4-m6w7-qqqr",
-    // markdown-it quadratic DoS — requires untrusted input with typographer
-    "GHSA-6v5v-wf23-fmfq",
-    // js-yaml quadratic DoS — requires untrusted YAML with merge keys
-    "GHSA-h67p-54hq-rp68"
+    // deepmerge-ts stack exhaustion — astro-compress receives trusted local config
+    "GHSA-ggr8-5vv4-36mx",
+    // js-yaml resource exhaustion — frontmatter is trusted repository content
+    "GHSA-5p4m-2wfm-xmqj",
+    "GHSA-2883-xcg3-v3hh",
+    // sharp/libvips image parsing — builds process trusted repository images
+    "GHSA-f88m-g3jw-g9cj",
+    "GHSA-rgj7-g3m4-5g8c",
+    // SVGO sanitization bypasses — SVG compression is disabled
+    "GHSA-w27v-7q3p-w38r",
+    "GHSA-4vpr-x523-8j87"
   ]
 }
